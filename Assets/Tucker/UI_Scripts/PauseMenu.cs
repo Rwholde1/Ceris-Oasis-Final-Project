@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
     public GameObject infoMenuUI;
+    public GameObject HUDUI;
     public Object menuScene;
     private bool inHelpMenu = false;
 
@@ -27,12 +28,14 @@ public class PauseMenu : MonoBehaviour
     void Pause() {
         isPaused = true;
         pauseMenuUI.SetActive(true);
+        HUDUI.SetActive(false);
         Time.timeScale = 0f;
     }
 
     public void Resume() {
         isPaused = false;
         pauseMenuUI.SetActive(false);
+        HUDUI.SetActive(true);
         Time.timeScale = 1f;
     }
 

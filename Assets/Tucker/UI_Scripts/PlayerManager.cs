@@ -9,10 +9,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     private int currentHealth;
 
+    [SerializeField] int cooldown1 = 10;
+    [SerializeField] int cooldown2 = 10;
+
     private bool alive = true;
     [SerializeField] object primaryWeapon;
     [SerializeField] object secondaryWeapon;
     public HealthBar healthBar;
+    public AbilityManager abilities;
 
     //grenades
     //shielding?
@@ -23,6 +27,8 @@ public class PlayerManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
+        abilities.setCooldown1(cooldown1);
+        abilities.setCooldown2(cooldown2);
     }
 
     // Update is called once per frame
