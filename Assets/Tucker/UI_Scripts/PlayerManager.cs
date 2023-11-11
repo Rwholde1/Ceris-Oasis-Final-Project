@@ -59,18 +59,10 @@ public class PlayerManager : MonoBehaviour
 
     void createPing() {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-                    Debug.Log("ping");
         if(Physics.Raycast(ray, out RaycastHit hit)) {
-                        Debug.Log("ping1");
             //Sets height offset and instantiates ping
             Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
             Instantiate(basicPing, offset, Quaternion.identity);
-
-            
-            if (hit.collider.gameObject.layer == 8) {
-                            Debug.Log("ping2");
-                
-            }
         }
     }
 

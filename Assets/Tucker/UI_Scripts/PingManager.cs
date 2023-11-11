@@ -11,6 +11,7 @@ public class PingManager : MonoBehaviour
     private GameObject player;
     private Transform target;
     [SerializeField] TextMeshPro distanceText;
+    [SerializeField] float lifetime;
 
     float dist;
     // Start is called before the first frame update
@@ -18,11 +19,16 @@ public class PingManager : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         target = player.GetComponent<Transform>();
+        lifetime = 30f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (lifetime <= 0)
+            Destroy(gameObject);
+        lifetime -= Time.deltaTime;
+
         //Orients ping to player
         transform.LookAt(target, Vector3.up);
         Vector3 retarget = Vector3.left * transform.localEulerAngles[0];
