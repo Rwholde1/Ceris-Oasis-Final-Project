@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject infoMenuUI;
     public GameObject HUDUI;
+    public GameObject StatsUI;
     public Object menuScene;
     private bool inHelpMenu = false;
 
@@ -21,6 +22,13 @@ public class PauseMenu : MonoBehaviour
                 Resume();
             } else {
                 Pause();
+            }
+        }
+
+        //Closes tab stats menu if needed
+        if (Input.GetKey(KeyCode.Tab)) {
+            if (isPaused) {
+                StatsUI.SetActive(false);
             }
         }
     }
