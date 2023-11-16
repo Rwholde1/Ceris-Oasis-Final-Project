@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AI_Gen_State : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class AI_Gen_State : MonoBehaviour
     [SerializeField] AI_STATE state;
     private Transform enemyT;
     private float speed = 1f;
+
+
+    private UnityEngine.AI.NavMeshAgent agent;
+    private Vector3 targetPos;
     void Start()
     {
         state = AI_STATE.CHASE;
@@ -65,9 +70,18 @@ public class AI_Gen_State : MonoBehaviour
     {
         //change the AI target
     }
+    public void ChangeTarget(string theTag)
+    {
+        //change the AI target based on the tag
+        GameObject tempObject = GameObject.FindWithTag(theTag);
+        Vector3 tempPos = tempObject.GetComponent<Transform>().position;
+        targetPos = tempPos;
+        
+    }
     void AIChasePlayer()
     {
         //moves towards the target
+
     }
     void AIWait()
     {
