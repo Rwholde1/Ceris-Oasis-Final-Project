@@ -215,20 +215,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  range: 10
-  firerate: 1
+  range: 20
+  firerate: 3
   cam: {fileID: 0}
   flash: {fileID: 5864439770645238009}
   IsAutomatic: 0
   anim: {fileID: 3288535220032974547}
   ShotFX: {fileID: 6366980465850393548, guid: 7fa54d01108f1cf479c3857c63c5a40d, type: 3}
   impacteffect: {fileID: 6704534940747636505, guid: a4b44ade50eeba84583f76d4321b50e9, type: 3}
-  accuracy: 10
+  accuracy: 15
   cosmetic: 0
   maxAmmoReserviour: 100
   maxAmmo: 10
   MagSize: 2
-  reloadtime: 1
+  reloadtime: 3
   bulletspershot: 10
   normalFOV: 60
   adsFOV: 30
