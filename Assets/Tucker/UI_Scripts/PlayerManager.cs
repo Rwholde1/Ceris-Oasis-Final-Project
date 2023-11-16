@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] object secondaryWeapon;
     public HealthBar healthBar;
     public AbilityManager abilities;
+    public StatsManager stats;
 
     public Camera mainCam;
     public GameObject basicPing;
@@ -39,11 +40,24 @@ public class PlayerManager : MonoBehaviour
     {
         if (currentHealth <= 0) {
             alive = false;
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            stats.addDeath(1);
+            currentHealth = maxHealth;
+            healthBar.setHealth(maxHealth);
         }
 
-
+        if(Input.GetKeyDown(KeyCode.J)) {
+            stats.addElim(1);
+        }
         if(Input.GetKeyDown(KeyCode.K)) {
+            stats.addAssist(1);
+        }
+        if(Input.GetKeyDown(KeyCode.L)) {
             takeDamage(10);
+        }
+        if(Input.GetMouseButtonDown(1)) {
+            var dmg = Mathf.Floor(GetComponent<Transform>().localEulerAngles.y);
+            stats.addDamage(1, (int) dmg);
         }
 
         if(Input.GetMouseButtonDown(2)) {

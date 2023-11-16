@@ -43,7 +43,7 @@ public class AbilityManager : MonoBehaviour
         if (!lockedout1) {
             counter1.text = "";
             //Ability 1 Trigger
-            if(Input.GetKeyDown(KeyCode.CapsLock)) {
+            if(Input.GetKeyDown(KeyCode.Q)) {
                 lockedout1 = true;
                 slider1.value = 0;
             }
