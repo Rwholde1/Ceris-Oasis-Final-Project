@@ -5,6 +5,9 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+//
+using UnityEngine.SceneManagement;
+//
 using UnityEngine;
 
 namespace LobbyRelaySample.ngo
@@ -26,6 +29,10 @@ namespace LobbyRelaySample.ngo
         private bool m_hasConnectedViaNGO = false;
 
         private LocalLobby m_lobby;
+
+        //
+        [SerializeField] Object testScene;
+        //
 
         private void SetMenuVisibility(bool areVisible)
         {
@@ -136,6 +143,10 @@ namespace LobbyRelaySample.ngo
             SetMenuVisibility(false);
 #pragma warning disable 4014
             CreateNetworkManager(localLobby, localPlayer);
+            //
+            Debug.Log(testScene.name);
+            NetworkManager.Singleton.SceneManager.LoadScene(testScene.name, LoadSceneMode.Single);
+            //
 #pragma warning restore 4014
         }
 
