@@ -6119,6 +6119,7 @@ MonoBehaviour:
   maxAmmo: 100
   MagSize: 10
   reloadtime: 1
+  bulletspershot: 1
   normalFOV: 60
   adsFOV: 30
   adsSpeed: 5
@@ -12360,7 +12361,7 @@ PrefabInstance:
     - target: {fileID: 95991959576746040, guid: 3f075d53433e33946a37da2f529947e9, type: 3}
       propertyPath: m_Avatar
       value: 
-      objectReference: {fileID: 9000000, guid: 8906bfe16f4f71a438e960f167f950e4, type: 3}
+      objectReference: {fileID: 9000000, guid: a03dc4bb8a2e6ec4b996490f101d3e75, type: 3}
     - target: {fileID: 95991959576746040, guid: 3f075d53433e33946a37da2f529947e9, type: 3}
       propertyPath: m_Controller
       value: 
