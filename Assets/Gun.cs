@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour
 
         if (isreloading)
         {
-            if (IsAutomatic)
+            if (IsAutomatic && !cosmetic)
             {
                 anim.SetBool("Continuous", false);
             }
@@ -68,7 +68,7 @@ public class Gun : MonoBehaviour
             }
             return;
         }
-        if(currentammo <= 0 || (Input.GetKeyDown(KeyCode.R) && currentammo != MagSize))
+        if(currentammo <= 0 || (Input.GetKeyDown(KeyCode.R) && currentammo != MagSize) && !cosmetic)
         {
             StartCoroutine(Reload());
             return;
@@ -78,12 +78,12 @@ public class Gun : MonoBehaviour
             if (Input.GetButton("Fire1") && Time.time >= timetofire)
             {
                 timetofire = Time.time + (1f / firerate);
-                anim.SetBool("Continuous", true);
+                if(!cosmetic) anim.SetBool("Continuous", true);
                 Shoot();
             }
             if (Input.GetButtonUp("Fire1"))
                 {
-                anim.SetBool("Continuous", false);
+                if (!cosmetic) anim.SetBool("Continuous", false);
             }
         }
         else

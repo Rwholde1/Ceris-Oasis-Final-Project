@@ -1189,6 +1189,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1577953771641086903}
+    - target: {fileID: 524859805533881539, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
+      propertyPath: ammocount
+      value: 
+      objectReference: {fileID: 1455155491}
+    - target: {fileID: 524859805533881539, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
+      propertyPath: crosshairImage
+      value: 
+      objectReference: {fileID: 1787673}
     - target: {fileID: 1023686168960097110, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
       propertyPath: cam
       value: 
@@ -1237,18 +1245,34 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1577953771641086903}
+    - target: {fileID: 7345666111087582808, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 8906bfe16f4f71a438e960f167f950e4, type: 3}
+    - target: {fileID: 7345666111087582808, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 819710e7248a15f46b5bc1acc8f299fe, type: 2}
     - target: {fileID: 8268883282137578081, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
       propertyPath: m_Name
       value: Boomerang Alien
       objectReference: {fileID: 0}
     - target: {fileID: 8268883282137578081, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8743642373989182806, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1577953771641086903}
+    - target: {fileID: 8743642373989182806, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
+      propertyPath: ammocount
+      value: 
+      objectReference: {fileID: 1455155491}
+    - target: {fileID: 8743642373989182806, guid: 737d0cee5f2bc0546abb1845415fbe8f, type: 3}
+      propertyPath: crosshairImage
+      value: 
+      objectReference: {fileID: 1787673}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1503,25 +1527,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1577953771641086903}
     - target: {fileID: 8188628749010094733, guid: bf67bb73bacb7b64a9fe2d58439bec87, type: 3}
-      propertyPath: range
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8188628749010094733, guid: bf67bb73bacb7b64a9fe2d58439bec87, type: 3}
-      propertyPath: accuracy
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8188628749010094733, guid: bf67bb73bacb7b64a9fe2d58439bec87, type: 3}
-      propertyPath: firerate
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8188628749010094733, guid: bf67bb73bacb7b64a9fe2d58439bec87, type: 3}
       propertyPath: ammocount
       value: 
       objectReference: {fileID: 1455155491}
-    - target: {fileID: 8188628749010094733, guid: bf67bb73bacb7b64a9fe2d58439bec87, type: 3}
-      propertyPath: reloadtime
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8188628749010094733, guid: bf67bb73bacb7b64a9fe2d58439bec87, type: 3}
       propertyPath: crosshairImage
       value: 
@@ -1554,6 +1562,10 @@ PrefabInstance:
     - target: {fileID: 2824062003209398013, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
       propertyPath: m_Name
       value: Pirate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2824062003209398013, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3890111276966364550, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
       propertyPath: m_IsActive
