@@ -67,7 +67,9 @@ public class ServerGameManager : IDisposable
             return;
         }
 
-        synchedServerData = await NetworkServer.ConfigureSerl
+        synchedServerData = await NetworkServer.ConfigureServer(startingGameInfo);
+        if (synchedServerData == null)
+        {
             Debug.LogError("Could not find the synchedServerData.");
             return;
         }

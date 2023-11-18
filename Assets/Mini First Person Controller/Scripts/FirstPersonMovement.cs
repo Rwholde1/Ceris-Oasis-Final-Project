@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
+using Unity.Netcode;
 
 public class FirstPersonMovement : NetworkBehaviour
 {
@@ -21,7 +22,7 @@ public class FirstPersonMovement : NetworkBehaviour
 
     void Awake()
     {
-        if(!isLocalPlayer) {
+        if(!IsLocalPlayer) {
             return;
         }
         // Get the rigidbody on this.
@@ -30,10 +31,12 @@ public class FirstPersonMovement : NetworkBehaviour
 
     void FixedUpdate()
     {   
-        if(!isLocalPlayer) {
+        if(!IsLocalPlayer) {
+            Debug.Log("NotLocal");
             return;
         }
-        
+        Debug.Log("islocal");
+
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.LeftShift))
         {
             //walking forward
@@ -101,6 +104,7 @@ public class FirstPersonMovement : NetworkBehaviour
         Vector2 targetVelocity =new Vector2( Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
 
         // Apply movement.
-        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
+        Rigidbody rig = gameObject.GetComponent<Rigidbody>();
+        rig.velocity = transform.rotation * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
     }
 }

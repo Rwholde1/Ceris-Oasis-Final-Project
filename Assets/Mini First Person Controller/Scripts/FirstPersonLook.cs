@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Unity.Netcode;
 
 public class FirstPersonLook : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class FirstPersonLook : MonoBehaviour
     {
         // Lock the mouse cursor to the game screen.
         Cursor.lockState = CursorLockMode.Locked;
+        character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
     }
 
     void Update()
@@ -36,6 +38,7 @@ public class FirstPersonLook : MonoBehaviour
         transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
 
-        transform.Transform = character.transform += Vector3(0f, 1.488f, 0f);
+        transform.position = character.transform.position;
+        transform.position += new Vector3(0f, 1.488f, 0f);
     }
 }

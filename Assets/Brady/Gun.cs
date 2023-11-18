@@ -97,7 +97,7 @@ public class Gun : MonoBehaviour
 
         if (!cosmetic)
         {
-            ammocount.text = currentammo + "/" + maxAmmo;
+            //ammocount.text = currentammo + "/" + maxAmmo;
             if (crosshairImage != null)
             {
                 float targetScale = isAiming ? 0.5f : 1f;
