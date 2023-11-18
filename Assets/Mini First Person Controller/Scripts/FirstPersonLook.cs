@@ -28,7 +28,20 @@ public class FirstPersonLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         //character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
         //character = NetworkManager.LocalClient.PlayerObject;
-        character = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
+        var ThisChar = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+        character = ThisChar.GetComponent<Transform>();
+        SkinnedMeshRenderer[] theseMeshes = ThisChar.GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach(SkinnedMeshRenderer thisMesh in theseMeshes) {
+            Debug.Log(thisMesh + " deleted");
+            thisMesh.enabled = false;
+            //thisMesh.SetActive(false);
+        }
+        MeshRenderer[] thoseMeshes = ThisChar.GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer thisMesh in thoseMeshes) {
+            Debug.Log(thisMesh + " deleted");
+            thisMesh.enabled = false;
+            //thisMesh.SetActive(false);
+        }
 
 
     }
