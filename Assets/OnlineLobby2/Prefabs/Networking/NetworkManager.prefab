@@ -48,8 +48,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 6485963998722371857}
-    PlayerPrefab: {fileID: 8854747452121219810, guid: 773b39ed367c011418f28a8bc3b8ca31,
-      type: 3}
+    PlayerPrefab: {fileID: 4425428723088313499, guid: fc9b148a2950aaf4cba8422632222c5d, type: 3}
     Prefabs:
       NetworkPrefabsLists: []
     TickRate: 30
@@ -69,32 +68,27 @@ MonoBehaviour:
     EnableNetworkLogs: 1
     OldPrefabList:
     - Override: 0
-      Prefab: {fileID: 2247144937675617167, guid: 8935789bd413573419fa49f6379675d7,
-        type: 3}
+      Prefab: {fileID: 2247144937675617167, guid: 8935789bd413573419fa49f6379675d7, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 4663426026667250098, guid: 301cebf8eacff4b4a83bf8f95afafb31,
-        type: 3}
+      Prefab: {fileID: 4663426026667250098, guid: 301cebf8eacff4b4a83bf8f95afafb31, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 5840646621225449203, guid: a0e8f6b1cff6ef747b984e52df011aa4,
-        type: 3}
+      Prefab: {fileID: 5840646621225449203, guid: a0e8f6b1cff6ef747b984e52df011aa4, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 2829942877377803283, guid: ca8dae37cae2db2448c0243e11a5afc3,
-        type: 3}
+      Prefab: {fileID: 2829942877377803283, guid: ca8dae37cae2db2448c0243e11a5afc3, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 6821460796240439114, guid: dcfc69b7a3ef9f249b414fbf17ebfdf3,
-        type: 3}
+      Prefab: {fileID: 6821460796240439114, guid: dcfc69b7a3ef9f249b414fbf17ebfdf3, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
@@ -113,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProtocolType: 1
+  m_UseWebSockets: 0
+  m_UseEncryption: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
   m_HeartbeatTimeoutMS: 500
