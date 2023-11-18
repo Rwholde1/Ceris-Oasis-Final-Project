@@ -91,6 +91,7 @@ public class MainMenuDisplay : MonoBehaviour
 
     public async void StartHost()
     {
+        Debug.Log("Starting Host Session");
         await HostSingleton.Instance.StartHostAsync();
     }
 
