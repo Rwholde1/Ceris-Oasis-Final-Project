@@ -21,7 +21,7 @@ public class PlayerManager : NetworkBehaviour
     public StatsManager stats;
 
     public Camera mainCam;
-    public GameObject basicPing;
+    public NetworkObject basicPing;
 
     //grenades
     //shielding?
@@ -80,7 +80,7 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("ping");
             //Sets height offset and instantiates ping
             Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
-            GameObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+            NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
             ping.GetComponent<NetworkObject>().Spawn();
         }
     }
