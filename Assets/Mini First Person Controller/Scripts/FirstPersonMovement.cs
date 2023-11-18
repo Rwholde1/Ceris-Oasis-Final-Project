@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FirstPersonMovement : MonoBehaviour
+public class FirstPersonMovement : NetworkBehaviour
 {
     public float speed = 5;
 
@@ -20,12 +21,19 @@ public class FirstPersonMovement : MonoBehaviour
 
     void Awake()
     {
+        if(!isLocalPlayer) {
+            return;
+        }
         // Get the rigidbody on this.
         rigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
-    {
+    {   
+        if(!isLocalPlayer) {
+            return;
+        }
+        
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.LeftShift))
         {
             //walking forward
