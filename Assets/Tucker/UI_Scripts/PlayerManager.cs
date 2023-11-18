@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
 
     [SerializeField] int maxHealth = 100;
@@ -61,6 +62,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         if(Input.GetMouseButtonDown(2)) {
+            Debug.Log("click ping");
             createPing();
         }
 
@@ -73,10 +75,13 @@ public class PlayerManager : MonoBehaviour
 
     void createPing() {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("call ping");
         if(Physics.Raycast(ray, out RaycastHit hit)) {
+            Debug.Log("ping");
             //Sets height offset and instantiates ping
             Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
-            Instantiate(basicPing, offset, Quaternion.identity);
+            GameObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+            ping.GetComponent<NetworkObject>().Spawn();
         }
     }
 

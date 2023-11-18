@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
 
-public class PingManager : MonoBehaviour
+public class PingManager : NetworkBehaviour
 {
 
     [SerializeField] float scaleFactor;
     [SerializeField] float MinDist;
-    private GameObject player;
+    //private GameObject player;
     private Transform target;
     [SerializeField] TextMeshPro distanceText;
     [SerializeField] float lifetime;
@@ -17,8 +18,8 @@ public class PingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        target = player.GetComponent<Transform>();
+        //player = /*GameObject.FindWithTag("Player");*/ (GameObject) NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+        target = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
         lifetime = 30f;
     }
 
