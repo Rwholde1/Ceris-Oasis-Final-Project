@@ -63,7 +63,11 @@ public class PlayerManager : NetworkBehaviour
 
         if(Input.GetMouseButtonDown(2)) {
             Debug.Log("click ping");
-            createPing();
+            if (isServer) {
+                createPing();
+            } else {
+                createPingRpc();
+            }
         }
 
     }
@@ -82,7 +86,13 @@ public class PlayerManager : NetworkBehaviour
             Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
             NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
             ping.GetComponent<NetworkObject>().Spawn();
+            //ping.SpawnWithOwnership(OwnerClientId);
         }
+    }
+
+    [ServerRpc]
+    void createPingRpc() {
+        createPing();
     }
 
 }
