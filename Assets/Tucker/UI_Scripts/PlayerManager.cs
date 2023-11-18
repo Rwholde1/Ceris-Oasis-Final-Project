@@ -90,7 +90,7 @@ public class PlayerManager : NetworkBehaviour
         }
     }
     
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     void createPingServerRpc() {
         createPing();
     }

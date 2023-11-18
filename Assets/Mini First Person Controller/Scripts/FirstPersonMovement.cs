@@ -32,10 +32,8 @@ public class FirstPersonMovement : NetworkBehaviour
     void FixedUpdate()
     {   
         if(!IsLocalPlayer) {
-            Debug.Log("NotLocal");
             return;
         }
-        Debug.Log("islocal");
 
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.LeftShift))
         {

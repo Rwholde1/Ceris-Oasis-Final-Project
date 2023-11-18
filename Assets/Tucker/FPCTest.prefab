@@ -988,6 +988,7 @@ GameObject:
   - component: {fileID: 7146304993476054103}
   - component: {fileID: 3470785808546908901}
   - component: {fileID: 5510776058576230220}
+  - component: {fileID: -3168170821049325052}
   - component: {fileID: 8352565862152366861}
   - component: {fileID: 8129546109565623395}
   m_Layer: 0
@@ -1115,6 +1116,21 @@ MonoBehaviour:
   headToLower: {fileID: 0}
   crouchYHeadPosition: -2
   colliderToLower: {fileID: 9066792802909015281}
+--- !u!114 &-3168170821049325052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050681411968407897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6faccc528eb1d4bbdafb36e0b46eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisCam: {fileID: 0}
+  controller: {fileID: 0}
+  beginScene: {fileID: 0}
 --- !u!114 &8352565862152366861
 MonoBehaviour:
   m_ObjectHideFlags: 0
