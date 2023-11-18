@@ -3419,6 +3419,7 @@ GameObject:
   - component: {fileID: 9099458159934236950}
   - component: {fileID: 7757515858557778575}
   - component: {fileID: -4260256161639779411}
+  - component: {fileID: -6275582562055830985}
   m_Layer: 0
   m_Name: ThirdPersonController_LITE
   m_TagString: Player
@@ -3677,6 +3678,18 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-6275582562055830985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4425428723088313499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4425428723094576442
 GameObject:
   m_ObjectHideFlags: 0
