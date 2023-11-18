@@ -15,7 +15,9 @@ public class FirstPersonLook : MonoBehaviour
     void Reset()
     {
         // Get the character from the FirstPersonMovement in parents.
-        character = GetComponentInParent<FirstPersonMovement>().transform;
+        //character = GetComponentInParent<FirstPersonMovement>().transform;
+        character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
+
     }
 
     void Start()
@@ -34,11 +36,15 @@ public class FirstPersonLook : MonoBehaviour
         velocity += frameVelocity;
         velocity.y = Mathf.Clamp(velocity.y, -90, 90);
 
+
+        transform.position = character.transform.position;
+        transform.position += new Vector3(0f, 1.488f, 0f);
+
+
         // Rotate camera up-down and controller left-right from velocity.
         transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
 
-        transform.position = character.transform.position;
-        transform.position += new Vector3(0f, 1.488f, 0f);
+        
     }
 }
