@@ -63,10 +63,10 @@ public class PlayerManager : NetworkBehaviour
 
         if(Input.GetMouseButtonDown(2)) {
             Debug.Log("click ping");
-            if (isServer) {
+            if (IsServer) {
                 createPing();
             } else {
-                createPingRpc();
+                createPingServerRpc();
             }
         }
 
@@ -77,7 +77,7 @@ public class PlayerManager : NetworkBehaviour
         healthBar.setHealth(currentHealth);
     }
 
-    void createPing() {
+    public void createPing() {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
         Debug.Log("call ping");
         if(Physics.Raycast(ray, out RaycastHit hit)) {
@@ -89,10 +89,11 @@ public class PlayerManager : NetworkBehaviour
             //ping.SpawnWithOwnership(OwnerClientId);
         }
     }
-
+    
     [ServerRpc]
-    void createPingRpc() {
+    void createPingServerRpc() {
         createPing();
     }
+    
 
 }
