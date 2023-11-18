@@ -16,7 +16,9 @@ public class FirstPersonLook : MonoBehaviour
     {
         // Get the character from the FirstPersonMovement in parents.
         //character = GetComponentInParent<FirstPersonMovement>().transform;
-        character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
+        //character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
+        //character = NetworkManager.LocalClient.PlayerObject;
+        character = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
 
     }
 
@@ -24,7 +26,11 @@ public class FirstPersonLook : MonoBehaviour
     {
         // Lock the mouse cursor to the game screen.
         Cursor.lockState = CursorLockMode.Locked;
-        character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
+        //character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
+        //character = NetworkManager.LocalClient.PlayerObject;
+        character = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
+
+
     }
 
     void Update()
@@ -42,7 +48,14 @@ public class FirstPersonLook : MonoBehaviour
 
 
         // Rotate camera up-down and controller left-right from velocity.
-        transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
+        //Debug.Log("updated mouse look " + velocity.y);
+
+        //transform.rotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
+        //transform.rotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+        transform.eulerAngles = new Vector3(-velocity.y, velocity.x, 0f);
+
+        //character.localRotation = Quaternion.AngleAxis( velocity.y, Vector3.right);
+
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
 
         
