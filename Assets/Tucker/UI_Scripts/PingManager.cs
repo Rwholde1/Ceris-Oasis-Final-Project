@@ -14,29 +14,53 @@ public class PingManager : NetworkBehaviour
     [SerializeField] TextMeshPro distanceText;
     [SerializeField] float lifetime;
 
+    [SerializeField] GameObject ping1;
+    [SerializeField] GameObject ping2;
+    [SerializeField] GameObject ping3;
+    [SerializeField] GameObject ping4;
+
+    public Transform target1;
+    public Transform target2;
+    public Transform target3;
+    public Transform target4;
+
     float dist;
     // Start is called before the first frame update
     void Start()
     {
         //player = /*GameObject.FindWithTag("Player");*/ (GameObject) NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
-        target = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
+        target1 = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
         lifetime = 30f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (lifetime <= 0)
+        target1 = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
+        /*
+        target2 = 
+        target3 = 
+        target4 = 
+        */
+        
+    }
+
+
+    void repositionPing(GameObject ping, Transform target) {
+    if (lifetime <= 0)
             Destroy(gameObject);
         lifetime -= Time.deltaTime;
 
+        if (target == null)
+            target = target1;
+
         //Orients ping to player
-        transform.LookAt(target, Vector3.up);
-        Vector3 retarget = Vector3.left * transform.localEulerAngles[0];
-        transform.Rotate(retarget);
+        ping.transform.LookAt(target, Vector3.up);
+        Vector3 retarget = Vector3.left * ping.transform.localEulerAngles[0];
+        ping.transform.Rotate(retarget);
 
         //Determines distance and updates TMP
-        dist = Vector3.Distance(transform.position, target.transform.position);
+        dist = Vector3.Distance(ping.transform.position, target.transform.position);
         distanceText.text = Mathf.Round(dist) + "m";
 
         if (dist > MinDist) {
@@ -44,10 +68,12 @@ public class PingManager : NetworkBehaviour
             if (ratio < scaleFactor) {
                 ratio = scaleFactor;
             }
-            transform.localScale = Vector3.one * ratio;
+            ping.transform.localScale = Vector3.one * ratio;
         } else {
-            transform.localScale = Vector3.one * scaleFactor;
+            ping.transform.localScale = Vector3.one * scaleFactor;
         }
 
-    }
 }
+}
+
+

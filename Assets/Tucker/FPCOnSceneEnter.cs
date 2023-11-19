@@ -10,6 +10,8 @@ public class FPCOnSceneEnter : NetworkBehaviour
     public GameObject controller;
     bool sceneBegin = false;
     public NetworkObject playerCam;
+    public int pingCullLayer = -1;
+    public Camera pingCam;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public class FPCOnSceneEnter : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         if (!sceneBegin) {
             if (controller == null) {
                 controller = GameObject.FindWithTag("GameController");
@@ -37,16 +39,19 @@ public class FPCOnSceneEnter : NetworkBehaviour
                 Debug.Log(beginScene +" scene begin");
                 if (beginScene != null) {
                     sceneBegin = true;
-                    thisCam = beginScene.getFirstCam();
-                    thisCam.SetActive(true);
-                    Debug.Log(thisCam + " cam");
+                    //Edit here
+                    //thisCam = beginScene.getFirstCam();
+                    //thisCam.SetActive(true);
+                    //Debug.Log(thisCam + " cam");
+                    var thisCullLayer = beginScene.getPingLayer(transform);
+                    pingCam.cullingMask = thisCullLayer;
                 }
             }
         } else {
             
 
 
-        }*/
+        }
 
         
     }
