@@ -52,7 +52,7 @@ public class MatchplayNetworkServer : IDisposable
     public async Task<SynchedServerData> ConfigureServer(GameInfo startingGameInfo)
     {
         //networkManager.SceneManager.LoadScene("CharacterSelect", LoadSceneMode.Single);
-        networkManager.SceneManager.LoadScene("Lobby V2", LoadSceneMode.Single);
+        networkManager.SceneManager.LoadScene("UITestScene", LoadSceneMode.Single);
 
         bool localNetworkedSceneLoaded = false;
         networkManager.SceneManager.OnLoadComplete += CreateAndSetSynchedServerData;
