@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bootstrap.unity
     guid: c3104e4de2136cf4fb908e1e6177baa0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
@@ -20,16 +20,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/StartScene.unity
     guid: 748f7de1bc29e4b408b805927af60ce8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Lobby V2.unity
     guid: ce4f8c58158a8084da66500a0455bea0
   - enabled: 0
     path: Assets/Scenes/LobbyScene.unity
     guid: 2f038145137c96d45a713f62131ab23d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UITestScene.unity
     guid: 8a410b01850f40f40a776b43ec40a255
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GunTest.unity
     guid: c3a03c18beaeed149a20379a0c8dd8c1
   m_configObjects: {}
