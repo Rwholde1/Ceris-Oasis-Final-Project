@@ -17,11 +17,12 @@ public class FPCOnSceneEnter : NetworkBehaviour
 
     }
 
+    /*
     void Awake() {
         NetworkObject cam = Instantiate(playerCam, Vector3.zero , Quaternion.identity);
         Debug.Log("Instantiated");
         cam.GetComponent<NetworkObject>().Spawn();
-    }
+    }*/
 
     // Update is called once per frame
     void Update()

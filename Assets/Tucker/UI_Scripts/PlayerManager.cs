@@ -92,7 +92,17 @@ public class PlayerManager : NetworkBehaviour
     
     [ServerRpc(RequireOwnership = false)]
     void createPingServerRpc() {
-        createPing();
+        //createPing();
+        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("call ping");
+        if(Physics.Raycast(ray, out RaycastHit hit)) {
+            Debug.Log("ping");
+            //Sets height offset and instantiates ping
+            Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
+            NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+            ping.GetComponent<NetworkObject>().Spawn();
+            //ping.SpawnWithOwnership(OwnerClientId);
+        }
     }
     
 
