@@ -15,6 +15,7 @@ public class BeginScene : NetworkBehaviour
     public GameObject[] camsList = new GameObject[4];
     public bool[] camsTaken = new bool[4];
     public int[] layersList = new int[4];
+    public Transform[] players = new Transform[4];
 
     int layer1;
     int layer2;
@@ -73,6 +74,7 @@ public class BeginScene : NetworkBehaviour
             if (!camsTaken[i]) {
                 camsTaken[i] = true;
                 Debug.Log("sent transform " + (i + 1) + " . " + pingManage);
+                players[i] = playerTransform;
                 pingManage.setTarget(i + 1, playerTransform);
                 /*
                 switch(i) {
@@ -101,3 +103,5 @@ public class BeginScene : NetworkBehaviour
         return -1;
     }
 }
+
+//Game currently doesn't update arrays when players leave
