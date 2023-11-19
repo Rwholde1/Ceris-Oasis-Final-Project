@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Unity.Netcode;
+using Unity.Netcode;
 
-public class FPCOnSceneEnter : MonoBehaviour
+public class FPCOnSceneEnter : NetworkBehaviour
 {   
     public GameObject thisCam;
     public GameObject controller;
