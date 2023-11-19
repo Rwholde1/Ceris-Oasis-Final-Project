@@ -64,7 +64,7 @@ public class StatsManager : MonoBehaviour
         if (pauseMenuUI.active) {
             close();
             HUDUI.SetActive(false);
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
         }
 
         player1Elims.text = playerStats[0, 0] + "";

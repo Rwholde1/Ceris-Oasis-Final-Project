@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public class FPCOnSceneEnter : NetworkBehaviour
 {   
     public GameObject thisCam;
     public GameObject controller;
     bool sceneBegin = false;
+    public NetworkObject playerCam;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +17,16 @@ public class FPCOnSceneEnter : NetworkBehaviour
 
     }
 
+    void Awake() {
+        NetworkObject cam = Instantiate(playerCam, Vector3.zero , Quaternion.identity);
+        Debug.Log("Instantiated");
+        cam.GetComponent<NetworkObject>().Spawn();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        /*
         if (!sceneBegin) {
             if (controller == null) {
                 controller = GameObject.FindWithTag("GameController");
@@ -33,8 +42,11 @@ public class FPCOnSceneEnter : NetworkBehaviour
                 }
             }
         } else {
+            
 
 
-        }
+        }*/
+
+        
     }
 }

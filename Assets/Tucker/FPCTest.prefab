@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisCam: {fileID: 0}
   controller: {fileID: 0}
-  beginScene: {fileID: 0}
+  playerCam: {fileID: 4829650590291620189, guid: 7d8689e587ff10b44b0a92e2badc6620, type: 3}
 --- !u!114 &8352565862152366861
 MonoBehaviour:
   m_ObjectHideFlags: 0
