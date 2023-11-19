@@ -37,15 +37,17 @@ public class BeginScene : NetworkBehaviour
             cam.SetActive(false);
         }
 
+        layer1 = LayerMask.NameToLayer("Ping1");
+        layer2 = LayerMask.NameToLayer("Ping2");
+        layer3 = LayerMask.NameToLayer("Ping3");
+        layer4 = LayerMask.NameToLayer("Ping4");
+
         layersList[0] = layer1;
         layersList[1] = layer2;
         layersList[2] = layer3;
         layersList[3] = layer4;
 
-        layer1 = LayerMask.NameToLayer("Ping1");
-        layer2 = LayerMask.NameToLayer("Ping2");
-        layer3 = LayerMask.NameToLayer("Ping3");
-        layer4 = LayerMask.NameToLayer("Ping4");
+        Debug.Log("Layer IDs: " + layer1 + " " + layer2 + " " + layer3 + " " + layer4 + " ");
 
         pingManage = pingPrefab.GetComponent<PingManager>();
     }
@@ -70,7 +72,9 @@ public class BeginScene : NetworkBehaviour
         for (int i = 0; i < 4; i++) {
             if (!camsTaken[i]) {
                 camsTaken[i] = true;
-                return layersList[i];
+                Debug.Log("sent transform " + (i + 1) + " . " + pingManage);
+                pingManage.setTarget(i + 1, playerTransform);
+                /*
                 switch(i) {
                     case 0:
                         pingManage.target1 = playerTransform;
@@ -87,8 +91,13 @@ public class BeginScene : NetworkBehaviour
                     default:
                         break;
                 }
+                return layersList[i];
+                */
+                Debug.Log("Layer Return: " + layersList[i]);
+                return layersList[i];
             }
         }
+
         return -1;
     }
 }

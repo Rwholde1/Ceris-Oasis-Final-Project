@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 6333852609567075624}
   - component: {fileID: -1392528790346645995}
   - component: {fileID: 6927920625405376307}
-  m_Layer: 6
+  m_Layer: 4
   m_Name: BasicPing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,6 +346,10 @@ MonoBehaviour:
   ping2: {fileID: 2144396231660616484}
   ping3: {fileID: 5657295580829927233}
   ping4: {fileID: 7947513712438993361}
+  target1: {fileID: 0}
+  target2: {fileID: 0}
+  target3: {fileID: 0}
+  target4: {fileID: 0}
 --- !u!114 &-1392528790346645995
 MonoBehaviour:
   m_ObjectHideFlags: 0

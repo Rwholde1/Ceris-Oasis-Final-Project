@@ -43,8 +43,9 @@ public class FPCOnSceneEnter : NetworkBehaviour
                     //thisCam = beginScene.getFirstCam();
                     //thisCam.SetActive(true);
                     //Debug.Log(thisCam + " cam");
-                    var thisCullLayer = beginScene.getPingLayer(transform);
-                    pingCam.cullingMask = thisCullLayer;
+                    Debug.Log(GetComponent<Transform>());
+                    int thisCullLayer = beginScene.getPingLayer(GetComponent<Transform>());
+                    pingCam.cullingMask = pingCam.cullingMask ^ (1<<thisCullLayer);
                 }
             }
         } else {

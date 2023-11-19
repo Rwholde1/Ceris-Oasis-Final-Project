@@ -30,7 +30,7 @@ public class PingManager : NetworkBehaviour
     {
         //player = /*GameObject.FindWithTag("Player");*/ (GameObject) NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
         target1 = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
-        lifetime = 30f;
+        lifetime = 120f;
     }
 
     // Update is called once per frame
@@ -72,7 +72,30 @@ public class PingManager : NetworkBehaviour
             ping.transform.localScale = Vector3.one * scaleFactor;
         }
 
-}
+    }
+
+    public void setTarget(int id, Transform player) {
+        switch(id) {
+            case 1:
+                target1 = player;
+                Debug.Log("set target 1");
+                break;
+            case 2:
+                target2 = player;
+                Debug.Log("set target 2");
+                break;
+            case 3:
+                target3 = player;
+                Debug.Log("set target 3");
+                break;
+            case 4:
+                target4 = player;
+                Debug.Log("set target 4");
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 

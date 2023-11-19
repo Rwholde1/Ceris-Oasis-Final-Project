@@ -10,6 +10,7 @@ public class FirstPersonLook : MonoBehaviour
 
     Vector2 velocity;
     Vector2 frameVelocity;
+    public Camera thisPingCam;
 
 
     void Reset()
@@ -29,6 +30,7 @@ public class FirstPersonLook : MonoBehaviour
         //character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
         //character = NetworkManager.LocalClient.PlayerObject;
         var ThisChar = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+        ThisChar.GetComponent<FPCOnSceneEnter>().pingCam = thisPingCam;
         character = ThisChar.GetComponent<Transform>();
         SkinnedMeshRenderer[] theseMeshes = ThisChar.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach(SkinnedMeshRenderer thisMesh in theseMeshes) {
