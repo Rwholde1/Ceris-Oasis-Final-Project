@@ -37,11 +37,10 @@ public class PingManager : NetworkBehaviour
     void Update()
     {
         target1 = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
-        /*
-        target2 = 
-        target3 = 
-        target4 = 
-        */
+        repositionPing(ping1, target1);
+        repositionPing(ping2, target2);
+        repositionPing(ping3, target3);
+        repositionPing(ping4, target4);
         
     }
 
