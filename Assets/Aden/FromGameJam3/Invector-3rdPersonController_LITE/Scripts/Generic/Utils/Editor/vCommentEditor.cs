@@ -38,8 +38,8 @@ namespace Invector.Utils
         {
             serializedObject.Update();
             textStyle = new GUIStyle(EditorStyles.label);
-            window = skin.GetStyle("vCommentWindow");
-            iconStyle = skin.GetStyle("vCommentHeader");
+            //window = skin.GetStyle("vCommentWindow");
+            //iconStyle = skin.GetStyle("vCommentHeader");
             EditorGUILayout.BeginVertical(window);
             {
                 GUILayout.Space(-(window.padding.top - 5));
