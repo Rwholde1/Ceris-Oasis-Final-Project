@@ -11,7 +11,6 @@ public class Gun : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
     public float firerate = 15f;
-    public Camera cam;
     public ParticleSystem flash;
     public bool IsAutomatic = false;
     public Animator anim;
@@ -38,8 +37,14 @@ public class Gun : MonoBehaviour
     private Camera playerCamera;
     void Start()
     {
+        GameObject parentObject = transform.parent.gameObject;
+        WeaponManager parentComponent = parentObject.GetComponent<WeaponManager>();
+        playerCamera = GameObject.Find("First Person Camera").GetComponent<Camera>();
+        Canvas canvas = GameObject.Find("GUI").GetComponent<Canvas>();
+        crosshairImage = canvas.GetComponentInChildren<Image>();
+        TextMeshProUGUI[] textMeshProComponents = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        ammocount = canvas.transform.Find("Ammo Count")?.GetComponent<TextMeshProUGUI>();
         currentammo = MagSize;
-        playerCamera = Camera.main;
     }
 
     private void OnEnable()
@@ -171,10 +176,10 @@ public class Gun : MonoBehaviour
             for (int i = 0; i < bulletspershot; i++)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(cam.transform.position, accuracyfunct(cam.transform.forward, accuracy), out hit, range))
+                if (Physics.Raycast(playerCamera.transform.position, accuracyfunct(playerCamera.transform.forward, accuracy), out hit, range))
                 {
                     Debug.Log(hit.transform.name);
-                    Debug.Log(cam.transform.forward);
+                    Debug.Log(playerCamera.transform.forward);
                     target Target = hit.transform.GetComponent<target>();
                     if (Target != null)
                     {
