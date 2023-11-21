@@ -22,7 +22,7 @@ public class AI_Gen_State : MonoBehaviour
     private Transform enemyT;
     private float speed = 1f;
 
-    GameObject targetObject;
+    public GameObject targetObject;
 
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
@@ -33,6 +33,9 @@ public class AI_Gen_State : MonoBehaviour
         enemyT = GetComponent<Transform>();
         attackWhenClose = true;
         targetPos = targetObject.transform.position;
+
+        //TEMP RESET TARGET TO 0
+        targetPos = new Vector3(0, 0, 0);
     }
     
     public void ChangeSpeed(float newSpeed)
@@ -48,6 +51,8 @@ public class AI_Gen_State : MonoBehaviour
             case AI_STATE.CHASE:
                 {
                     Debug.Log("Chasing to target");
+
+
 
                     if (CastToPlayer())
                     { 
@@ -114,8 +119,9 @@ public class AI_Gen_State : MonoBehaviour
     }
     public bool CastToPlayer()
     {
+        Debug.DrawRay(enemyT.position, (2 * enemyT.position) - CheckTarget("Player"), Color.green);
         RaycastHit hit;
-        if (Physics.Raycast(enemyT.position, (2*enemyT.position) - CheckTarget("Player"), out hit, 50f, ~0))
+        if (Physics.Raycast(enemyT.position, CheckTarget("Player") - enemyT.position, out hit, 50f, ~0))
         {
             if (hit.transform.CompareTag("Player"))
             {
