@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_WandererScript : MonoBehaviour
+public class WaveSpawnManager : MonoBehaviour
 {
+    public GameObject[] spawnObjects;
+
+    public int numToSpawn;
+
+
     // Start is called before the first frame update
     void Start()
     {
         
+
     }
 
     // Update is called once per frame

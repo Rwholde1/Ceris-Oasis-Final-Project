@@ -14,39 +14,55 @@ public class AI_Gen_State : MonoBehaviour
         ACTIVECHASE = 4,
     }
 
-    public bool attackWhenClose;
+    
     public float ADT; //Attack Distance Threshold
 
 
-    [SerializeField] public AI_STATE state;
+    [SerializeField] public AI_STATE state = AI_STATE.ACTIVECHASE;
     private Transform enemyT;
-    private float speed = 1f;
 
     public GameObject targetObject;
 
-
+    public float attackDamageModifier;
     public float timeAttack;
-    public bool canAttack = true;
-    public bool doAttack = false;
-    public bool doSearch = true;
+    public bool canAttack;
+    public bool doAttack;
+    public bool doSearch;
 
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
+
+    void Awake()
+    {
+        attackDamageModifier = 1f;
+        canAttack = true;
+        doAttack = false;
+        doSearch = true;
+    }
     void Start()
     {
         //state = AI_STATE.CHASE;
         agent = GetComponent<NavMeshAgent>();
         enemyT = GetComponent<Transform>();
-        attackWhenClose = true;
-        targetPos = targetObject.transform.position;
+        //targetPos = targetPos;
         timeAttack = 5f;
         //TEMP RESET TARGET TO 0
-        targetPos = new Vector3(0, 0, 0);
+        //targetPos = new Vector3(0, 0, 0);
+        ChangeTarget("Player");
+        state = AI_STATE.ACTIVECHASE;
     }
     
     public void ChangeSpeed(float newSpeed)
     {
-        speed = newSpeed;
+        if (!(newSpeed == 0f))
+        {
+            agent.velocity = Vector3.one * newSpeed;
+        }
+        else
+        {
+            agent.velocity = Vector3.zero;
+        }
+
     }
     // Update is called once per frame
     void Update()
@@ -57,8 +73,6 @@ public class AI_Gen_State : MonoBehaviour
             case AI_STATE.CHASE:
                 {
                     Debug.Log("Chasing to target");
-
-
 
                     if (CastToPlayer(50f))
                     { 
@@ -105,13 +119,13 @@ public class AI_Gen_State : MonoBehaviour
                 
                 if(CheckDistance()<ADT*.9f)
                 {
-                    agent.velocity = Vector3.zero;
+                    ChangeSpeed(0);
                     AIAttack();
                 }
-                else if (!CastToPlayer(ADT * 1.1f) && CheckDistance()<ADT)
+                else if (!CastToPlayer(ADT * 1.1f) && CheckDistance()<=ADT)
                 {
                     Debug.Log("They Ran Away!)");
-                    agent.velocity = Vector3.one;
+                    ChangeSpeed(1);
 
                     state = AI_STATE.CHASE;
                 }
@@ -141,7 +155,7 @@ public class AI_Gen_State : MonoBehaviour
     {
         Debug.DrawRay(enemyT.position, (2 * enemyT.position) - CheckTarget("Player"), Color.green);
         RaycastHit hit;
-        if (Physics.Raycast(enemyT.position, CheckTarget("Player") - enemyT.position, out hit, distance, ~0))
+        if (Physics.Raycast(enemyT.position, CheckTarget("Player") - enemyT.position, out hit, distance, ~6))
         {
             if (hit.transform.CompareTag("Player"))
             {
