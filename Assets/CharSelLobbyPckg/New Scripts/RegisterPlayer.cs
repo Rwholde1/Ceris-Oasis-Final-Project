@@ -99,6 +99,10 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         return IsHost;
     }
 
+    public bool getIsLocalPlayer() {
+        return IsLocalPlayer;
+    }
+
 
 
     /*

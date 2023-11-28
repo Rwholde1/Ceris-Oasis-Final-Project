@@ -94,7 +94,8 @@ public class LevelSelector : MonoBehaviour
                 levelString.SetText(levelDescriptions[2]);
                 break;
             case "UITestScene":
-                levelString.SetText("UI Test Scene");
+                levelImage.sprite = levelImages[0];
+                levelString.SetText("UI Test Scene Description");
                 break;
             default: 
                 levelImage.sprite = levelImages[0];
