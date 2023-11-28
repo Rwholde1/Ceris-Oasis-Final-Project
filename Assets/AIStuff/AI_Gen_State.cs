@@ -24,6 +24,9 @@ public class AI_Gen_State : MonoBehaviour
 
     public GameObject targetObject;
 
+
+    public float timeAttack;
+    public bool doAttack = false;
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
     void Start()
@@ -33,7 +36,7 @@ public class AI_Gen_State : MonoBehaviour
         enemyT = GetComponent<Transform>();
         attackWhenClose = true;
         targetPos = targetObject.transform.position;
-
+        timeAttack = 5f;
         //TEMP RESET TARGET TO 0
         targetPos = new Vector3(0, 0, 0);
     }
@@ -54,7 +57,7 @@ public class AI_Gen_State : MonoBehaviour
 
 
 
-                    if (CastToPlayer())
+                    if (CastToPlayer(50f))
                     { 
                     ChangeTarget("Player");
                     state = AI_STATE.ACTIVECHASE;
@@ -63,10 +66,15 @@ public class AI_Gen_State : MonoBehaviour
                 }
             case AI_STATE.ACTIVECHASE:
                 {
+                    ChangeTarget("Player");
                     Debug.Log("ACTIVELY Chasing");
-                    if(CheckDistance()<= ADT)
+                    if(CheckDistance()<= ADT && CastToPlayer(4f))
                     {
                         state= AI_STATE.ATTACK;
+                    }
+                    else if(!CastToPlayer(20f))
+                    {
+                        state = AI_STATE.CHASE;
                     }
                     break;
                 }
@@ -91,17 +99,23 @@ public class AI_Gen_State : MonoBehaviour
                 break;
         
             case AI_STATE.ATTACK:
-                if (CheckDistance() >= ADT && !CastToPlayer())
+                if (CheckDistance() >= ADT && !CastToPlayer(50f))
                 {
                     state = AI_STATE.CHASE;
                 }
+                if(CheckDistance()<ADT)
+                {
+                    targetPos = enemyT.position;
+                }
+                else
+                {
+                    Debug.Log("Target changed to player");
+                    ChangeTarget("Player");
+                }
                 Debug.Log("Attacking");
-                Debug.Log("Right now changes state to chase player");
+                
                 AIAttack();
 
-                //Updates player pos
-                ChangeTarget("Player");
-                
                 
                 
                 //state = AI_STATE.CHASE;
@@ -117,11 +131,11 @@ public class AI_Gen_State : MonoBehaviour
     {
         return (int)state;
     }
-    public bool CastToPlayer()
+    public bool CastToPlayer(float distance)
     {
         Debug.DrawRay(enemyT.position, (2 * enemyT.position) - CheckTarget("Player"), Color.green);
         RaycastHit hit;
-        if (Physics.Raycast(enemyT.position, CheckTarget("Player") - enemyT.position, out hit, 50f, ~0))
+        if (Physics.Raycast(enemyT.position, CheckTarget("Player") - enemyT.position, out hit, distance, ~0))
         {
             if (hit.transform.CompareTag("Player"))
             {
@@ -133,7 +147,7 @@ public class AI_Gen_State : MonoBehaviour
         return false;
     }
 
-    float CheckDistance() //method to return the distance between the target and the current position
+    public float CheckDistance() //method to return the distance between the target and the current position
     {
         return Mathf.Abs(Vector3.Magnitude(enemyT.position - targetPos));
     }
@@ -165,13 +179,16 @@ public class AI_Gen_State : MonoBehaviour
         yield return new WaitForSeconds(5f);
         state = AI_STATE.ATTACK;
     }
+    
     void AIWait()
     {
         //pretty much stays still
     }
     void AIAttack()
     {
+       
         //activates attack, refresh on attack most likely stored in here
+
         //attacks themselves will be in seperate scripts for enemies
     }
 

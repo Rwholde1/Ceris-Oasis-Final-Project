@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class AI_RusherScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public AI_Gen_State genState;
     AI_Gen_State state;
     PlayerAttributes player;
     public float damage;
-
-    public bool doAttack;
 
     public float timeBetweenAttacks;
 
@@ -20,14 +18,13 @@ public class NewBehaviourScript : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<PlayerAttributes>();
 
         genState.timeAttack = timeBetweenAttacks;
-        timeBetweenAttacks = 5f;
-        doAttack = false;
+        damage = 10f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(genState.CheckDistance()<1f)
+        if (genState.doAttack)
         {
             rusherAttack();
 
@@ -36,24 +33,11 @@ public class NewBehaviourScript : MonoBehaviour
 
     void rusherAttack()
     {
-        if (doAttack)
+        if (genState.CastToPlayer(5f))
         {
-            doAttack = false;
-            if (genState.CastToPlayer(.5f))
-            {
-                Debug.Log("ATTACK HIT THE PLAYER");
-                player.Damage(damage);
-                //StartCoroutine(AttackCooldown());
-            }
-            
+            Debug.Log("ATTACK HIT THE PLAYER");
+            player.Damage(damage);
         }
+
     }
-
-    IEnumerator AttackCooldown()
-    {
-        yield return new WaitForSeconds(5f);
-        doAttack = true;
-    }
-
-
 }
