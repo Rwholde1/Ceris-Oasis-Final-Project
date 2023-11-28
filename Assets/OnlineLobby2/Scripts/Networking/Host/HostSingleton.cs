@@ -17,6 +17,8 @@ public class HostSingleton : MonoBehaviour
 
     private static HostSingleton hostSingleton;
 
+    public Lobby lobby;
+
     public static HostSingleton Instance
     {
         get
@@ -38,7 +40,7 @@ public class HostSingleton : MonoBehaviour
     public MatchplayNetworkServer NetworkServer { get; private set; }
     public RelayHostData RelayHostData => relayHostData;
     private RelayHostData relayHostData;
-    private string lobbyId;
+    public string lobbyId;
 
     private void Start()
     {
@@ -112,7 +114,7 @@ public class HostSingleton : MonoBehaviour
                 }
             };
 
-            Lobby lobby = await Lobbies.Instance.CreateLobbyAsync("My Lobby", maxConnections, createLobbyOptions);
+            lobby = await Lobbies.Instance.CreateLobbyAsync("My Lobby", maxConnections, createLobbyOptions);
             lobbyId = lobby.Id;
             StartCoroutine(HeartbeatLobbyCoroutine(15));
         }

@@ -11,19 +11,37 @@ public class CharacterSelectDisplay : NetworkBehaviour
     [SerializeField] private Transform charactersHolder;
     [SerializeField] private CharacterSelectButton selectButtonPrefab;
     [SerializeField] private PlayerCard[] playerCards;
+    [SerializeField] private Image[] playerReadyIcons;
+    [SerializeField] private Image[] playerCharIcons;
     //[SerializeField] private GameObject characterInfoPanel;
     //[SerializeField] private TMP_Text characterNameText;
     //[SerializeField] private Transform introSpawnPoint;
+    [SerializeField] private TMP_Text joinCodePlaceholder;    
     [SerializeField] private TMP_Text joinCodeText;
     [SerializeField] private Button lockInButton;
 
+    public Sprite unready;
+    public Sprite ready;
+
     private GameObject introInstance;
-    private List<CharacterSelectButton> characterButtons = new List<CharacterSelectButton>();
-    private NetworkList<CharacterSelectState> players;
+    public List<CharacterSelectButton> characterButtons = new List<CharacterSelectButton>();
+    public NetworkList<CharacterSelectState> players;
+
+    public TMP_Text lobbyHeader;
+
+    public float readyWaitTime = 5f;
+    public float currentReadyWait = 0f;
+    public bool countingDown = false;
+    public TMP_Text timerText;
 
     private void Awake()
     {
         players = new NetworkList<CharacterSelectState>();
+
+        //
+        var canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.interactable = true;
+        canvasGroup.enabled = true;
     }
 
     public override void OnNetworkSpawn()
@@ -40,6 +58,12 @@ public class CharacterSelectDisplay : NetworkBehaviour
             }
 
             players.OnListChanged += HandlePlayersStateChanged;
+
+            joinCodeText.SetText("" + HostSingleton.Instance.RelayHostData.JoinCode);
+            joinCodePlaceholder.SetText("");
+            //LobbySceneManagement.singleton
+            LobbySceneManagement.singleton.joinCodeText = joinCodeText;
+            LobbySceneManagement.singleton.joinCode = "" + HostSingleton.Instance.RelayHostData.JoinCode;
         }
 
         if (IsServer)
@@ -55,8 +79,15 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
         if (IsHost)
         {
-            joinCodeText.text = HostSingleton.Instance.RelayHostData.JoinCode;
+            joinCodeText.SetText("" + HostSingleton.Instance.RelayHostData.JoinCode);
+            joinCodePlaceholder.SetText("");
+            //LobbySceneManagement.singleton
+            LobbySceneManagement.singleton.joinCodeText = joinCodeText;
+            LobbySceneManagement.singleton.joinCode = "" + HostSingleton.Instance.RelayHostData.JoinCode;
+            //Debug.Log("Join code: " + HostSingleton.Instance.RelayHostData.JoinCode);
         }
+        
+
     }
 
     public override void OnNetworkDespawn()
@@ -93,6 +124,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
+            Debug.Log("character: " + character);
             if (players[i].ClientId != NetworkManager.Singleton.LocalClientId) { continue; }
 
             if (players[i].IsLockedIn) { return; }
@@ -112,13 +144,14 @@ public class CharacterSelectDisplay : NetworkBehaviour
         }
 
         //introInstance = Instantiate(character.IntroPrefab, introSpawnPoint);
-
+        Debug.Log("made it here");
         SelectServerRpc(character.Id);
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void SelectServerRpc(int characterId, ServerRpcParams serverRpcParams = default)
-    {
+    {   
+        Debug.Log("made it to SelectServerRPC");
         for (int i = 0; i < players.Count; i++)
         {
             if (players[i].ClientId != serverRpcParams.Receive.SenderClientId) { continue; }
@@ -137,38 +170,87 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     public void LockIn()
     {
+
+        /*
+        for (int i = 0; i < players.Count; i++)
+        {               
+            if (!characterDatabase.IsValidCharacterId(players[i].CharacterId)) { return; }
+
+            if (players[i].ClientId != NetworkManager.Singleton.LocalClientId) { return; }
+
+            if (players[i])
+
+            var button = characterButtons[i].GetComponentInChildren<Button>();
+            if (!players[i].IsLockedIn) {
+                Debug.Log("Confirm local lock in " + characterButtons[i].name);
+                button.enabled = false;
+                //characterButtons[i].GetComponent<Button>().interactable = false;
+            } else {
+                Debug.Log("Undo local lock in " + characterButtons[i].name);
+                button.enabled = true;
+                //characterButtons[i].GetComponent<Button>().interactable = true;
+            }
+        }*/
+
         LockInServerRpc();
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void LockInServerRpc(ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log("Lockin server rpc");
         for (int i = 0; i < players.Count; i++)
-        {
+        {   
+            Debug.Log(i + "Client ID: " + players[i].ClientId + " Char ID: " + players[i].CharacterId + " ");
+            
             if (players[i].ClientId != serverRpcParams.Receive.SenderClientId) { continue; }
 
             if (!characterDatabase.IsValidCharacterId(players[i].CharacterId)) { return; }
 
-            if (IsCharacterTaken(players[i].CharacterId, true)) { return; }
+            //if (IsCharacterTaken(players[i].CharacterId, true)) { return; }
 
-            players[i] = new CharacterSelectState(
+            if (!players[i].IsLockedIn) {
+                Debug.Log("Confirm lock in " + characterButtons[i].name);
+                players[i] = new CharacterSelectState(
                 players[i].ClientId,
                 players[i].CharacterId,
-                true
-            );
+                true);
+                //characterButtons[i].GetComponent<Button>().enabled = false;
+                //characterButtons[i].GetComponent<Button>().interactable = false;
+            } else {
+                Debug.Log("Undo lock in " + characterButtons[i].name);
+                players[i] = new CharacterSelectState(
+                players[i].ClientId,
+                players[i].CharacterId,
+                false);
+                //characterButtons[i].GetComponent<Button>().enabled = true;
+                //characterButtons[i].GetComponent<Button>().interactable = true;
+            }
+            
         }
 
+        //Ensures everyone is locked in
         foreach (var player in players)
         {
-            if (!player.IsLockedIn) { return; }
+            if (!player.IsLockedIn) { 
+                if (countingDown) {
+                    stopTimer();
+                }
+                return; 
+            }
         }
-
+        Debug.Log("Prefab assignment");
+        //Assigns players to prefabs for load-in
         foreach (var player in players)
         {
             MatchplayNetworkServer.Instance.SetCharacter(player.ClientId, player.CharacterId);
         }
 
-        MatchplayNetworkServer.Instance.StartGame();
+        //Add countdown here
+        if (!countingDown) {
+            startTimer();
+        }
+        //MatchplayNetworkServer.Instance.StartGame();
     }
 
     private void HandlePlayersStateChanged(NetworkListEvent<CharacterSelectState> changeEvent)
@@ -185,36 +267,56 @@ public class CharacterSelectDisplay : NetworkBehaviour
             }
         }
 
+        
         foreach (var button in characterButtons)
         {
-            if (button.IsDisabled) { continue; }
-
-            if (IsCharacterTaken(button.Character.Id, false))
-            {
-                button.SetDisabled();
+            if (button.IsDisabled) { 
+                if (!IsCharacterTaken(button.Character.Id, true)) {
+                    Debug.Log("button enabled");
+                    button.SetEnabled();
+                }
+            } else {
+                if (IsCharacterTaken(button.Character.Id, false)) {
+                    Debug.Log("button disabled");
+                    button.SetDisabled();
+                }
             }
-        }
 
+            
+            
+                        Debug.Log(button.IsDisabled);
+
+        }
+        /*
+        var ind = -1;
         foreach (var player in players)
         {
+            ind++;
             if (player.ClientId != NetworkManager.Singleton.LocalClientId) { continue; }
 
-            if (player.IsLockedIn)
-            {
-                lockInButton.interactable = false;
-                break;
+            Debug.Log("IDS: " + players[ind].ClientId + " " + player.ClientId);
+            if (player.IsLockedIn && players[ind].ClientId == player.ClientId)
+            {   
+                characterButtons[ind].button.interactable = false;
+                Debug.Log("turned off button " + (ind + 1));
+                //lockInButton.interactable = false;
+                //break;
+            } else {
+                Debug.Log("turned on button " + (ind + 1));
+                characterButtons[ind].button.interactable = true;
             }
-
+            
             if (IsCharacterTaken(player.CharacterId, false))
             {
-                lockInButton.interactable = false;
+                //lockInButton.interactable = false;
                 break;
             }
 
-            lockInButton.interactable = true;
+            //lockInButton.interactable = true;
 
-            break;
+            //break;
         }
+        */
     }
 
     private bool IsCharacterTaken(int characterId, bool checkAll)
@@ -233,5 +335,88 @@ public class CharacterSelectDisplay : NetworkBehaviour
         }
 
         return false;
+    }
+
+    //
+    void Update() {
+        if (LobbySceneManagement.singleton.joinCodeText == null) {
+            LobbySceneManagement.singleton.joinCodeText = joinCodeText;
+            LobbySceneManagement.singleton.joinCode = "" + HostSingleton.Instance.RelayHostData.JoinCode;
+        }
+
+        for (int r = 0; r < 4; r++) {
+            //Player lobby info (name, ready state)
+            for (int c1 = 0; c1 < 2; c1++) {
+                if (c1 == 1 && LobbySceneManagement.singleton.playerLobbyInfo[r, c1] != "ready") {
+                    playerReadyIcons[r].sprite = unready;
+                } else {
+                    playerReadyIcons[r].sprite = ready;
+                }
+            }
+        }  
+
+
+        CharacterSelectButton currentButton = null;
+        foreach (CharacterSelectButton buttn in characterButtons) {
+            if (buttn.currentlySelected) {
+                currentButton = buttn;
+            }
+        }
+
+        if (playerCharIcons[/*LobbySceneManagement.singleton.localPlayerID - 1*/LobbySceneManagement.singleton.getLocalPlayerNetworkID()].sprite == null || currentButton.IsDisabled) {
+            lockInButton.interactable = false;
+        } else {
+            lockInButton.interactable = true;
+        }
+
+        if (LobbySceneManagement.singleton.LobbyHeader == null) {
+            LobbySceneManagement.singleton.LobbyHeader = lobbyHeader;
+            LobbySceneManagement.singleton.levelSelector.changeLevel();
+            //LobbySceneManagement.singleton.updateSelectedLevel();
+
+        }
+
+
+
+        //Ensures everyone is locked in
+        foreach (var player in players)
+        {
+            if (!player.IsLockedIn) { 
+                if (countingDown) {
+                    stopTimer();
+                }
+                return; 
+            }
+        }
+
+        //Add countdown here
+        if (!countingDown) {
+            startTimer();
+        }
+
+
+
+        if (countingDown) {
+            if (currentReadyWait <= 0f) {
+                countingDown = false;
+                Debug.Log("Starting game instance");
+                timerText.SetText("Waiting for all to ready up");
+                MatchplayNetworkServer.Instance.StartGame();
+            }
+            Debug.Log("counting down");
+            timerText.SetText("Starting in " + Mathf.Ceil(currentReadyWait) + "s");
+            currentReadyWait -= Time.deltaTime;
+        }
+    }
+
+    public void startTimer() {
+        currentReadyWait = readyWaitTime;
+        countingDown = true;
+    }
+
+    public void stopTimer() {
+        currentReadyWait = 0f;
+        countingDown = false;
+        timerText.SetText("Waiting for all to ready up");
     }
 }
