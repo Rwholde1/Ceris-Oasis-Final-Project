@@ -18,7 +18,7 @@ public class AI_Gen_State : MonoBehaviour
     public float ADT; //Attack Distance Threshold
 
 
-    [SerializeField] AI_STATE state;
+    [SerializeField] public AI_STATE state;
     private Transform enemyT;
     private float speed = 1f;
 
@@ -26,7 +26,10 @@ public class AI_Gen_State : MonoBehaviour
 
 
     public float timeAttack;
+    public bool canAttack = true;
     public bool doAttack = false;
+    public bool doSearch = true;
+
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
     void Start()
@@ -68,11 +71,11 @@ public class AI_Gen_State : MonoBehaviour
                 {
                     ChangeTarget("Player");
                     Debug.Log("ACTIVELY Chasing");
-                    if(CheckDistance()<= ADT && CastToPlayer(4f))
+                    if(CastToPlayer(4f))
                     {
                         state= AI_STATE.ATTACK;
                     }
-                    else if(!CastToPlayer(20f))
+                    else if(!CastToPlayer(20f)&&doSearch)
                     {
                         state = AI_STATE.CHASE;
                     }
@@ -99,25 +102,28 @@ public class AI_Gen_State : MonoBehaviour
                 break;
         
             case AI_STATE.ATTACK:
-                if (CheckDistance() >= ADT && !CastToPlayer(50f))
+                
+                if(CheckDistance()<ADT*.9f)
                 {
+                    agent.velocity = Vector3.zero;
+                    AIAttack();
+                }
+                else if (!CastToPlayer(ADT * 1.1f) && CheckDistance()<ADT)
+                {
+                    Debug.Log("They Ran Away!)");
+                    agent.velocity = Vector3.one;
+
                     state = AI_STATE.CHASE;
                 }
-                if(CheckDistance()<ADT)
-                {
-                    targetPos = enemyT.position;
-                }
-                else
+
+                /*else
                 {
                     Debug.Log("Target changed to player");
                     ChangeTarget("Player");
-                }
-                Debug.Log("Attacking");
-                
-                AIAttack();
+                }*/
 
-                
-                
+
+
                 //state = AI_STATE.CHASE;
                 break;
         
@@ -188,10 +194,23 @@ public class AI_Gen_State : MonoBehaviour
     {
        
         //activates attack, refresh on attack most likely stored in here
-
+        if(canAttack)
+        {
+            Debug.Log("Attacking");
+            StartCoroutine(ResetAttack());
+            canAttack = false;
+            doAttack = true;
+            //DO ATTACK HERE
+        }
         //attacks themselves will be in seperate scripts for enemies
     }
-
+    IEnumerator ResetAttack()
+    {
+        
+            yield return new WaitForSeconds(timeAttack);
+            canAttack = true;
+        
+    }
 
 
 }

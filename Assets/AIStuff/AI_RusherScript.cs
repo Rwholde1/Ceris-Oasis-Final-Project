@@ -8,23 +8,35 @@ public class AI_RusherScript : MonoBehaviour
     public AI_Gen_State genState;
     AI_Gen_State state;
     PlayerAttributes player;
+    public float ADT;
+    public bool doSearch;
     public float damage;
+
+    [SerializeField] public bool doAttack;
 
     public float timeBetweenAttacks;
 
     void Start()
     {
+        ADT = 1.5f;
+        timeBetweenAttacks = 1.5f;
+        damage = 10f;
+        doSearch = false;
         genState = GetComponent<AI_Gen_State>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerAttributes>();
+        
 
+        doAttack = genState.doAttack;
+
+        genState.doSearch = doSearch;
         genState.timeAttack = timeBetweenAttacks;
-        damage = 10f;
+        genState.ADT = ADT;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (genState.doAttack)
+        if (genState.CheckDistance() < ADT)
         {
             rusherAttack();
 
@@ -33,11 +45,33 @@ public class AI_RusherScript : MonoBehaviour
 
     void rusherAttack()
     {
-        if (genState.CastToPlayer(5f))
+
+        doAttack = genState.doAttack;
+        if (doAttack)
         {
-            Debug.Log("ATTACK HIT THE PLAYER");
-            player.Damage(damage);
+            genState.doAttack = false;
+            if (genState.CastToPlayer(1.5f))
+            {
+                Debug.Log("ATTACK HIT THE PLAYER");
+                player.Damage(damage);
+                StartCoroutine(AttackCooldown());
+            }
+            
+
         }
 
+        if (!genState.CastToPlayer(1.5f))
+        {
+            genState.state = AI_Gen_State.AI_STATE.ACTIVECHASE;
+        }
     }
+
+    IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(5f);
+        genState.doAttack = true;
+
+    }
+
+
 }
