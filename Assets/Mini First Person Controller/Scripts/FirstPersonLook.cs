@@ -19,7 +19,8 @@ public class FirstPersonLook : MonoBehaviour
         //character = GetComponentInParent<FirstPersonMovement>().transform;
         //character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
         //character = NetworkManager.LocalClient.PlayerObject;
-        character = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
+        //character = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
+        character = LobbySceneManagement.singleton.getLocalPlayerTransform();
 
     }
 
@@ -50,6 +51,11 @@ public class FirstPersonLook : MonoBehaviour
 
     void Update()
     {
+
+        if (character == null) {
+            character = LobbySceneManagement.singleton.getLocalPlayerTransform();
+            Debug.Log("Fetching character");
+        }
         // Get smooth velocity.
         Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);

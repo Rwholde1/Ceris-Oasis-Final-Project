@@ -54,7 +54,8 @@ public class LevelSelector : MonoBehaviour
         Debug.Log("Dropdown val: " + dropdown.value);
         switch (dropdown.value) {
             case 0:
-                levelName = "Urban";
+                //levelName = "Urban";
+                levelName = "UITestScene";
                 break;
             case 1:
                 levelName = "Skyline";
@@ -91,6 +92,9 @@ public class LevelSelector : MonoBehaviour
             case "Transit": 
                 levelImage.sprite = levelImages[2];
                 levelString.SetText(levelDescriptions[2]);
+                break;
+            case "UITestScene":
+                levelString.SetText("UI Test Scene");
                 break;
             default: 
                 levelImage.sprite = levelImages[0];

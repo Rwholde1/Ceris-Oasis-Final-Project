@@ -122,6 +122,10 @@ public class LobbySceneManagement : NetworkBehaviour
         return NetworkManager.LocalClient.ClientId;
     }
 
+    public Transform getLocalPlayerTransform() {
+        return NetworkManager.LocalClient.PlayerObject.GetComponent<Transform>();
+    }
+
     /*
     public void Clicked(object sender, System.EventArgs e) {
         if (IsLocalPlayer) {
