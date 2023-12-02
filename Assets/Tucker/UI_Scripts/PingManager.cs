@@ -11,7 +11,10 @@ public class PingManager : NetworkBehaviour
     [SerializeField] float MinDist;
     //private GameObject player;
     private Transform target;
-    [SerializeField] TextMeshPro distanceText;
+    //[SerializeField] TextMeshPro distanceText1;
+    //[SerializeField] TextMeshPro distanceText2;
+    //[SerializeField] TextMeshPro distanceText3;
+    //[SerializeField] TextMeshPro distanceText4;
     [SerializeField] float lifetime;
 
     [SerializeField] GameObject ping1;
@@ -57,9 +60,11 @@ public class PingManager : NetworkBehaviour
         ping.transform.LookAt(target, Vector3.up);
         Vector3 retarget = Vector3.left * ping.transform.localEulerAngles[0];
         ping.transform.Rotate(retarget);
-
         //Determines distance and updates TMP
+    
         dist = Vector3.Distance(ping.transform.position, target.transform.position);
+        //Debug.Log("distance to player: " + Mathf.Round(dist));
+        TextMeshPro distanceText = ping.GetComponentInChildren<TextMeshPro>();
         distanceText.text = Mathf.Round(dist) + "m";
 
         if (dist > MinDist) {

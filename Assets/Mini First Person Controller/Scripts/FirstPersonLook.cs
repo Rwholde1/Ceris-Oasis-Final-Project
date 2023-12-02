@@ -60,12 +60,14 @@ public class FirstPersonLook : MonoBehaviour
 
         if (character == null) {
             character = LobbySceneManagement.singleton.getLocalPlayerTransform();
-            
-            Debug.Log("Character transform: " + character);
-            Debug.Log("Initial position: " + character.transform.position);
-            character.transform.position = Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position);
-            character.transform.position += new Vector3(Random.Range(-spawnRadius, spawnRadius), 1.488f, Random.Range(-spawnRadius, spawnRadius));
-            Debug.Log("New position: " + character.transform.position);
+            if (character != null) {
+                Debug.Log("Character transform: " + character);
+                Debug.Log("Initial position: " + character.transform.position);
+                character.transform.position = Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position);
+                character.transform.position += new Vector3(Random.Range(-spawnRadius, spawnRadius), 1.488f, Random.Range(-spawnRadius, spawnRadius));
+                Debug.Log("New position: " + character.transform.position);
+                character.GetComponentInParent<FirstPersonMovement>().enabled = true;
+            }
             
             Debug.Log("Fetching character");
         }

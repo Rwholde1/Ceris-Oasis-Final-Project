@@ -37,7 +37,25 @@ public class LobbySceneManagement : NetworkBehaviour
 
     public TMP_Text LobbyHeader;
     public LevelSelector levelSelector;
-    public string SceneToPlay = "Urban";
+    public string SceneToPlay = "Epsilon";
+
+    //Ping Stuff
+    public NetworkObject pingPrefab;
+
+    public GameObject cam1;
+    public GameObject cam2;
+    public GameObject cam3;
+    public GameObject cam4;
+
+    public GameObject[] camsList = new GameObject[4];
+    public int[] layersList = new int[4];
+
+    int layer1;
+    int layer2;
+    int layer3;
+    int layer4;
+
+    public PingManager pingManage;
 
     
 
@@ -55,6 +73,28 @@ public class LobbySceneManagement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Ping stuff
+        camsList[0] = cam1;
+        camsList[1] = cam2;
+        camsList[2] = cam3;
+        camsList[3] = cam4;
+        foreach(GameObject cam in camsList) {
+            cam.SetActive(false);
+        }
+
+        layer1 = LayerMask.NameToLayer("Ping1");
+        layer2 = LayerMask.NameToLayer("Ping2");
+        layer3 = LayerMask.NameToLayer("Ping3");
+        layer4 = LayerMask.NameToLayer("Ping4");
+
+        layersList[0] = layer1;
+        layersList[1] = layer2;
+        layersList[2] = layer3;
+        layersList[3] = layer4;
+
+        Debug.Log("Layer IDs: " + layer1 + " " + layer2 + " " + layer3 + " " + layer4 + " ");
+
+        pingManage = pingPrefab.GetComponent<PingManager>();
     }
 
     // Update is called once per frame
@@ -84,6 +124,10 @@ public class LobbySceneManagement : NetworkBehaviour
                     playerNames[r].text = playerLobbyInfo[r, c1];
                 }
             }
+        }
+
+        if(pingManage == null) {
+            pingManage = pingPrefab.GetComponent<PingManager>();
         }
 
 
@@ -176,4 +220,24 @@ public class LobbySceneManagement : NetworkBehaviour
     public void updateSelectedLevel() {
         getLocalPlayer().updateSelectedLevelServerRpc();
     }
+
+    public int getPingLayer() {
+        //camsTaken[i] = true;
+        //Debug.Log("sent transform " + (i + 1) + " . " + pingManage);
+        //players[i] = playerTransform;
+        layer1 = LayerMask.NameToLayer("Ping1");
+        layer2 = LayerMask.NameToLayer("Ping2");
+        layer3 = LayerMask.NameToLayer("Ping3");
+        layer4 = LayerMask.NameToLayer("Ping4");
+
+        layersList[0] = layer1;
+        layersList[1] = layer2;
+        layersList[2] = layer3;
+        layersList[3] = layer4;
+
+        pingManage.setTarget(getLocalPlayer().identity, getLocalPlayerTransform());
+        Debug.Log("Layer Return: " + layersList[getLocalPlayer().identity - 1]);
+        return layersList[getLocalPlayer().identity - 1];
+    }
+
 }

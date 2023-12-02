@@ -4258,6 +4258,18 @@ MonoBehaviour:
   LobbyHeader: {fileID: 0}
   levelSelector: {fileID: 0}
   SceneToPlay: Urban
+  pingPrefab: {fileID: 6927920625405376307, guid: 4305e60ec5d31cf4a811ab171f8535cf, type: 3}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  cam3: {fileID: 0}
+  cam4: {fileID: 0}
+  camsList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  layersList: 00000000000000000000000000000000
+  pingManage: {fileID: 0}
 --- !u!4 &1694693554
 Transform:
   m_ObjectHideFlags: 0

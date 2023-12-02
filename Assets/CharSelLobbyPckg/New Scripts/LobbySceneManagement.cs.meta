@@ -3,7 +3,19 @@ guid: 63723d7aff882984389c2335fbc43c14
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - joinCodeText: {instanceID: 0}
+  - renameButtonHolder: {instanceID: 0}
+  - renameButton: {instanceID: 0}
+  - localNameText: {instanceID: 0}
+  - LobbyHeader: {instanceID: 0}
+  - levelSelector: {instanceID: 0}
+  - pingPrefab: {fileID: 6927920625405376307, guid: 4305e60ec5d31cf4a811ab171f8535cf, type: 3}
+  - cam1: {instanceID: 0}
+  - cam2: {instanceID: 0}
+  - cam3: {instanceID: 0}
+  - cam4: {instanceID: 0}
+  - pingManage: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

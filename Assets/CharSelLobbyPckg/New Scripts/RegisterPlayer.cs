@@ -103,6 +103,10 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         return IsLocalPlayer;
     }
 
+    public int getIdentity() {
+        return identity;
+    }
+
 
 
     /*

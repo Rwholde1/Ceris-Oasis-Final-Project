@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class FPCOnSceneEnter : NetworkBehaviour
 {   
-    public GameObject thisCam;
-    public GameObject controller;
+    //public GameObject thisCam;
+    //public GameObject controller;
     bool sceneBegin = false;
     public NetworkObject playerCam;
     public int pingCullLayer = -1;
@@ -31,22 +31,17 @@ public class FPCOnSceneEnter : NetworkBehaviour
     {
         
         if (!sceneBegin) {
-            if (controller == null) {
-                controller = GameObject.FindWithTag("GameController");
-                Debug.Log(controller + " controller");
-            } else {
-                var beginScene = controller.GetComponent<BeginScene>();
-                Debug.Log(beginScene +" scene begin");
-                if (beginScene != null) {
-                    sceneBegin = true;
-                    //Edit here
-                    //thisCam = beginScene.getFirstCam();
-                    //thisCam.SetActive(true);
-                    //Debug.Log(thisCam + " cam");
-                    Debug.Log(GetComponent<Transform>());
-                    int thisCullLayer = beginScene.getPingLayer(GetComponent<Transform>());
-                    pingCam.cullingMask = pingCam.cullingMask ^ (1<<thisCullLayer);
-                }
+            //Edit here
+            //thisCam = beginScene.getFirstCam();
+            //thisCam.SetActive(true);
+            //Debug.Log(thisCam + " cam");
+            //Debug.Log(GetComponent<Transform>());
+            int thisCullLayer = LobbySceneManagement.singleton.getPingLayer();
+            pingCullLayer = thisCullLayer;
+            Debug.Log("Cull Layer: " + thisCullLayer);
+            pingCam.cullingMask = pingCam.cullingMask ^ (1<<thisCullLayer);
+            if (thisCullLayer != -1) {
+                sceneBegin = true;
             }
         } else {
             

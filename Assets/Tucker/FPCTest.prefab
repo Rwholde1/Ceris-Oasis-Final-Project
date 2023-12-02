@@ -521,7 +521,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649139909996281542}
-  - component: {fileID: 2857006414145206602}
   m_Layer: 0
   m_Name: Ground Check
   m_TagString: Untagged
@@ -544,20 +543,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8510068259853299778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2857006414145206602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4790615851121103719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084c01ab381b9da4082c1f84cf70751b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceThreshold: 0.15
-  isGrounded: 0
 --- !u!1 &5328634207814848549
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,7 +891,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 43863140785411451}
-  - component: {fileID: 1918911816517013977}
   m_Layer: 0
   m_Name: First Person Audio
   m_TagString: Untagged
@@ -934,46 +918,6 @@ Transform:
   - {fileID: 6660374033959607171}
   m_Father: {fileID: 8510068259853299778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1918911816517013977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6170016358423248908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f45facc01772ba47a9ae17bb7061b71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 7146304993476054103}
-  groundCheck: {fileID: 2857006414145206602}
-  stepAudio: {fileID: 38075527326721174}
-  runningAudio: {fileID: 1954299548547505081}
-  velocityThreshold: 0.01
-  landingAudio: {fileID: 3512157481207282987}
-  landingSFX:
-  - {fileID: 8300000, guid: 9fcb6dc763cd0354da305b5de2091287, type: 3}
-  - {fileID: 8300000, guid: ab9637a2491abbf4ca9c9601321cbb88, type: 3}
-  - {fileID: 8300000, guid: 50b288ce0d5ac1e439827c5365c74c31, type: 3}
-  jump: {fileID: 3470785808546908901}
-  jumpAudio: {fileID: 287562802770248919}
-  jumpSFX:
-  - {fileID: 8300000, guid: 3888a1e1c52793144a6d07b8c508772e, type: 3}
-  - {fileID: 8300000, guid: 5b26cf3cd5f6b914a80e6d3476caaf86, type: 3}
-  - {fileID: 8300000, guid: b16dc74b7376aca46bd0c6be96c940fa, type: 3}
-  crouch: {fileID: 5510776058576230220}
-  crouchStartAudio: {fileID: 1523675964099018656}
-  crouchedAudio: {fileID: 8301376666447703608}
-  crouchEndAudio: {fileID: 3912194651050019610}
-  crouchStartSFX:
-  - {fileID: 8300000, guid: 9b910aa79c186384cb17f28fad642b0a, type: 3}
-  - {fileID: 8300000, guid: 8a49e3e94b1e34e47bc5f47c5233c5a5, type: 3}
-  - {fileID: 8300000, guid: 3e0e4a1bf1a03c24a85ad855f4be231e, type: 3}
-  crouchEndSFX:
-  - {fileID: 8300000, guid: aac7fe48a39af6e46a2d48c5d2655976, type: 3}
-  - {fileID: 8300000, guid: e6f44b6fce71be34dbbd6d12cb3d3b8c, type: 3}
-  - {fileID: 8300000, guid: 9d46f9a0e3e8be44aa2dc581bd6e0c97, type: 3}
 --- !u!1 &8050681411968407897
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,11 +929,11 @@ GameObject:
   - component: {fileID: 8510068259853299778}
   - component: {fileID: 9066792802909015281}
   - component: {fileID: 8364462688203398512}
+  - component: {fileID: 98899578874679460}
   - component: {fileID: 7146304993476054103}
-  - component: {fileID: 3470785808546908901}
-  - component: {fileID: 5510776058576230220}
   - component: {fileID: -3168170821049325052}
   - component: {fileID: 8352565862152366861}
+  - component: {fileID: 6001883631761041190}
   - component: {fileID: 8129546109565623395}
   m_Layer: 0
   m_Name: FPCTest
@@ -1067,6 +1011,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!114 &98899578874679460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050681411968407897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14b2e39dbf015c4cbeed43a3d06b33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identity: -1
 --- !u!114 &7146304993476054103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,38 +1041,6 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 3390452654981840396}
---- !u!114 &3470785808546908901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8050681411968407897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f977f53412d81140ab13b3fca57cca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpStrength: 2
-  groundCheck: {fileID: 2857006414145206602}
---- !u!114 &5510776058576230220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8050681411968407897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b67ddb3d23b8340b125aede56d7e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: 306
-  movement: {fileID: 7146304993476054103}
-  movementSpeed: 2
-  headToLower: {fileID: 0}
-  crouchYHeadPosition: -2
-  colliderToLower: {fileID: 9066792802909015281}
 --- !u!114 &-3168170821049325052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,6 +1056,8 @@ MonoBehaviour:
   thisCam: {fileID: 0}
   controller: {fileID: 0}
   playerCam: {fileID: 4829650590291620189, guid: 7d8689e587ff10b44b0a92e2badc6620, type: 3}
+  pingCullLayer: -1
+  pingCam: {fileID: 0}
 --- !u!114 &8352565862152366861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,6 +1088,18 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &6001883631761041190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050681411968407897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8129546109565623395
 MonoBehaviour:
   m_ObjectHideFlags: 0
