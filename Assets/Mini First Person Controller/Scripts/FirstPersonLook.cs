@@ -37,7 +37,7 @@ public class FirstPersonLook : MonoBehaviour
         var ThisChar = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
         ThisChar.GetComponent<FPCOnSceneEnter>().pingCam = thisPingCam;
 
-        character = ThisChar.GetComponent<Transform>();
+        //character = ThisChar.GetComponent<Transform>();
 
         SkinnedMeshRenderer[] theseMeshes = ThisChar.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach(SkinnedMeshRenderer thisMesh in theseMeshes) {
