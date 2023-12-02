@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3734470864058015010}
-  - component: {fileID: 6489042395724309033}
   m_Layer: 0
   m_Name: GroundCheckContainer
   m_TagString: Untagged
@@ -32,20 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8854747452121219814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6489042395724309033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301055656611652971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084c01ab381b9da4082c1f84cf70751b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceThreshold: 0.15
-  isGrounded: 0
 --- !u!1 &8854747452121219810
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,8 +44,8 @@ GameObject:
   - component: {fileID: 44323585536700613}
   - component: {fileID: -9126412152770641070}
   - component: {fileID: 463780199157428676}
-  - component: {fileID: 8924697631559072420}
-  - component: {fileID: -1962129982320846118}
+  - component: {fileID: 174970812598107955}
+  - component: {fileID: 3965371242910497315}
   - component: {fileID: 8854747452121219813}
   m_Layer: 0
   m_Name: Player
@@ -165,7 +150,7 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &8924697631559072420
+--- !u!114 &174970812598107955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,12 +159,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8854747452121219810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f977f53412d81140ab13b3fca57cca2, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpStrength: 2
-  groundCheck: {fileID: 6489042395724309033}
---- !u!114 &-1962129982320846118
+--- !u!114 &3965371242910497315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,15 +171,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8854747452121219810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b67ddb3d23b8340b125aede56d7e8c, type: 3}
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 306
-  movement: {fileID: 44323585536700613}
-  movementSpeed: 2
-  headToLower: {fileID: 0}
-  crouchYHeadPosition: 1
-  colliderToLower: {fileID: 0}
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!114 &8854747452121219813
 MonoBehaviour:
   m_ObjectHideFlags: 0

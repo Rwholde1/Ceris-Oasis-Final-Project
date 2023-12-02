@@ -20,7 +20,10 @@ public class FirstPersonLook : MonoBehaviour
         //character = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.GetComponent<Transform>();
         //character = NetworkManager.LocalClient.PlayerObject;
         //character = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<Transform>();
-        character = LobbySceneManagement.singleton.getLocalPlayerTransform();
+        //character = LobbySceneManagement.singleton.getLocalPlayerTransform();
+        //Debug.Log("Character transform: " + character);
+        //Debug.Log("Initial position: " + character.transform.position + " New Position: " + Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position));
+        //transform.position = Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position);
 
     }
 
@@ -32,7 +35,9 @@ public class FirstPersonLook : MonoBehaviour
         //character = NetworkManager.LocalClient.PlayerObject;
         var ThisChar = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
         ThisChar.GetComponent<FPCOnSceneEnter>().pingCam = thisPingCam;
+
         character = ThisChar.GetComponent<Transform>();
+
         SkinnedMeshRenderer[] theseMeshes = ThisChar.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach(SkinnedMeshRenderer thisMesh in theseMeshes) {
             Debug.Log(thisMesh + " deleted");
@@ -54,6 +59,13 @@ public class FirstPersonLook : MonoBehaviour
 
         if (character == null) {
             character = LobbySceneManagement.singleton.getLocalPlayerTransform();
+            
+            Debug.Log("Character transform: " + character);
+            Debug.Log("Initial position: " + character.transform.position);
+            character.transform.position = Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position);
+            character.transform.position += new Vector3(0f, 1.488f, 0f);
+            Debug.Log("New position: " + character.transform.position);
+            
             Debug.Log("Fetching character");
         }
         // Get smooth velocity.

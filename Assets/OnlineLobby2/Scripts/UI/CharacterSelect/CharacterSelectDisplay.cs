@@ -403,7 +403,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
                 timerText.SetText("Waiting for all to ready up");
                 MatchplayNetworkServer.Instance.StartGame();
             }
-            Debug.Log("counting down");
+            //Debug.Log("counting down");
             timerText.SetText("Starting in " + Mathf.Ceil(currentReadyWait) + "s");
             currentReadyWait -= Time.deltaTime;
         }

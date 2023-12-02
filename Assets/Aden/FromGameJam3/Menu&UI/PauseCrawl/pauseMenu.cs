@@ -10,11 +10,12 @@ public class pauseMenu : MonoBehaviour
     public GameObject infoMenuUI;
     public Object menuScene;
     private bool inHelpMenu = false;
+    private bool inUse = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !inHelpMenu) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !inHelpMenu && inUse) {
             if (isPaused) {
                 Resume();
             } else {
