@@ -5,12 +5,13 @@ public class FirstPersonLook : MonoBehaviour
 {
     [SerializeField]
     Transform character;
-    public float sensitivity = 2;
+    public float sensitivity = 2f;
     public float smoothing = 1.5f;
 
     Vector2 velocity;
     Vector2 frameVelocity;
     public Camera thisPingCam;
+    public float spawnRadius = 2f;
 
 
     void Reset()
@@ -63,7 +64,7 @@ public class FirstPersonLook : MonoBehaviour
             Debug.Log("Character transform: " + character);
             Debug.Log("Initial position: " + character.transform.position);
             character.transform.position = Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position);
-            character.transform.position += new Vector3(0f, 1.488f, 0f);
+            character.transform.position += new Vector3(Random.Range(-spawnRadius, spawnRadius), 1.488f, Random.Range(-spawnRadius, spawnRadius));
             Debug.Log("New position: " + character.transform.position);
             
             Debug.Log("Fetching character");
