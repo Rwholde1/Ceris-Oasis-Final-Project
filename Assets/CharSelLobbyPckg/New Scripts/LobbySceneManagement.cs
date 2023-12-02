@@ -42,12 +42,12 @@ public class LobbySceneManagement : NetworkBehaviour
     //Ping Stuff
     public NetworkObject pingPrefab;
 
-    public GameObject cam1;
-    public GameObject cam2;
-    public GameObject cam3;
-    public GameObject cam4;
+    //public GameObject cam1;
+    //public GameObject cam2;
+    //public GameObject cam3;
+    //public GameObject cam4;
 
-    public GameObject[] camsList = new GameObject[4];
+    //public GameObject[] camsList = new GameObject[4];
     public int[] layersList = new int[4];
 
     int layer1;
@@ -56,6 +56,9 @@ public class LobbySceneManagement : NetworkBehaviour
     int layer4;
 
     public PingManager pingManage;
+
+    public Transform playerSpawnZone;
+    public float playerSpawnZoneRadius;
 
     
 
@@ -74,13 +77,13 @@ public class LobbySceneManagement : NetworkBehaviour
     void Start()
     {
         //Ping stuff
-        camsList[0] = cam1;
-        camsList[1] = cam2;
-        camsList[2] = cam3;
-        camsList[3] = cam4;
-        foreach(GameObject cam in camsList) {
+        //camsList[0] = cam1;
+        //camsList[1] = cam2;
+        //camsList[2] = cam3;
+        //camsList[3] = cam4;
+        /*foreach(GameObject cam in camsList) {
             cam.SetActive(false);
-        }
+        }*/
 
         layer1 = LayerMask.NameToLayer("Ping1");
         layer2 = LayerMask.NameToLayer("Ping2");

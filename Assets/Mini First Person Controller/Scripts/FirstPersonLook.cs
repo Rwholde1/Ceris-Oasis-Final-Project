@@ -11,7 +11,8 @@ public class FirstPersonLook : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
     public Camera thisPingCam;
-    public float spawnRadius = 2f;
+    private bool lockedIn = false;
+    //public float spawnRadius = 2f;
 
 
     void Reset()
@@ -58,19 +59,26 @@ public class FirstPersonLook : MonoBehaviour
     void Update()
     {
 
-        if (character == null) {
+        if (!lockedIn) {
             character = LobbySceneManagement.singleton.getLocalPlayerTransform();
-            if (character != null) {
+            if (character != null && LobbySceneManagement.singleton.playerSpawnZone != null) {
                 Debug.Log("Character transform: " + character);
                 Debug.Log("Initial position: " + character.transform.position);
-                character.transform.position = Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position);
-                character.transform.position += new Vector3(Random.Range(-spawnRadius, spawnRadius), 1.488f, Random.Range(-spawnRadius, spawnRadius));
+                //character.transform.position = Vector3.Scale(new Vector3(1f, 0f, 1f), character.transform.position);
+                character.transform.position = LobbySceneManagement.singleton.playerSpawnZone.position;
+                float spawnRadius = LobbySceneManagement.singleton.playerSpawnZoneRadius;
+                character.transform.position += new Vector3(Random.Range(-spawnRadius, spawnRadius), 0.5f, Random.Range(-spawnRadius, spawnRadius));
                 Debug.Log("New position: " + character.transform.position);
                 character.GetComponentInParent<FirstPersonMovement>().enabled = true;
+                Debug.Log("FPM Script enabled: " + character.GetComponentInParent<FirstPersonMovement>().enabled);
+
+                lockedIn = true;
             }
             
             Debug.Log("Fetching character");
         }
+
+        //if (character.GetC)
         // Get smooth velocity.
         Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
