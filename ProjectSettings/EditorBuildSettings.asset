@@ -6,9 +6,42 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 56d15a6fb58e46e4d9fa432e94e67ef6
+    path: Assets/Scenes/Bootstrap.unity
+    guid: c3104e4de2136cf4fb908e1e6177baa0
   - enabled: 1
-    path: Assets/Scenes/lobbyTest.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/Scenes/Depracated Scenes/lobbyTest.unity
     guid: ac99f707ce93cff419a804de3a2cc937
+  - enabled: 0
+    path: Assets/Scenes/Depracated Scenes/StartScene.unity
+    guid: 748f7de1bc29e4b408b805927af60ce8
+  - enabled: 0
+    path: Assets/Scenes/Depracated Scenes/Lobby V2.unity
+    guid: ce4f8c58158a8084da66500a0455bea0
+  - enabled: 0
+    path: Assets/Scenes/Depracated Scenes/LobbyScene.unity
+    guid: 2f038145137c96d45a713f62131ab23d
+  - enabled: 1
+    path: Assets/Scenes/UITestScene.unity
+    guid: 8a410b01850f40f40a776b43ec40a255
+  - enabled: 0
+    path: Assets/Scenes/GunTest.unity
+    guid: c3a03c18beaeed149a20379a0c8dd8c1
+  - enabled: 1
+    path: Assets/CharSelLobbyPckg/Scenes/LobbyScene.unity
+    guid: 739d41eb6dcc4fc4094f264a7ee4ae40
+  - enabled: 1
+    path: Assets/CharSelLobbyPckg/Scenes/Urban.unity
+    guid: 615236e7cc9b34741bb21345b1d5824e
+  - enabled: 1
+    path: Assets/CharSelLobbyPckg/Scenes/Skyline.unity
+    guid: c9b84caf5e1044d498f987fbb99de97c
+  - enabled: 1
+    path: Assets/CharSelLobbyPckg/Scenes/Transit.unity
+    guid: 2440d79085ea0e04ca4df93fd8640eb1
+  - enabled: 1
+    path: Assets/Scenes/FromGameJam3/StageOne.unity
+    guid: 622e79123d4a7ed4db1bfc28903ac8d6
   m_configObjects: {}

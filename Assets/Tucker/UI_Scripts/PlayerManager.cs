@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
 
     [SerializeField] int maxHealth = 100;
@@ -20,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     public StatsManager stats;
 
     public Camera mainCam;
-    public GameObject basicPing;
+    public NetworkObject basicPing;
 
     //grenades
     //shielding?
@@ -61,9 +62,20 @@ public class PlayerManager : MonoBehaviour
         }
 
         if(Input.GetMouseButtonDown(2)) {
-            createPing();
+            Debug.Log("click ping");
+            if (IsServer) {
+                createPing();
+            } else {
+                Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+                Debug.Log("call ping");
+                if(Physics.Raycast(ray, out RaycastHit hit)) {
+                    Debug.Log("ping");
+                    //Sets height offset and instantiates ping
+                    Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
+                    createPingServerRpc(offset);
+                }
+            }
         }
-
     }
 
     void takeDamage(int damageIn) {
@@ -71,13 +83,24 @@ public class PlayerManager : MonoBehaviour
         healthBar.setHealth(currentHealth);
     }
 
-    void createPing() {
+    public void createPing() {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("call ping");
         if(Physics.Raycast(ray, out RaycastHit hit)) {
+            Debug.Log("ping");
             //Sets height offset and instantiates ping
             Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
-            Instantiate(basicPing, offset, Quaternion.identity);
+            NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+            ping.GetComponent<NetworkObject>().Spawn();
+            //ping.SpawnWithOwnership(OwnerClientId);
         }
     }
+    
+    [ServerRpc(RequireOwnership = false)]
+    void createPingServerRpc(Vector3 offset) {
+        NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+        ping.GetComponent<NetworkObject>().Spawn();
+    }
+    
 
 }

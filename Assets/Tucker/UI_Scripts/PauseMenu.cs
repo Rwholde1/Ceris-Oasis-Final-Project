@@ -37,19 +37,19 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         pauseMenuUI.SetActive(true);
         HUDUI.SetActive(false);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     public void Resume() {
         isPaused = false;
         pauseMenuUI.SetActive(false);
         HUDUI.SetActive(true);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
 
     public void LoadMenu() {
         Debug.Log("loading menu");
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         SceneManager.LoadScene(menuScene.name);
     }
 
