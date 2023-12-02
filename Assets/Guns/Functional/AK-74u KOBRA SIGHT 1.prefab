@@ -353,11 +353,10 @@ MonoBehaviour:
   damage: 15
   range: 150
   firerate: 10
-  cam: {fileID: 0}
   flash: {fileID: 1409177136459102229}
   IsAutomatic: 1
   anim: {fileID: 2522295981957639649}
-  ShotFX: {fileID: 6366980465850393548, guid: 7fa54d01108f1cf479c3857c63c5a40d, type: 3}
+  ShotFX: {fileID: 5113535495413218142, guid: 5802732f9bce14646adfd801f40b3cd9, type: 3}
   impacteffect: {fileID: 6704534940747636505, guid: a4b44ade50eeba84583f76d4321b50e9, type: 3}
   accuracy: 10
   cosmetic: 0
@@ -370,6 +369,7 @@ MonoBehaviour:
   adsFOV: 30
   adsSpeed: 5
   crosshairImage: {fileID: 0}
+  allowshooting: 0
   ammocount: {fileID: 0}
 --- !u!95 &2522295981957639649
 Animator:

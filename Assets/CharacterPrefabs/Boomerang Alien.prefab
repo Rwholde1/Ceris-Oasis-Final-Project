@@ -6107,7 +6107,6 @@ MonoBehaviour:
   damage: 15
   range: 150
   firerate: 10
-  cam: {fileID: 0}
   flash: {fileID: 4597209086194768070}
   IsAutomatic: 1
   anim: {fileID: 0}
@@ -6124,7 +6123,10 @@ MonoBehaviour:
   adsFOV: 30
   adsSpeed: 5
   crosshairImage: {fileID: 0}
+  allowshooting: 0
   ammocount: {fileID: 0}
+  burstamount: 0
+  timebetweenbursts: 0
 --- !u!95 &4772187575337167865
 Animator:
   serializedVersion: 5
@@ -11527,7 +11529,7 @@ GameObject:
   - component: {fileID: 3873722433545697245}
   m_Layer: 0
   m_Name: Boomerang Alien
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11619,6 +11621,7 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 7345666111087582808}
+  isMovementEnabled: 1
 --- !u!114 &6027334633466792219
 MonoBehaviour:
   m_ObjectHideFlags: 0

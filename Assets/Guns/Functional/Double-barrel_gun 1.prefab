@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 4638347060227240820}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.189, y: -0.105, z: 0.088}
+  m_LocalPosition: {x: 0.148, y: -0.147, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -150,7 +150,10 @@ MonoBehaviour:
   adsFOV: 30
   adsSpeed: 5
   crosshairImage: {fileID: 0}
+  allowshooting: 0
   ammocount: {fileID: 0}
+  burstamount: 0
+  timebetweenbursts: 0
 --- !u!95 &7541742378352645995
 Animator:
   serializedVersion: 5
@@ -161,7 +164,7 @@ Animator:
   m_GameObject: {fileID: 4638347060227240820}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 08bf1927ab151da4aa2bc5e4d7afa5d8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 559d1eaca63652b4383b0324ca9f0777, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
