@@ -1922,7 +1922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6225030991243622601, guid: 1c316835b9ccd044da761fd8bcf37bfc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3655738736
+      value: 2122825183
       objectReference: {fileID: 0}
     - target: {fileID: 6304588635409441210, guid: 1c316835b9ccd044da761fd8bcf37bfc, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1990,7 +1990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635328298291366772, guid: 1c316835b9ccd044da761fd8bcf37bfc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4217936288
+      value: 843188070
       objectReference: {fileID: 0}
     - target: {fileID: 6712397106889375175, guid: 1c316835b9ccd044da761fd8bcf37bfc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4284,7 +4284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3699192804
+  GlobalObjectIdHash: 1061854062
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
