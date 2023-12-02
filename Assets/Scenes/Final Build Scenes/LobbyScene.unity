@@ -2569,11 +2569,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f18a89c12a346a8488ed507a0bd79d2e, type: 3}
   - {fileID: 21300000, guid: 0fca28892f34375439c32b1ee1c8d655, type: 3}
   levelDescriptions:
-  - The first level is urban, an exploration of a district of the main city
-  - The second level is Skyline, where you traverse across the tops of the city's
-    highest buildings
-  - The third level is Transit, where you must survive by traversing the outskirt
-    islands
+  - "A once bustling city now still in the Uprising\u2019s wake. Defend the world\u2019s
+    largest metropolitan area from C.A.P.S. and Barct alike."
+  - The rich built their homes above the clouds in Epsilon. Now their peaceful and
+    beautiful penthouses are no longer safe.
+  - Days after the uprising began, the nuclear Pherris Reactor exploded. While the
+    area is dangerous, it contains useful supplies.
   levelName: Urban
 --- !u!1 &619794160
 GameObject:
@@ -3088,11 +3089,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Urban
+    - m_Text: Epsilon
       m_Image: {fileID: 21300000, guid: bc8c0e2bc04ce93488efe4ea898047a9, type: 3}
     - m_Text: Skyline
       m_Image: {fileID: 21300000, guid: 7236d49fc9649dc44a67849a94ab3969, type: 3}
-    - m_Text: Transit
+    - m_Text: Pherris Reactor
       m_Image: {fileID: 21300000, guid: 0fca28892f34375439c32b1ee1c8d655, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3764,7 +3765,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Urban
+  m_text: Epsilon
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4284,7 +4285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1061854062
+  GlobalObjectIdHash: 3699192804
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0

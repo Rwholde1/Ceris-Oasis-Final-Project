@@ -55,17 +55,17 @@ public class LevelSelector : MonoBehaviour
         switch (dropdown.value) {
             case 0:
                 //levelName = "Urban";
-                levelName = "StageOne";
+                levelName = "Epsilon";
                 break;
             case 1:
-                //levelName = "Skyline;
-                levelName = "UITestScene";
+                levelName = "Skyline";
                 break;
             case 2:
-                levelName = "Transit";
+                //levelName = "Pherris Reactor";
+                levelName = "UITestScene";
                 break;
             default:
-                levelName = "Urban";
+                levelName = "Epsilon";
                 break;
         }
         LobbySceneManagement.singleton.SceneToPlay = levelName;
@@ -82,7 +82,7 @@ public class LevelSelector : MonoBehaviour
         LobbySceneManagement.singleton.LobbyHeader.SetText(nameIn);
         titleText.SetText(levelName);
         switch (levelName) {
-            case "Urban": 
+            case "Epsilon": 
                 levelImage.sprite = levelImages[0];
                 levelString.SetText(levelDescriptions[0]);
                 break;
@@ -90,17 +90,13 @@ public class LevelSelector : MonoBehaviour
                 levelImage.sprite = levelImages[1];
                 levelString.SetText(levelDescriptions[1]);
                 break;
-            case "Transit": 
+            case "Pherris Reactor": 
                 levelImage.sprite = levelImages[2];
                 levelString.SetText(levelDescriptions[2]);
                 break;
             case "UITestScene":
                 levelImage.sprite = levelImages[0];
                 levelString.SetText("UI Test Scene Description");
-                break;
-            case "StageOne":
-                levelImage.sprite = levelImages[0];
-                levelString.SetText("Stage One (early Urban) Description");
                 break;
             default: 
                 levelImage.sprite = levelImages[0];
