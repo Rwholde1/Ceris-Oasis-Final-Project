@@ -65,6 +65,8 @@ public class LobbySceneManagement : NetworkBehaviour
     public TMP_Text ammoCountText;
     public Image crosshair;
 
+    public Vector3 coordReference;
+
     
 
     void Awake() {
@@ -109,7 +111,7 @@ public class LobbySceneManagement : NetworkBehaviour
     void Update()
     {
         //Debug.Log("alive");
-        if (renameButton == null) {
+        if (renameButton == null && renameButtonHolder != null) {
             renameButton = renameButtonHolder.GetComponent<Button>();
         }
         if (joinCodeText.text.Length == 0) {
@@ -244,7 +246,7 @@ public class LobbySceneManagement : NetworkBehaviour
         layersList[3] = layer4;
 
         pingManage.setTarget(getLocalPlayer().identity, getLocalPlayerTransform());
-        Debug.Log("Layer Return: " + layersList[getLocalPlayer().identity - 1]);
+        //Debug.Log("Layer Return: " + layersList[getLocalPlayer().identity - 1]);
         return layersList[getLocalPlayer().identity - 1];
     }
 

@@ -84,6 +84,7 @@ public class AbilityManager : MonoBehaviour
                 slider2.value = cooldownMax2 - cooldown2;
             }
         }
+    
         
     }
 }

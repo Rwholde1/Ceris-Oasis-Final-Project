@@ -16,6 +16,8 @@ public class FirstPersonLook : MonoBehaviour
     //public float spawnRadius = 2f;
     public Animator thisAnim;
 
+    public Camera minimapCam;
+
 
     void Reset()
     {
@@ -43,17 +45,24 @@ public class FirstPersonLook : MonoBehaviour
 
         //character = ThisChar.GetComponent<Transform>();
 
+        Debug.Log("deleting meshes");
         SkinnedMeshRenderer[] theseMeshes = ThisChar.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach(SkinnedMeshRenderer thisMesh in theseMeshes) {
-            Debug.Log(thisMesh + " deleted");
-            thisMesh.enabled = false;
-            //thisMesh.SetActive(false);
+            //Debug.Log("go " + thisMesh.gameObject);
+            //Debug.Log("layer is: " + thisMesh.gameObject.layer);
+            if (thisMesh.gameObject.layer != 30) {
+                Debug.Log(thisMesh + " deleted");
+                thisMesh.enabled = false;
+            }
+            
         }
         MeshRenderer[] thoseMeshes = ThisChar.GetComponentsInChildren<MeshRenderer>();
         foreach(MeshRenderer thisMesh in thoseMeshes) {
-            Debug.Log(thisMesh + " deleted");
-            thisMesh.enabled = false;
-            //thisMesh.SetActive(false);
+            //Debug.Log("layer is: " + thisMesh.gameObject.layer);
+            if (thisMesh.gameObject.layer != 30) {
+                Debug.Log(thisMesh + " deleted");
+                thisMesh.enabled = false;
+            }
         }
 
 
@@ -115,6 +124,23 @@ public class FirstPersonLook : MonoBehaviour
 
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
 
+        if (minimapCam != null) {
+            //minimapCam.GetComponent<Transform>().rotation = Quaternion.identity;
+            //minimapCam.GetComponent<Transform>().eulerAngles = new Vector3(90f, velocity.x, 0f);
+            Vector3 newPos = LobbySceneManagement.singleton.getLocalPlayerTransform().position;
+            newPos.y = minimapCam.GetComponent<Transform>().transform.position.y;
+            minimapCam.GetComponent<Transform>().transform.position = newPos;
 
+            minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, LobbySceneManagement.singleton.getLocalPlayerTransform().eulerAngles.y, 0f);
+        }
+
+
+    }
+
+    void LateUpdate() {
+        if (minimapCam != null) {
+            //minimapCam.GetComponent<Transform>().rotation = Quaternion.identity;
+            //minimapCam.GetComponent<Transform>().eulerAngles = new Vector3(90f, velocity.x, 0f);
+        }
     }
 }

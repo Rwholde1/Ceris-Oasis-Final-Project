@@ -38,8 +38,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - mapObjects
+  - MinimapIcons
   - PlayerAnimations
   m_SortingLayers:
   - name: Default
