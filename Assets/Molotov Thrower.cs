@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class MolotovThrower : MonoBehaviour
+public class MolotovThrower : NetworkBehaviour
 {
     public float throwForce = 40f;
-    public GameObject grenadePrefab;
+    public NetworkObject grenadePrefab;
 
     //
     public float sensitivity = 2f;
@@ -38,12 +39,14 @@ public class MolotovThrower : MonoBehaviour
 
         */
 
-        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z + 0.1f);
+        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y - 0f, transform.position.z + 0.1f);
+        createFireGrenadeServerRpc(throwpoint, transform.forward * throwForce);
+        Debug.Log("Threw molotov");
         //GameObject grenade = Instantiate(grenadePrefab, transform.position, transform.rotation);
-                GameObject grenade = Instantiate(grenadePrefab, transform.position, Quaternion.identity);
+                //GameObject grenade = Instantiate((GameObject) grenadePrefab, throwpoint, Quaternion.identity);
 
-        grenade.GetComponent<MolotovCocktail>().player = gameObject;
-        Rigidbody rb = grenade.GetComponent<Rigidbody>();
+        // grenade.GetComponent<MolotovCocktail>().player = gameObject;
+        // Rigidbody rb = grenade.GetComponent<Rigidbody>();
         /*
         Ray ray = LobbySceneManagement.singleton.playerCamObject.ScreenPointToRay(Input.mousePosition);
         Debug.Log("call ping");
@@ -51,8 +54,8 @@ public class MolotovThrower : MonoBehaviour
             Debug.Log("naed thrown");
             grenade.GetComponent<Transform>().LookAt(hit.transform, Vector3.up);
         }*/
-        rb.velocity = new Vector3(0f, 0f, 0f);
-                rb.AddForce(transform.forward * throwForce);
+        // rb.velocity = new Vector3(0f, 0f, 0f);
+                // rb.AddForce(transform.forward * throwForce);
 
         /*
         if (transform.forward.y >= 0) {
@@ -64,4 +67,32 @@ public class MolotovThrower : MonoBehaviour
         }*/
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    void createFireGrenadeServerRpc(Vector3 throwPoint, Vector3 throwDir) {
+        Debug.Log("Threw molotov serverrpc");
+        NetworkObject molotov = Instantiate(grenadePrefab, throwPoint, Quaternion.identity);
+        molotov.GetComponent<NetworkObject>().Spawn();
+        molotov.GetComponent<Rigidbody>().AddForce(throwDir);
     }
+
+    /*
+    public void createPing() {
+        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("call ping");
+        if(Physics.Raycast(ray, out RaycastHit hit)) {
+            Debug.Log("ping");
+            //Sets height offset and instantiates ping
+            Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
+            NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+            ping.GetComponent<NetworkObject>().Spawn();
+            //ping.SpawnWithOwnership(OwnerClientId);
+        }
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    void createPingServerRpc(Vector3 offset) {
+        NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+        ping.GetComponent<NetworkObject>().Spawn();
+    }*/
+
+}

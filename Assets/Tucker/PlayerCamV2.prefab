@@ -6448,7 +6448,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4585141637375252266}
-  - component: {fileID: 4324479668803351358}
   - component: {fileID: 8318034813386105431}
   - component: {fileID: 2922353792682523302}
   - component: {fileID: 576425611952873016}
@@ -6478,23 +6477,6 @@ Transform:
   - {fileID: 3671203519377028420}
   m_Father: {fileID: 7680276625874212466}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4324479668803351358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6740094280896417139}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2a8ebb79df64c44c9f920daf85af1cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cosmetics:
-  - {fileID: 0}
-  - {fileID: 0}
-  animator: {fileID: 0}
-  selectedweapon: 0
 --- !u!65 &8318034813386105431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6617,7 +6599,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwForce: 400
-  grenadePrefab: {fileID: 1339690406208628, guid: f124b8cda6e474147967db74528f8951, type: 3}
+  grenadePrefab: {fileID: 7126793330508074834, guid: f124b8cda6e474147967db74528f8951, type: 3}
+  sensitivity: 2
+  smoothing: 1.5
 --- !u!1 &7238167166311919383
 GameObject:
   m_ObjectHideFlags: 0

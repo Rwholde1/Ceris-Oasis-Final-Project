@@ -38,8 +38,10 @@ public class MolotovSphere : MonoBehaviour
     }
     void sendmoney()
     {
-
-        player.GetComponentInParent<AddMoney>().money += moneytosendtoplayer;
-        moneytosendtoplayer = 0;
+        if (player != null) {
+            player.GetComponentInParent<AddMoney>().money += moneytosendtoplayer;
+            moneytosendtoplayer = 0;
+        }
+        
     }
 }
