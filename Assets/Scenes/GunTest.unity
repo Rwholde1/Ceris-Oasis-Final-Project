@@ -8022,6 +8022,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824062003209398013, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
+      propertyPath: m_Name
+      value: PlayerPirate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2824062003209398013, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5234125540705691879, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.3
@@ -8060,14 +8068,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5234125540705691879, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2824062003209398013, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
-      propertyPath: m_Name
-      value: PlayerPirate
-      objectReference: {fileID: 0}
-    - target: {fileID: 2824062003209398013, guid: 0d6a275615c048c458ffe6921d7739b4, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7624142692756023800, guid: bddc0c49590d0734f9f551b77ba5f4a4, type: 3}

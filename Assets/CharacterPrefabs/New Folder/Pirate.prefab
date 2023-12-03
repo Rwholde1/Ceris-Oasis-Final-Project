@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 1355664645965260287}
   - component: {fileID: 4900620055812673419}
   - component: {fileID: 8489500981878581297}
-  - component: {fileID: 4510846893700079062}
-  - component: {fileID: 6640757307115088962}
   - component: {fileID: 6430222354453962677}
   m_Layer: 0
   m_Name: Pirate
@@ -109,39 +107,8 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 4800471514387552539}
+  spawnRadius: 2
   isMovementEnabled: 1
---- !u!114 &4510846893700079062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148630362986374416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f977f53412d81140ab13b3fca57cca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpStrength: 2
-  groundCheck: {fileID: 4037733418192813281}
---- !u!114 &6640757307115088962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148630362986374416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b67ddb3d23b8340b125aede56d7e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: 306
-  movement: {fileID: 8489500981878581297}
-  movementSpeed: 2
-  headToLower: {fileID: 8218542015223229829}
-  crouchYHeadPosition: 1
-  colliderToLower: {fileID: 1355664645965260287}
 --- !u!114 &6430222354453962677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4459804894076065504}
-  - component: {fileID: 4037733418192813281}
   m_Layer: 0
   m_Name: Ground Check
   m_TagString: Untagged
@@ -188,20 +154,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2105440496885579127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4037733418192813281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510643346423869446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084c01ab381b9da4082c1f84cf70751b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceThreshold: 0.15
-  isGrounded: 1
 --- !u!1 &698520553937385167
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +378,6 @@ GameObject:
   - component: {fileID: 2596639574338809902}
   - component: {fileID: 1078654648413539455}
   - component: {fileID: 9118045099693223050}
-  - component: {fileID: 2501408994227002023}
   - component: {fileID: 1876486110101778715}
   m_Layer: 0
   m_Name: First Person Camera
@@ -533,22 +484,9 @@ MonoBehaviour:
   character: {fileID: 2105440496885579127}
   sensitivity: 2
   smoothing: 1.5
---- !u!114 &2501408994227002023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2310827779751566429}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 780f90e951d635f439326ea715cd97e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultFOV: 60
-  maxZoomFOV: 15
-  currentZoom: 0
-  sensitivity: 1
+  thisPingCam: {fileID: 0}
+  thisAnim: {fileID: 0}
+  minimapCam: {fileID: 0}
 --- !u!114 &1876486110101778715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,7 +765,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6398659550467082553}
-  - component: {fileID: 3131226208759856905}
   m_Layer: 0
   m_Name: First Person Audio
   m_TagString: Untagged
@@ -855,46 +792,6 @@ Transform:
   - {fileID: 2387572305625193077}
   m_Father: {fileID: 2105440496885579127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3131226208759856905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4010035618602157796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f45facc01772ba47a9ae17bb7061b71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 8489500981878581297}
-  groundCheck: {fileID: 4037733418192813281}
-  stepAudio: {fileID: 451118664818751162}
-  runningAudio: {fileID: 3268851488062966065}
-  velocityThreshold: 0.01
-  landingAudio: {fileID: 1758275878358848034}
-  landingSFX:
-  - {fileID: 8300000, guid: 9fcb6dc763cd0354da305b5de2091287, type: 3}
-  - {fileID: 8300000, guid: ab9637a2491abbf4ca9c9601321cbb88, type: 3}
-  - {fileID: 8300000, guid: 50b288ce0d5ac1e439827c5365c74c31, type: 3}
-  jump: {fileID: 4510846893700079062}
-  jumpAudio: {fileID: 3373375426287829029}
-  jumpSFX:
-  - {fileID: 8300000, guid: 3888a1e1c52793144a6d07b8c508772e, type: 3}
-  - {fileID: 8300000, guid: 5b26cf3cd5f6b914a80e6d3476caaf86, type: 3}
-  - {fileID: 8300000, guid: b16dc74b7376aca46bd0c6be96c940fa, type: 3}
-  crouch: {fileID: 6640757307115088962}
-  crouchStartAudio: {fileID: 7544986734881763712}
-  crouchedAudio: {fileID: 7743928469383694136}
-  crouchEndAudio: {fileID: 8482046964584956909}
-  crouchStartSFX:
-  - {fileID: 8300000, guid: 9b910aa79c186384cb17f28fad642b0a, type: 3}
-  - {fileID: 8300000, guid: 8a49e3e94b1e34e47bc5f47c5233c5a5, type: 3}
-  - {fileID: 8300000, guid: 3e0e4a1bf1a03c24a85ad855f4be231e, type: 3}
-  crouchEndSFX:
-  - {fileID: 8300000, guid: aac7fe48a39af6e46a2d48c5d2655976, type: 3}
-  - {fileID: 8300000, guid: e6f44b6fce71be34dbbd6d12cb3d3b8c, type: 3}
-  - {fileID: 8300000, guid: 9d46f9a0e3e8be44aa2dc581bd6e0c97, type: 3}
 --- !u!1 &4029727475823154226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,6 +1227,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwForce: 400
   grenadePrefab: {fileID: 1339690406208628, guid: f124b8cda6e474147967db74528f8951, type: 3}
+  sensitivity: 2
+  smoothing: 1.5
 --- !u!1 &5418383199943055878
 GameObject:
   m_ObjectHideFlags: 0

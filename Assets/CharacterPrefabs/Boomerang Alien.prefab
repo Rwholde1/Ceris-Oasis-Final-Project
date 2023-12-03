@@ -5040,7 +5040,6 @@ GameObject:
   - component: {fileID: 1850935213234761195}
   - component: {fileID: 1028603334199088703}
   - component: {fileID: 4201563449299656933}
-  - component: {fileID: 8977241550241229283}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -5146,22 +5145,9 @@ MonoBehaviour:
   character: {fileID: 6054811908026736002}
   sensitivity: 2
   smoothing: 1.5
---- !u!114 &8977241550241229283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476791606712122623}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 780f90e951d635f439326ea715cd97e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultFOV: 60
-  maxZoomFOV: 15
-  currentZoom: 0
-  sensitivity: 1
+  thisPingCam: {fileID: 0}
+  thisAnim: {fileID: 0}
+  minimapCam: {fileID: 0}
 --- !u!1 &911344909211951471
 GameObject:
   m_ObjectHideFlags: 0
@@ -5544,7 +5530,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3143969122925707117}
-  - component: {fileID: 4122396305685643383}
   m_Layer: 0
   m_Name: First Person Audio
   m_TagString: Untagged
@@ -5572,46 +5557,6 @@ Transform:
   - {fileID: 5950821330701973074}
   m_Father: {fileID: 6054811908026736002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4122396305685643383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2446446854463392667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f45facc01772ba47a9ae17bb7061b71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 3596057306866673188}
-  groundCheck: {fileID: 3515662560703149032}
-  stepAudio: {fileID: 740754251432903418}
-  runningAudio: {fileID: 6850592090095245696}
-  velocityThreshold: 0.01
-  landingAudio: {fileID: 7322469060504001684}
-  landingSFX:
-  - {fileID: 8300000, guid: 9fcb6dc763cd0354da305b5de2091287, type: 3}
-  - {fileID: 8300000, guid: ab9637a2491abbf4ca9c9601321cbb88, type: 3}
-  - {fileID: 8300000, guid: 50b288ce0d5ac1e439827c5365c74c31, type: 3}
-  jump: {fileID: 6027334633466792219}
-  jumpAudio: {fileID: 8383258244323356463}
-  jumpSFX:
-  - {fileID: 8300000, guid: 3888a1e1c52793144a6d07b8c508772e, type: 3}
-  - {fileID: 8300000, guid: 5b26cf3cd5f6b914a80e6d3476caaf86, type: 3}
-  - {fileID: 8300000, guid: b16dc74b7376aca46bd0c6be96c940fa, type: 3}
-  crouch: {fileID: 3873722433545697245}
-  crouchStartAudio: {fileID: 6295949197643013357}
-  crouchedAudio: {fileID: 2358967899751428049}
-  crouchEndAudio: {fileID: 6744634177712947229}
-  crouchStartSFX:
-  - {fileID: 8300000, guid: 9b910aa79c186384cb17f28fad642b0a, type: 3}
-  - {fileID: 8300000, guid: 8a49e3e94b1e34e47bc5f47c5233c5a5, type: 3}
-  - {fileID: 8300000, guid: 3e0e4a1bf1a03c24a85ad855f4be231e, type: 3}
-  crouchEndSFX:
-  - {fileID: 8300000, guid: aac7fe48a39af6e46a2d48c5d2655976, type: 3}
-  - {fileID: 8300000, guid: e6f44b6fce71be34dbbd6d12cb3d3b8c, type: 3}
-  - {fileID: 8300000, guid: 9d46f9a0e3e8be44aa2dc581bd6e0c97, type: 3}
 --- !u!1 &2692515605468049864
 GameObject:
   m_ObjectHideFlags: 0
@@ -5966,7 +5911,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4179079332963178622}
-  - component: {fileID: 3515662560703149032}
   m_Layer: 0
   m_Name: Ground Check
   m_TagString: Untagged
@@ -5989,20 +5933,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6054811908026736002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3515662560703149032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5719785082979863195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084c01ab381b9da4082c1f84cf70751b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceThreshold: 0.15
-  isGrounded: 1
 --- !u!1 &6291056416831637442
 GameObject:
   m_ObjectHideFlags: 0
@@ -11525,8 +11455,6 @@ GameObject:
   - component: {fileID: 5351612557700460191}
   - component: {fileID: 662227767566723340}
   - component: {fileID: 3596057306866673188}
-  - component: {fileID: 6027334633466792219}
-  - component: {fileID: 3873722433545697245}
   m_Layer: 0
   m_Name: Boomerang Alien
   m_TagString: Player
@@ -11621,39 +11549,8 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 7345666111087582808}
+  spawnRadius: 2
   isMovementEnabled: 1
---- !u!114 &6027334633466792219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8268883282137578081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f977f53412d81140ab13b3fca57cca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpStrength: 2
-  groundCheck: {fileID: 3515662560703149032}
---- !u!114 &3873722433545697245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8268883282137578081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b67ddb3d23b8340b125aede56d7e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: 306
-  movement: {fileID: 3596057306866673188}
-  movementSpeed: 2
-  headToLower: {fileID: 4399335221293868629}
-  crouchYHeadPosition: 1
-  colliderToLower: {fileID: 5351612557700460191}
 --- !u!1001 &2224698458391692888
 PrefabInstance:
   m_ObjectHideFlags: 0
