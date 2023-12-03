@@ -60,6 +60,11 @@ public class LobbySceneManagement : NetworkBehaviour
     public Transform playerSpawnZone;
     public float playerSpawnZoneRadius;
 
+    //public GameObject playerCamObject;
+    public Camera playerCamObject;
+    public TMP_Text ammoCountText;
+    public Image crosshair;
+
     
 
     void Awake() {

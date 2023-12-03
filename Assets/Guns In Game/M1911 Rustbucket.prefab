@@ -166,18 +166,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6904721206520731058}
-<<<<<<< HEAD:Assets/Guns In Game/M1911 Rustbucket.prefab
-  - component: {fileID: 4740556100927801555}
-  m_Layer: 0
-=======
   m_Layer: 31
->>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Cosmo/M1911 Rustbucket.prefab
   m_Name: M1911 Rustbucket
-  m_TagString: Untagged
+  m_TagString: Pistol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6904721206520731058
 Transform:
   m_ObjectHideFlags: 0
@@ -196,38 +191,6 @@ Transform:
   - {fileID: 4263292700469495927}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD:Assets/Guns In Game/M1911 Rustbucket.prefab
---- !u!114 &4740556100927801555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592505750181202689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb1426cd6e2382142843df3d2c8abb05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  range: 100
-  firerate: 6
-  cam: {fileID: 0}
-  flash: {fileID: 8917509466986934071}
-  IsAutomatic: 0
-  anim: {fileID: 4449474791658557339}
-  ShotFX: {fileID: 6366980465850393548, guid: 7fa54d01108f1cf479c3857c63c5a40d, type: 3}
-  impacteffect: {fileID: 6704534940747636505, guid: a4b44ade50eeba84583f76d4321b50e9, type: 3}
-  accuracy: 5
-  cosmetic: 0
-  maxAmmo: 100
-  reloadtime: 1
-  normalFOV: 60
-  adsFOV: 30
-  adsSpeed: 5
-  crosshairImage: {fileID: 0}
-=======
->>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Cosmo/M1911 Rustbucket.prefab
 --- !u!1001 &4618110325555891237
 PrefabInstance:
   m_ObjectHideFlags: 0

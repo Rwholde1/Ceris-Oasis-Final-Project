@@ -13,7 +13,6 @@ public class Gun : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
     public float firerate = 15f;
-    public Camera cam;
     public ParticleSystem flash;
     public bool IsAutomatic = false;
     public Animator anim;
@@ -35,7 +34,7 @@ public class Gun : MonoBehaviour
     private bool isAiming = false;
     public Image crosshairImage;
     public bool allowshooting = false;
-    public TextMeshProUGUI ammocount;
+    public TMP_Text ammocount;
     public int burstamount = 0;
     public float timebetweenbursts = 0;
     private Camera playerCamera;
@@ -45,12 +44,22 @@ public class Gun : MonoBehaviour
     private int burstshotsfired = 0;
     void Start()
     {
+        GameObject parentObject = transform.parent.gameObject;
+        WeaponManager parentComponent = parentObject.GetComponent<WeaponManager>();
+        //playerCamera = GameObject.Find("First Person Camera").GetComponent<Camera>();
+        //playerCamera = LobbySceneManagement.singleton.playerCamObject.GetComponent<Camera>();
+        playerCamera = LobbySceneManagement.singleton.playerCamObject;
+        ammocount = LobbySceneManagement.singleton.ammoCountText;
+        crosshairImage = LobbySceneManagement.singleton.crosshair;
+        //Canvas canvas = GameObject.Find("GUI").GetComponent<Canvas>();
+        //crosshairImage = canvas.GetComponentInChildren<Image>();
+        //TextMeshProUGUI[] textMeshProComponents = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        //ammocount = canvas.transform.Find("Ammo Count")?.GetComponent<TextMeshProUGUI>();
         currentammo = MagSize;
-<<<<<<<< HEAD:Assets/Brady/Gun.cs
-        playerCamera = Camera.main;
-========
 
->>>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Gun Scripts/Gun.cs
+        //add ammoCount tmp
+        //add crosshair images
+
     }
 
     private void OnEnable()
@@ -65,6 +74,20 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Async start astuff
+        if (playerCamera == null) {
+            //playerCamera = LobbySceneManagement.singleton.playerCamObject.GetComponent<Camera>();
+            playerCamera = LobbySceneManagement.singleton.playerCamObject;
+        }
+        if (ammocount == null) {
+            ammocount = LobbySceneManagement.singleton.ammoCountText;
+        }
+        if (crosshairImage == null) {
+            crosshairImage = LobbySceneManagement.singleton.crosshair;
+        }
+
+
+
         if(burstshotsfired>0)
         {
             allowshooting = false;
@@ -139,51 +162,6 @@ public class Gun : MonoBehaviour
                 float targetFOV = isAiming ? adsFOV : normalFOV;
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, Time.deltaTime * adsSpeed);
             }
-<<<<<<<< HEAD:Assets/Brady/Gun.cs
-            return;
-        }
-        if(currentammo <= 0 || (Input.GetKeyDown(KeyCode.R) && currentammo != MagSize) && !cosmetic)
-        {
-            StartCoroutine(Reload());
-            return;
-        }
-        if (IsAutomatic)
-        {
-            if (Input.GetButton("Fire1") && Time.time >= timetofire)
-            {
-                timetofire = Time.time + (1f / firerate);
-                if(!cosmetic) anim.SetBool("Continuous", true);
-                Shoot();
-            }
-            if (Input.GetButtonUp("Fire1"))
-                {
-                if (!cosmetic) anim.SetBool("Continuous", false);
-            }
-        }
-        else
-        {
-            if (Input.GetButtonDown("Fire1") && Time.time >= timetofire)
-            {
-                timetofire = Time.time + (1f / firerate);
-                Shoot();
-            }
-        }
-
-        if (!cosmetic)
-        {
-            //ammocount.text = currentammo + "/" + maxAmmo;
-            if (crosshairImage != null)
-            {
-                float targetScale = isAiming ? 0.5f : 1f;
-                crosshairImage.transform.localScale = Vector3.Lerp(crosshairImage.transform.localScale, new Vector3(targetScale, targetScale, 1f), Time.deltaTime * adsSpeed);
-            }
-
-
-            HandleFOVInput();
-            float targetFOV = isAiming ? adsFOV : normalFOV;
-            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, Time.deltaTime * adsSpeed);
-========
->>>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Gun Scripts/Gun.cs
         }
 
     }
@@ -290,10 +268,10 @@ public class Gun : MonoBehaviour
             for (int j = 0; j < bulletspershot; j++)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(cam.transform.position, accuracyfunct(cam.transform.forward, accuracy), out hit, range))
+                if (Physics.Raycast(playerCamera.transform.position, accuracyfunct(playerCamera.transform.forward, accuracy), out hit, range))
                 {
                     Debug.Log(hit.transform.name);
-                    Debug.Log(cam.transform.forward);
+                    Debug.Log(playerCamera.transform.forward);
                     target Target = hit.transform.GetComponent<target>();
                     if (Target != null)
                     {

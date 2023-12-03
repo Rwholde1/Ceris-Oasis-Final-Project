@@ -13,6 +13,7 @@ public class FirstPersonLook : MonoBehaviour
     public Camera thisPingCam;
     private bool lockedIn = false;
     //public float spawnRadius = 2f;
+    public Animator thisAnim;
 
 
     void Reset()
@@ -37,6 +38,7 @@ public class FirstPersonLook : MonoBehaviour
         //character = NetworkManager.LocalClient.PlayerObject;
         var ThisChar = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
         ThisChar.GetComponent<FPCOnSceneEnter>().pingCam = thisPingCam;
+        //ThisChar.GetComponent<FirstPersonMovement>().animator = thisAnim;
 
         //character = ThisChar.GetComponent<Transform>();
 
@@ -77,6 +79,11 @@ public class FirstPersonLook : MonoBehaviour
             
             Debug.Log("Fetching character");
         }
+
+        /*
+        if (LobbySceneManagement.singleton.playerCamObject == null) {
+            LobbySceneManagement.singleton.playerCamObject = GetComponent<GameObject>();
+        }*/
 
         //if (character.GetC)
         // Get smooth velocity.

@@ -6,6 +6,14 @@ public class MolotovThrower : MonoBehaviour
 {
     public float throwForce = 40f;
     public GameObject grenadePrefab;
+
+    //
+    public float sensitivity = 2f;
+    public float smoothing = 1.5f;
+    Vector2 velocity;
+    Vector2 frameVelocity;
+    //
+
     // Update is called once per frame
     void Update()
     {
@@ -17,10 +25,24 @@ public class MolotovThrower : MonoBehaviour
 
     void ThrowGrenade()
     {
-        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.1f);
+
+        //
+        Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
+        frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
+        velocity += frameVelocity;
+        velocity.y = Mathf.Clamp(velocity.y, -90, 90);
+
+        //transform.eulerAngles = new Vector3(-velocity.y, velocity.x, 0f);
+        Vector3 dir = new Vector3(-velocity.y, velocity.x, 0f);
+
+        //
+
+        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
         GameObject grenade = Instantiate(grenadePrefab, transform.position, transform.rotation);
         grenade.GetComponent<MolotovCocktail>().player = gameObject;
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
+        Debug.Log("Direction: " + transform.forward);
         rb.AddForce(transform.forward * throwForce);
     }
 

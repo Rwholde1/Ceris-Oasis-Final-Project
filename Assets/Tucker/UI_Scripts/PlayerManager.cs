@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
+using TMPro;
 
 public class PlayerManager : NetworkBehaviour
 {
@@ -22,6 +23,9 @@ public class PlayerManager : NetworkBehaviour
 
     public Camera mainCam;
     public NetworkObject basicPing;
+
+    public TMP_Text ammoText;
+    public Image crosshair;
 
     //grenades
     //shielding?
@@ -75,6 +79,16 @@ public class PlayerManager : NetworkBehaviour
                     createPingServerRpc(offset);
                 }
             }
+        }
+
+        if (LobbySceneManagement.singleton.ammoCountText == null) {
+            LobbySceneManagement.singleton.ammoCountText = ammoText;
+        }
+        if (LobbySceneManagement.singleton.crosshair == null) {
+            LobbySceneManagement.singleton.crosshair = crosshair;
+        }
+        if (LobbySceneManagement.singleton.playerCamObject == null) {
+            LobbySceneManagement.singleton.playerCamObject = mainCam;
         }
     }
 

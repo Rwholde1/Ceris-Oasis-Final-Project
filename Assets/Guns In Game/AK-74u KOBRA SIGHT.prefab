@@ -260,15 +260,9 @@ GameObject:
   - component: {fileID: 2201048977436253113}
   - component: {fileID: 7056404646822195132}
   - component: {fileID: 1052449045675266157}
-<<<<<<< HEAD:Assets/Guns In Game/AK-74u KOBRA SIGHT.prefab
-  - component: {fileID: 4458216468708569353}
-  - component: {fileID: 2522295981957639649}
-  m_Layer: 0
-=======
   m_Layer: 31
->>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Cosmo/AK-74u KOBRA SIGHT.prefab
   m_Name: AK-74u KOBRA SIGHT
-  m_TagString: Untagged
+  m_TagString: Rifle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,59 +336,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-<<<<<<< HEAD:Assets/Guns In Game/AK-74u KOBRA SIGHT.prefab
---- !u!114 &4458216468708569353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8982318626141028466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb1426cd6e2382142843df3d2c8abb05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  range: 150
-  firerate: 10
-  cam: {fileID: 0}
-  flash: {fileID: 1409177136459102229}
-  IsAutomatic: 1
-  anim: {fileID: 2522295981957639649}
-  ShotFX: {fileID: 6366980465850393548, guid: 7fa54d01108f1cf479c3857c63c5a40d, type: 3}
-  impacteffect: {fileID: 6704534940747636505, guid: a4b44ade50eeba84583f76d4321b50e9, type: 3}
-  accuracy: 10
-  cosmetic: 0
-  maxAmmo: 100
-  reloadtime: 1
-  normalFOV: 60
-  adsFOV: 30
-  adsSpeed: 5
-  crosshairImage: {fileID: 0}
---- !u!95 &2522295981957639649
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8982318626141028466}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1b581bb5a28738f4796dacf624dd6070, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
-=======
->>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Cosmo/AK-74u KOBRA SIGHT.prefab
 --- !u!1001 &1246971758796645711
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,9 +10,9 @@ public class AddMoney : MonoBehaviour
 
     private void Start()
     {
-        Canvas canvas = GameObject.Find("GUI").GetComponent<Canvas>();
-        TextMeshProUGUI[] textMeshProComponents = canvas.GetComponentsInChildren<TextMeshProUGUI>();
-        MoneyCount = canvas.transform.Find("Money")?.GetComponent<TextMeshProUGUI>();
+        //Canvas canvas = GameObject.Find("GUI").GetComponent<Canvas>();
+        //TextMeshProUGUI[] textMeshProComponents = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        //MoneyCount = canvas.transform.Find("Money")?.GetComponent<TextMeshProUGUI>();
     }
     // Update is called once per frame
     void Update()

@@ -521,6 +521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649139909996281542}
+  - component: {fileID: 8254092192214022149}
   m_Layer: 0
   m_Name: Ground Check
   m_TagString: Untagged
@@ -543,6 +544,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8510068259853299778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8254092192214022149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4790615851121103719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff20b8790b9ea56428a8c3b1207bbead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceThreshold: 0.15
+  isGrounded: 0
 --- !u!1 &5328634207814848549
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 43863140785411451}
+  - component: {fileID: 6016671761033649510}
   m_Layer: 0
   m_Name: First Person Audio
   m_TagString: Untagged
@@ -918,6 +934,37 @@ Transform:
   - {fileID: 6660374033959607171}
   m_Father: {fileID: 8510068259853299778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6016671761033649510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170016358423248908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1701a254e935844aadf441e43e9e1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 7146304993476054103}
+  groundCheck: {fileID: 8254092192214022149}
+  stepAudio: {fileID: 38075527326721174}
+  runningAudio: {fileID: 1954299548547505081}
+  velocityThreshold: 0.01
+  landingAudio: {fileID: 3512157481207282987}
+  landingSFX:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  jump: {fileID: 0}
+  jumpAudio: {fileID: 0}
+  jumpSFX: []
+  crouch: {fileID: 0}
+  crouchStartAudio: {fileID: 0}
+  crouchedAudio: {fileID: 0}
+  crouchEndAudio: {fileID: 0}
+  crouchStartSFX: []
+  crouchEndSFX: []
 --- !u!1 &8050681411968407897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1088,8 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 3390452654981840396}
+  spawnRadius: 2
+  isMovementEnabled: 1
 --- !u!114 &-3168170821049325052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,8 +1102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6faccc528eb1d4bbdafb36e0b46eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisCam: {fileID: 0}
-  controller: {fileID: 0}
   playerCam: {fileID: 4829650590291620189, guid: 7d8689e587ff10b44b0a92e2badc6620, type: 3}
   pingCullLayer: -1
   pingCam: {fileID: 0}
