@@ -38,11 +38,12 @@ public class MolotovThrower : MonoBehaviour
 
         //
 
-        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
+        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z + 0.1f);
         GameObject grenade = Instantiate(grenadePrefab, transform.position, transform.rotation);
         grenade.GetComponent<MolotovCocktail>().player = gameObject;
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
-        Debug.Log("Direction: " + transform.forward);
+        Debug.Log("Throw Direction: " + transform.forward);
+        Debug.Log("Throw force: " + transform.forward * throwForce);
         rb.AddForce(transform.forward * throwForce);
     }
 

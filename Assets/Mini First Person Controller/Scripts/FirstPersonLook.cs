@@ -109,6 +109,7 @@ public class FirstPersonLook : MonoBehaviour
 
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
 
-        
+                Debug.Log("Cam Direction: " + transform.forward);
+
     }
 }

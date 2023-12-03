@@ -62,7 +62,7 @@ public class LevelSelector : MonoBehaviour
                 break;
             case 2:
                 //levelName = "Pherris Reactor";
-                levelName = "UITestScene";
+                levelName = "GunTest";
                 break;
             default:
                 levelName = "Epsilon";
@@ -94,9 +94,9 @@ public class LevelSelector : MonoBehaviour
                 levelImage.sprite = levelImages[2];
                 levelString.SetText(levelDescriptions[2]);
                 break;
-            case "UITestScene":
+            case "GunTest":
                 levelImage.sprite = levelImages[0];
-                levelString.SetText("UI Test Scene Description");
+                levelString.SetText("Gun Test Scene Description");
                 break;
             default: 
                 levelImage.sprite = levelImages[0];
