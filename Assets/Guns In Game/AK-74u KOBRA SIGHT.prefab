@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4568234953082381051}
   - component: {fileID: 6325650462994068831}
   - component: {fileID: 5077739187266800300}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: AK74U_Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3536492051231163118}
   - component: {fileID: 4837951296737885378}
   - component: {fileID: 8255632723909307830}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: AK74U_Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3073648809244995484}
   - component: {fileID: 7555076426577643433}
   - component: {fileID: 6196893155414550802}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: AK_74U_Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,9 +260,13 @@ GameObject:
   - component: {fileID: 2201048977436253113}
   - component: {fileID: 7056404646822195132}
   - component: {fileID: 1052449045675266157}
+<<<<<<< HEAD:Assets/Guns In Game/AK-74u KOBRA SIGHT.prefab
   - component: {fileID: 4458216468708569353}
   - component: {fileID: 2522295981957639649}
   m_Layer: 0
+=======
+  m_Layer: 31
+>>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Cosmo/AK-74u KOBRA SIGHT.prefab
   m_Name: AK-74u KOBRA SIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,8 +281,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8982318626141028466}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.198, y: -0.30900002, z: 0.251}
+  m_LocalRotation: {x: 0.23921138, y: 0, z: 0, w: 0.97096753}
+  m_LocalPosition: {x: 0.029, y: -0.113, z: -0.059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -338,6 +342,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<< HEAD:Assets/Guns In Game/AK-74u KOBRA SIGHT.prefab
 --- !u!114 &4458216468708569353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +393,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+=======
+>>>>>>> Brady-testing-(guns-and-people):Assets/Guns/Cosmo/AK-74u KOBRA SIGHT.prefab
 --- !u!1001 &1246971758796645711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -399,6 +406,14 @@ PrefabInstance:
     - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_Name
       value: MuzzleFlash01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992675705445476, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -500,10 +515,5 @@ PrefabInstance:
 --- !u!4 &1243386550654568795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
-  m_PrefabInstance: {fileID: 1246971758796645711}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1409177136459102229 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   m_PrefabInstance: {fileID: 1246971758796645711}
   m_PrefabAsset: {fileID: 0}

@@ -1087,7 +1087,7 @@ GameObject:
   - component: {fileID: 1501328487539134013}
   m_Layer: 0
   m_Name: OtherAlien
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1179,6 +1179,7 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 5918852483586048552}
+  isMovementEnabled: 1
 --- !u!114 &4996117742066491138
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -220,9 +220,10 @@ GameObject:
   - component: {fileID: 4755677699500297660}
   - component: {fileID: 5070087192024326323}
   - component: {fileID: 8205976698596906105}
+  - component: {fileID: 1676334086988437162}
   m_Layer: 0
   m_Name: Pirate
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,6 +315,7 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 5201082835924732602}
+  isMovementEnabled: 1
 --- !u!114 &5070087192024326323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +348,20 @@ MonoBehaviour:
   headToLower: {fileID: 8949045085045250392}
   crouchYHeadPosition: 1
   colliderToLower: {fileID: 3799380597815859810}
+--- !u!114 &1676334086988437162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824062003209398013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1626ab9b3238e41b2427e08aafe3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  MoneyCount: {fileID: 0}
 --- !u!1 &2968971368087070400
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +666,7 @@ GameObject:
   - component: {fileID: 808798618350445024}
   - component: {fileID: 730329727628399893}
   - component: {fileID: 5817401687884492309}
+  - component: {fileID: 8201692620047842771}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -771,6 +788,19 @@ MonoBehaviour:
   maxZoomFOV: 15
   currentZoom: 0
   sensitivity: 1
+--- !u!114 &8201692620047842771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064886566186945618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b6333d87ec00e4b8070a988b6f8da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 2824062003209398013}
 --- !u!1 &5428070965685729520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1323,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8625004502981480256}
   - component: {fileID: 4902908204706460529}
+  - component: {fileID: 6391298301816995354}
+  - component: {fileID: 7950188155965641511}
+  - component: {fileID: 5674348160201181557}
+  - component: {fileID: 4594187668673800483}
+  - component: {fileID: 4823286523313544640}
   m_Layer: 0
   m_Name: GunManager
   m_TagString: Untagged
@@ -1334,6 +1369,129 @@ MonoBehaviour:
   - {fileID: 3970224150519400}
   animator: {fileID: 5201082835924732602}
   selectedweapon: 0
+--- !u!65 &6391298301816995354
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050405483193927438}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7950188155965641511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050405483193927438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ada13aa9f995024384614c6e54eee88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns:
+  - {fileID: 3477272106043243643, guid: 1d2cc453192e4164e924f186584ebd24, type: 3}
+  - {fileID: 8982318626141028466, guid: 2b18cb58caa67cd45be58bc2e6457c18, type: 3}
+  - {fileID: 4638347060227240820, guid: f270964dcb0244d4e921d769e923ef25, type: 3}
+  - {fileID: 8592505750181202689, guid: b7ea13a7175b11b4489c409194ea234d, type: 3}
+  - {fileID: 4264692285918226091, guid: b60cf8d1506bddf44b0c3994e6bbe017, type: 3}
+  - {fileID: 3443020312930799103, guid: 529e41702fb655b41b5fd23024f67a41, type: 3}
+  - {fileID: 6669494006212981932, guid: 7a7ebe09963e8614aa952d1d722aadd9, type: 3}
+  - {fileID: 8411963280288052242, guid: 98076905dc8eaef4abd114342da15f62, type: 3}
+  - {fileID: 2467886614539273244, guid: 0a78581b728434f40992f2217adbecc1, type: 3}
+  - {fileID: 6490548185606528983, guid: f5a53748c76151447a0693ba8ff18304, type: 3}
+  gunID1: 0
+  gunID2: 0
+  riflepos: {fileID: 5201082835917219032}
+  pistolpos: {fileID: 5201082835917219108}
+  shotpos: {fileID: 5201082835917219016}
+  GunPNG:
+  - {fileID: 21300000, guid: 394e93ce356b57344903a08ff72fcab2, type: 3}
+  - {fileID: 21300000, guid: 3588be8a7f564a04eb55e7f87b2b4793, type: 3}
+  - {fileID: 21300000, guid: 20faeee9a0fbb994394e5453e3758c86, type: 3}
+  - {fileID: 21300000, guid: fdc0ec5714daaf24fad1ad3cb4397a49, type: 3}
+  - {fileID: 21300000, guid: 61f7477179075664abe5a43dc532d21f, type: 3}
+  - {fileID: 21300000, guid: ef182176239e15048ba8df91cb683208, type: 3}
+  - {fileID: 21300000, guid: f12a6a100017ace49a37707ffb8c44e1, type: 3}
+  - {fileID: 21300000, guid: 39521888eff7ad7489e7586a565dc9d2, type: 3}
+  - {fileID: 21300000, guid: 0f15197b0bf29cd469b39440a0f51c9b, type: 3}
+  - {fileID: 21300000, guid: c06717742e7e0564f8879248b2233a3b, type: 3}
+  gun1: {fileID: 0}
+  gun2: {fileID: 0}
+  gunactive: 1
+  animator: {fileID: 5201082835924732602}
+  gun1IMG: {fileID: 0}
+  gun2IMG: {fileID: 0}
+--- !u!114 &5674348160201181557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050405483193927438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e510bb753ae414290a45c68a5dd024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns:
+  - {fileID: 3477272106043243643, guid: bab6bdf1c74840a43ae4eb60b6633b26, type: 3}
+  - {fileID: 8982318626141028466, guid: f1142a5c70fa2794ca85dc3cb4bfd11b, type: 3}
+  - {fileID: 4638347060227240820, guid: f705468fa35bad6499341f90aecbd3c5, type: 3}
+  - {fileID: 8592505750181202689, guid: 2085bdc64330fee4da5ea73faa5f9225, type: 3}
+  - {fileID: 672754247056582823, guid: a3edc9fd420c412418c8e22a29e27a60, type: 3}
+  - {fileID: 3443020312930799103, guid: a85c0c0238622394697d636727bad5a0, type: 3}
+  - {fileID: 6669494006212981932, guid: dec784d1682b37c42a600cb5c2d8ef54, type: 3}
+  - {fileID: 8411963280288052242, guid: 40c2eff72447bd3439939cea68ac6bd8, type: 3}
+  - {fileID: 2467886614539273244, guid: 61e80b40b63a5594d992785d19402986, type: 3}
+  - {fileID: 6490548185606528983, guid: 1bba3008ff004204abb76db17d0c44b7, type: 3}
+  gunID1: 8
+  gunID2: 7
+  gun1: {fileID: 0}
+  gun2: {fileID: 0}
+  gunactive: 1
+--- !u!114 &4594187668673800483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050405483193927438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db55d20e61bf25488e87791be6f0a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 400
+  grenadePrefab: {fileID: 462512784854240293, guid: 1922bb0472da6b04bbab1e5f7c24f421, type: 3}
+  totalgrenades: 0
+--- !u!114 &4823286523313544640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050405483193927438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4fa4550450b7d4e8f42949af09244b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 400
+  grenadePrefab: {fileID: 1339690406208628, guid: f124b8cda6e474147967db74528f8951, type: 3}
 --- !u!1 &9118227927362461426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3577,6 +3735,11 @@ PrefabInstance:
       addedObject: {fileID: 796367141830186476}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 370a0190cfdb6f04f8362160688b1ab6, type: 3}
+--- !u!4 &5201082835917219016 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400146, guid: 370a0190cfdb6f04f8362160688b1ab6, type: 3}
+  m_PrefabInstance: {fileID: 5201082835917357018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5201082835917219032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400130, guid: 370a0190cfdb6f04f8362160688b1ab6, type: 3}

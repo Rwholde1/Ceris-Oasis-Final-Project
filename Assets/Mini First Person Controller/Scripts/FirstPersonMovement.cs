@@ -15,6 +15,7 @@ public class FirstPersonMovement : NetworkBehaviour
     public Animator animator;
     public float spawnRadius = 2f;
     //private Rigidbody rig;
+    public bool isMovementEnabled = true;
 
     Rigidbody rigidbody;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
@@ -39,7 +40,7 @@ public class FirstPersonMovement : NetworkBehaviour
 
     void FixedUpdate()
     {   
-        if(!LobbySceneManagement.singleton.getLocalPlayer().getIsLocalPlayer()) {
+        if(!LobbySceneManagement.singleton.getLocalPlayer().getIsLocalPlayer() || !isMovementEnabled) {
             //Debug.Log("isn't local player");
             return;
         }
@@ -105,13 +106,20 @@ public class FirstPersonMovement : NetworkBehaviour
         }
         // Update IsRunning from input.
         IsRunning = canRun && Input.GetKey(runningKey);
+        /*
+            // Get targetMovingSpeed.
+            float targetMovingSpeed = IsRunning ? runSpeed : speed;
+            if (speedOverrides.Count > 0)
+            {
+                targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
+            }
 
-        // Get targetMovingSpeed.
-        float targetMovingSpeed = IsRunning ? runSpeed : speed;
-        if (speedOverrides.Count > 0)
-        {
-            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
-        }
+            // Get targetVelocity from input.
+            Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+
+            // Apply movement.
+            rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
+        }*/
 
         /*
         // Get targetVelocity from input.
@@ -139,5 +147,10 @@ public class FirstPersonMovement : NetworkBehaviour
         Rigidbody rig = gameObject.GetComponent<Rigidbody>();
         rig.velocity = transform.rotation * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
         Debug.Log(rig.velocity);
+    }
+    
+    public void SetMovementEnabled(bool isEnabled)
+    {
+        isMovementEnabled = isEnabled;
     }
 }

@@ -1287,7 +1287,7 @@ GameObject:
   - component: {fileID: 5942188709875440484}
   m_Layer: 0
   m_Name: Commando
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1379,6 +1379,7 @@ MonoBehaviour:
   runSpeed: 9
   runningKey: 304
   animator: {fileID: 4964834272296585853}
+  isMovementEnabled: 1
 --- !u!114 &4641563891079985772
 MonoBehaviour:
   m_ObjectHideFlags: 0
