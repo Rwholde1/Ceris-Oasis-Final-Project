@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public class FirstPersonLook : MonoBehaviour
 {
@@ -62,7 +63,12 @@ public class FirstPersonLook : MonoBehaviour
     {
 
         if (!lockedIn) {
+            //Normal case
             character = LobbySceneManagement.singleton.getLocalPlayerTransform();
+            if (SceneManager.GetActiveScene().name == "GunTest") {
+                Debug.Log("In Gun Test");
+                character = GameObject.FindWithTag("Player").GetComponent<Transform>();
+            }
             if (character != null && LobbySceneManagement.singleton.playerSpawnZone != null) {
                 Debug.Log("Character transform: " + character);
                 Debug.Log("Initial position: " + character.transform.position);
@@ -109,7 +115,6 @@ public class FirstPersonLook : MonoBehaviour
 
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
 
-                Debug.Log("Cam Direction: " + transform.forward);
 
     }
 }

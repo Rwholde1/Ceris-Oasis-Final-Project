@@ -126,7 +126,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483648
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -148,6 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireEffectPrefab: {fileID: 1956197547661106, guid: f293a2dcc753a4a489fefe7f8f312d69, type: 3}
   igniteSound: {fileID: 8300000, guid: 3cb596e0ddb36e148b2014a73d993faa, type: 3}
-  damagepersecond: 0
   player: {fileID: 0}
   DamageSphere: {fileID: 2013516672976690806, guid: bc82439e4ff5ae14694fd29bde3fe514, type: 3}
