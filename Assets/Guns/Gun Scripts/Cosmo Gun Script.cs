@@ -28,8 +28,14 @@ public class CosmoGunScript : MonoBehaviour
     {
         Gman = GetComponent<FixedGunManager>();
         CopyOtherScript();
-        gun1Color.a = 1;
+        gun1Color.a = 1.0f;
         gun2Color.a = 0.3f;
+        gun1IMG.sprite = GunPNG[gunID1];
+        gun2IMG.sprite = GunPNG[gunID2];
+        gun1IMG.color = gun1Color;
+        gun2IMG.color = gun2Color;
+
+
     }
     // Update is called once per frame
     void Update()
@@ -50,13 +56,14 @@ public class CosmoGunScript : MonoBehaviour
         }
         if (gunactive == 1 && !gun1.activeInHierarchy)
         {
-            gun1Color.a = 1;
+            gun1Color.a = 1.0f;
             gun1.SetActive(true);
             gun2.SetActive(false);
             print("GUN SWITCHED TO GUN 1");
             AnimChecker(gun1);
             gun2Color.a = 0.3f;
-
+            gun1IMG.color = gun1Color;
+            gun2IMG.color = gun2Color;
         }
         if (gunactive == 2 && !gun2.activeInHierarchy)
         {
@@ -65,11 +72,11 @@ public class CosmoGunScript : MonoBehaviour
             gun1.SetActive(false);
             print("GUN SWITCHED TO GUN 2");
             AnimChecker(gun2);
-            gun2Color.a = 1;
+            gun2Color.a = 1.0f;
         }
-        print(gun2Color);
         gun1IMG.color = gun1Color;
         gun2IMG.color = gun2Color;
+        print(gun2IMG.color);
     }
 
     void CopyOtherScript()
