@@ -25,7 +25,10 @@ public class PlayerCard : MonoBehaviour
         }
 
         //playerNameText.text = state.IsLockedIn ? $"Player {state.ClientId}" : $"Player {state.ClientId} (Picking...)";
-        playerNameText.text = $"Player {state.ClientId + 1}";
+        if (playerNameText.text == "NewPlayerName") {
+            Debug.Log("Initial rename");
+            playerNameText.text = $"Player {state.ClientId + 1}";
+        }
 
         visuals.SetActive(true);
     }

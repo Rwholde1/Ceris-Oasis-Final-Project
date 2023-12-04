@@ -13,6 +13,7 @@ public class EMPGrenade : MonoBehaviour
     public GameObject player;
     int moneytosendtoplayer;
     public int pID;
+    public AudioClip empTrigger;
 
         float countdown;
     // Start is called before the first frame update
@@ -35,6 +36,8 @@ public class EMPGrenade : MonoBehaviour
     {
         GameObject boom = Instantiate(explosion, transform.position, transform.rotation);
         boom.GetComponent<Transform>().eulerAngles = new Vector3(0f, 0f, 0f);
+
+        AudioSource.PlayClipAtPoint(empTrigger, boom.transform.position, 2f);
 
         Debug.Log("explodin time");
         if (pID == LobbySceneManagement.singleton.getLocalPlayer().identity) {

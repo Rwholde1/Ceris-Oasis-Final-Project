@@ -1400,6 +1400,17 @@ MonoBehaviour:
   playerCam: {fileID: 4829650590291620189, guid: 7d8689e587ff10b44b0a92e2badc6620, type: 3}
   pingCullLayer: -1
   pingCam: {fileID: 0}
+  characterDatabase: {fileID: 11400000, guid: ec8b1e2238d23db41a016f6fc4ed931b, type: 2}
+  classMeshPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  classIconColors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &67119826962698294
 MonoBehaviour:
   m_ObjectHideFlags: 0

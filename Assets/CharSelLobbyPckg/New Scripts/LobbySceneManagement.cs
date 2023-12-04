@@ -68,6 +68,9 @@ public class LobbySceneManagement : NetworkBehaviour
 
     public Vector3 coordReference;
 
+    public List<int> statsCharId;
+    public List<int> statsPlayerId;
+
     
 
     void Awake() {
@@ -147,6 +150,11 @@ public class LobbySceneManagement : NetworkBehaviour
         if (localStats == null) {
             StatsManager mng = playerCamObject.GetComponentInChildren<StatsManager>();
             localStats = mng.playerStats;
+            for (int i = 0; i < statsPlayerId.Count; i++) {
+                Debug.Log("Setting player " + (statsPlayerId[i] + 1) + " icon to char " + (statsCharId[i] + 1));
+                mng.setSprite(statsCharId[i], statsPlayerId[i]);
+            }
+            
         } else {
             for (int row = 0; row < 4; row++) {
                 for (int col = 0; col < 4; col++) {

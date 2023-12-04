@@ -3,7 +3,10 @@ guid: ca6faccc528eb1d4bbdafb36e0b46eff
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerCam: {instanceID: 0}
+  - pingCam: {instanceID: 0}
+  - characterDatabase: {fileID: 11400000, guid: ec8b1e2238d23db41a016f6fc4ed931b, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

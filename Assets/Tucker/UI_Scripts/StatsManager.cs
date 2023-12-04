@@ -35,6 +35,10 @@ public class StatsManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI player4Deaths;
     [SerializeField] TextMeshProUGUI player4Damage;
 
+    public Image[] playerIcons = new Image[4];
+    public Sprite[] charSprites = new Sprite[4];
+    public TMP_Text[] playerNames = new TMP_Text[4];
+
     void Start() {
         /*
         TextMeshProUGUI[] transforms = StatsUI.GetComponentsInChildren<TextMeshProUGUI>();
@@ -120,5 +124,10 @@ public class StatsManager : MonoBehaviour
     //Adds damage dealt to given player's damage counter
     public void addDamage(int player, int damageIn) {
         playerStats[player - 1, 3] += damageIn;
+    }
+
+    public void setSprite(int charId, int playerId) {
+        Debug.Log("setting icon");
+        playerIcons[playerId].sprite = charSprites[charId];
     }
 }

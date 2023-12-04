@@ -154,6 +154,7 @@ MonoBehaviour:
   damage: 70
   player: {fileID: 0}
   pID: 0
+  empTrigger: {fileID: 8300000, guid: 46667f454535a924f8939497c1d5cb93, type: 3}
 --- !u!114 &8895931448192201472
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10b06c7c69874ad4390b6d9b4d73ce98, type: 3}
-  m_Name: Character_Abe
+  m_Name: Character_Commando
   m_EditorClassIdentifier: 
-  id: 3
-  displayName: BoomerangAlien
-  icon: {fileID: 21300000, guid: 0596b7236890d104fb5cb43dd4239698, type: 3}
-  introPrefab: {fileID: 3775802999470174207, guid: ec5b3898d294c8e448f7280558c0813e, type: 3}
-  gameplayPrefab: {fileID: 834795578545296066, guid: a0e8f6b1cff6ef747b984e52df011aa4, type: 3}
+  id: 2
+  displayName: Commando
+  icon: {fileID: 21300000, guid: 4e6d719bf7a4ab34fb8bd4822400ec22, type: 3}
+  introPrefab: {fileID: 6439293245699153084, guid: 712eaaa6122d37b4b8efa14a252494b3, type: 3}
+  gameplayPrefab: {fileID: 4296044924856737924, guid: 301cebf8eacff4b4a83bf8f95afafb31, type: 3}

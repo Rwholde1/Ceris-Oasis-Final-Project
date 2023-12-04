@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class Jetpack : MonoBehaviour
+public class Jetpack : NetworkBehaviour
 {
     public float thrustForce = 10f;         // The force applied when using the jetpack
     public float maxFuel = 100f;            // Maximum fuel for the jetpack
@@ -9,9 +10,12 @@ public class Jetpack : MonoBehaviour
     public GameObject jets;
     private float currentFuel;              // Current fuel level
     private bool isUsingJetpack;            // Flag to check if the jetpack is being used
-
+    public float timetowait;
+    public float refillrate;
     private Rigidbody rb;
-
+    private bool hasusedjetpack = true;
+    private float timeSinceLastUse;
+    [SerializeField] GroundCheck groundCheck;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,14 +29,23 @@ public class Jetpack : MonoBehaviour
         if (Input.GetKeyDown(jetpackKey) && currentFuel > 0)
         {
             isUsingJetpack = true;
-            
         }
 
         if (Input.GetKeyUp(jetpackKey) || currentFuel <= 0)
         {
             isUsingJetpack = false;
         }
-        jets.SetActive(isUsingJetpack);
+        setJetsActiveServerRpc(isUsingJetpack);
+
+        timeSinceLastUse += Time.deltaTime;
+        if(!groundCheck.isGrounded) timeSinceLastUse = 0f;
+        if (!isUsingJetpack && timeSinceLastUse > timetowait && currentFuel < maxFuel)
+        {
+            currentFuel += refillrate * Time.deltaTime;
+            currentFuel = Mathf.Clamp(currentFuel, 0f, maxFuel);
+            print("REFUEL:" + currentFuel);
+
+        }
     }
 
     void FixedUpdate()
@@ -46,6 +59,41 @@ public class Jetpack : MonoBehaviour
             // Consume fuel
             currentFuel -= fuelConsumptionRate * Time.fixedDeltaTime;
             print("FUEL:" + currentFuel);
+            hasusedjetpack = true;
         }
+
+        if (currentFuel >= 100) hasusedjetpack = true;
+
+        if (currentFuel <100 && !hasusedjetpack)
+        {
+            //lerpin
+
+        }
+
+        Checktime();
+    }
+
+    private void Checktime()
+    {
+
+        if (currentFuel >= 100) return;
+        if(hasusedjetpack)
+        {
+
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void setJetsActiveServerRpc(bool isJetpackOn) {
+        if (LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
+            Debug.Log("setting jets to " + isJetpackOn);
+            setJetsActiveClientRpc(isJetpackOn);
+        }
+    }
+
+    [ClientRpc]
+    public void setJetsActiveClientRpc(bool isJetpackOn) {
+        Debug.Log("turning jetpack status " + isJetpackOn);
+        jets.SetActive(isJetpackOn);
     }
 }

@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &428109144210964261
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_Name
+      value: Boomerang
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 529b58e1869f6954f83f9e617f72df0c, type: 2}
+    - target: {fileID: 2300000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 529b58e1869f6954f83f9e617f72df0c, type: 2}
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 391385445948973651}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8555437888350864216}
+  m_SourcePrefab: {fileID: 100100000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+--- !u!1 &428109144211061125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 07cc34f898991d34fb697a9e28d0da71, type: 3}
+  m_PrefabInstance: {fileID: 428109144210964261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &391385445948973651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428109144211061125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491fb744f7269734fb466040782802db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: {x: 0, y: 100, z: 0}
+--- !u!114 &8555437888350864216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428109144211061125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96ec42288a551b449feb18c8f6f43cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardSpeed: 10
+  returnSpeed: 15
+  flightDuration: 3
+  damage: 5
+  playerposition: {fileID: 0}
+  camposition: {fileID: 0}
+  childBoom: {fileID: 0}

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10b06c7c69874ad4390b6d9b4d73ce98, type: 3}
-  m_Name: Character_Michelle
+  m_Name: Character_BoomAlien
   m_EditorClassIdentifier: 
-  id: 4
-  displayName: Pirate
-  icon: {fileID: 21300000, guid: 20b84350de1cdf9429e1db4c2fbfbf07, type: 3}
-  introPrefab: {fileID: 7266629359441964423, guid: 8f6da2702137b9a41b90e9ba0cf88e14, type: 3}
-  gameplayPrefab: {fileID: -2973271135186903978, guid: ca8dae37cae2db2448c0243e11a5afc3, type: 3}
+  id: 3
+  displayName: BoomerangAlien
+  icon: {fileID: 21300000, guid: 0596b7236890d104fb5cb43dd4239698, type: 3}
+  introPrefab: {fileID: 3775802999470174207, guid: ec5b3898d294c8e448f7280558c0813e, type: 3}
+  gameplayPrefab: {fileID: 834795578545296066, guid: a0e8f6b1cff6ef747b984e52df011aa4, type: 3}

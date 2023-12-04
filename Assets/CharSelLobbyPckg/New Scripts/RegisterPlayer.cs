@@ -32,6 +32,8 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     public int identity = -1;
 
+    public int charIdentity = -1;
+
     /*
     *
     * INHERENT & EVENT FUNCTIONS
