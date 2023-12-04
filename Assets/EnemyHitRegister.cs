@@ -118,11 +118,13 @@ public class EnemyHitRegister : NetworkBehaviour
                 LobbySceneManagement.singleton.statsArray[playerID, 3] += health;
                 health = 0;
                 //credit player for kill
+                Debug.Log("Player " + (playerID + 1) + " killed me");
                 LobbySceneManagement.singleton.statsArray[playerID, 0]++;
                 //credit all players with assists who aren't the killer with assists
                 for (int i = 0; i < 4; i++) {
                     if (i != playerID && hitBy[i]) {
-                        LobbySceneManagement.singleton.statsArray[playerID, 1]++;
+                        Debug.Log("assisted by player " + i);
+                        LobbySceneManagement.singleton.statsArray[i, 1]++;
                     }
                 }
                 

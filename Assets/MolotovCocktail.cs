@@ -34,8 +34,8 @@ public class MolotovCocktail : MonoBehaviour
             AudioSource.PlayClipAtPoint(crackleSound, fireEffect.transform.position, 0.7f);
 
             // Destroy the Molotov cocktail object (you might want to disable it instead, depending on your game design)
-            Destroy(fireEffect, 5f);
-            Destroy(gameObject, 6);
+            Destroy(fireEffect, 7f);
+            Destroy(gameObject, 7f);
         }
     }
 
