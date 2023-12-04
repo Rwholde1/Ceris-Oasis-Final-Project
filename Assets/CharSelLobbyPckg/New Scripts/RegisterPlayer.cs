@@ -266,9 +266,9 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     //Renames player
     [ServerRpc(RequireOwnership = false)]
     public void renamePlayerServerRpc(string name) {
-        Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on server"); 
-        LobbySceneManagement.singleton.playerNames[LobbySceneManagement.singleton.mostRecentPlayerClick - 1].SetText(name);   
-        if (IsServer) {
+        if (IsServer || IsHost) {
+            //Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on server"); 
+            //LobbySceneManagement.singleton.playerNames[LobbySceneManagement.singleton.mostRecentPlayerClick - 1].SetText(name);   
             renamePlayerClientRpc(name);    
         }
     }

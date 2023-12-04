@@ -61,8 +61,8 @@ public class LevelSelector : MonoBehaviour
                 levelName = "Skyline";
                 break;
             case 2:
-                //levelName = "Pherris Reactor";
-                levelName = "GunTest";
+                levelName = "Pherris Reactor";
+                //levelName = "GunTest";
                 break;
             default:
                 levelName = "Epsilon";

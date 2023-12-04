@@ -34,6 +34,7 @@ public class FPCOnSceneEnter : NetworkBehaviour
                     Debug.Log("Local Player ID: " + LobbySceneManagement.singleton.getLocalPlayer().identity);
                     Debug.Log("Local Player Char ID: " + client.Value.characterId);
                     Debug.Log("Local Player Character: " + character);
+                    Debug.Log("client id: " + client.Value.clientId);
                     /*
                     Debug.Log("spawning character: " + character);
                     var spawnPos = new Vector3(Random.Range(-3f, 3f), 10f, Random.Range(-3f, 3f));
@@ -41,7 +42,8 @@ public class FPCOnSceneEnter : NetworkBehaviour
                     characterInstance.SpawnAsPlayerObject(client.Value.clientId);
                     */
                 }
-                setClientCharacterServerRpc(client.Value.characterId - 1, LobbySceneManagement.singleton.getLocalPlayer().identity - 1);
+                //setClientCharacterServerRpc(client.Value.characterId - 1, LobbySceneManagement.singleton.getLocalPlayer().identity - 1);
+                setClientCharacterServerRpc(client.Value.characterId - 1, (int) client.Value.clientId);
             }   
         }    
 
@@ -56,7 +58,7 @@ public class FPCOnSceneEnter : NetworkBehaviour
 
     [ClientRpc]
     public void setClientCharacterClientRpc(int charId, int playerId) {
-        Debug.Log("setting char on client");
+        Debug.Log("setting char on client, playerID: " + playerId);
         if (LobbySceneManagement.singleton.players[playerId] == gameObject.GetComponent<RegisterPlayer>()) {
             gameObject.GetComponent<RegisterPlayer>().charIdentity = charId;
             Debug.Log("passed match");
