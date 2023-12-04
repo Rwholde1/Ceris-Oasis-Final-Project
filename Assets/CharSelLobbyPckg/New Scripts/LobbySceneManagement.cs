@@ -62,6 +62,7 @@ public class LobbySceneManagement : NetworkBehaviour
 
     //public GameObject playerCamObject;
     public Camera playerCamObject;
+    public int[,] localStats;
     public TMP_Text ammoCountText;
     public Image crosshair;
 
@@ -141,6 +142,21 @@ public class LobbySceneManagement : NetworkBehaviour
         if(pingManage == null) {
             pingManage = pingPrefab.GetComponent<PingManager>();
         }
+
+    if (playerCamObject != null) {
+        if (localStats == null) {
+            StatsManager mng = playerCamObject.GetComponentInChildren<StatsManager>();
+            localStats = mng.playerStats;
+        } else {
+            for (int row = 0; row < 4; row++) {
+                for (int col = 0; col < 4; col++) {
+                    localStats[row, col] = statsArray[row, col];
+                }
+            }
+        }
+
+
+    }
 
 
   

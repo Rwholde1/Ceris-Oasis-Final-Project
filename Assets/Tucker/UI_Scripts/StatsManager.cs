@@ -12,7 +12,7 @@ public class StatsManager : MonoBehaviour
     public GameObject StatsUI;
     public GameObject HUDUI;
     public GameObject pauseMenuUI;
-    private int [,] playerStats = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+    public int [,] playerStats = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
     //private TextMeshProUGUI[,] playerStatsTex;
 
     [SerializeField] TextMeshProUGUI player1Elims;
@@ -41,6 +41,7 @@ public class StatsManager : MonoBehaviour
         foreach(TextMeshProUGUI trans in transforms) {
             Debug.Log(trans);
         }*/
+
     }
 
     // Update is called once per frame
