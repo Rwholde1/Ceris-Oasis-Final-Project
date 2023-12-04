@@ -12,6 +12,7 @@ public class AI_Gen_State : MonoBehaviour
         WAIT = 0,
         ATTACK = 3,
         ACTIVECHASE = 4,
+        DEAD = 5,
     }
 
     
@@ -22,6 +23,8 @@ public class AI_Gen_State : MonoBehaviour
     private Transform enemyT;
 
     private GameObject playerObject;
+    private GameObject[] playerArray;
+    private int playerLiveCount;
 
     public GameObject targetObject;
 
@@ -32,19 +35,19 @@ public class AI_Gen_State : MonoBehaviour
     public bool doSearch;
     public bool isAnimating;
 
+    
+
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
 
-    void Awake()
+    void Start()
     {
+
         attackDamageModifier = 1f;
         canAttack = true;
         doAttack = false;
         doSearch = true;
         isAnimating = false;
-    }
-    void Start()
-    {
         //state = AI_STATE.CHASE;
         agent = GetComponent<NavMeshAgent>();
         enemyT = GetComponent<Transform>();
@@ -52,35 +55,27 @@ public class AI_Gen_State : MonoBehaviour
         timeAttack = 5f;
         //TEMP RESET TARGET TO 0
         //targetPos = new Vector3(0, 0, 0);
-        ChangeTarget("Player");
+        //ChangeTarget("Player");
         state = AI_STATE.ACTIVECHASE;
+        playerObject = getRandomFromAllPlayer();
+        targetObject = playerObject;
     }
     
-    public void ChangeSpeed(float newSpeed)
-    {
-        if (!(newSpeed == 0f))
-        {
-            agent.velocity = Vector3.one * 3.5f * newSpeed;
-        }
-        else
-        {
-            agent.velocity = Vector3.zero;
-        }
-
-    }
+    
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        CheckIfPlayerDiedUpdate(playerObject);
         agent.destination = targetPos;
         switch (state)
         {
             case AI_STATE.CHASE:
                 {
-                    Debug.Log("Chasing to target");
+                    Debug.Log("Chasing to RANDOM target");
 
                     if (CastToPlayer(50f))
                     { 
-                    ChangeTarget("Player");
+                    ChangeTarget(targetObject);
                     state = AI_STATE.ACTIVECHASE;
                     isAnimating = false;
                     }
@@ -88,7 +83,7 @@ public class AI_Gen_State : MonoBehaviour
                 }
             case AI_STATE.ACTIVECHASE:
                 {
-                    ChangeTarget("Player");
+                    ChangeTarget(targetObject);
                     Debug.Log("ACTIVELY Chasing");
                     if(CastToPlayer(4f))
                     {
@@ -118,18 +113,20 @@ public class AI_Gen_State : MonoBehaviour
             case AI_STATE.WAIT:
         
                 Debug.Log("Waiting");
+                ChangeSpeed(0);
                 targetPos = enemyT.position;
 
                 break;
         
             case AI_STATE.ATTACK:
                 
-                if(CheckDistance()<ADT*.9f)
+                if(CheckDistance()<=ADT*1.1f)
                 {
+                    Debug.Log("ACTIVE ATTACK STATE)");
                     ChangeSpeed(0);
                     AIAttack();
                 }
-                else if (!CastToPlayer(ADT * 1.1f) && CheckDistance()<=ADT)
+                else if (!CastToPlayer(ADT * 1.2f) && CheckDistance()>=ADT*2)
                 {
                     Debug.Log("They Ran Away!)");
                     ChangeSpeed(1);
@@ -137,33 +134,37 @@ public class AI_Gen_State : MonoBehaviour
                     state = AI_STATE.CHASE;
                     isAnimating = false;
                 }
-
-                /*else
-                {
-                    Debug.Log("Target changed to player");
-                    ChangeTarget("Player");
-                }*/
-
-
-
-                //state = AI_STATE.CHASE;
                 break;
-        
+            case AI_STATE.DEAD:
+                {
+                    ChangeSpeed(0);
+                    targetPos = enemyT.position;
+                    StartCoroutine(KilledRIP());
+
+                    break;
+                }
             default:
                 Debug.Log("NOTHING)");
                 break;
         }  
     }
-
+    public GameObject getRandomFromAllPlayer()
+    {
+        playerArray = GameObject.FindGameObjectsWithTag("Player");
+        playerLiveCount = playerArray.Length;
+        
+        int randPick = Random.Range(0, playerLiveCount-1);
+        return playerArray[randPick];
+    }
     public int CheckState() ///method to return the current state
     {
         return (int)state;
     }
     public bool CastToPlayer(float distance)
     {
-        Debug.DrawRay(enemyT.position, (2 * enemyT.position) - CheckTarget("Player"), Color.green);
+        Debug.DrawRay(enemyT.position, CheckTarget(targetObject) - enemyT.position, Color.green);
         RaycastHit hit;
-        if (Physics.Raycast(enemyT.position, CheckTarget("Player") - enemyT.position, out hit, distance, ~6))
+        if (Physics.Raycast(enemyT.position, CheckTarget(targetObject) - enemyT.position, out hit, distance, ~0))
         {
             if (hit.transform.CompareTag("Player"))
             {
@@ -175,14 +176,29 @@ public class AI_Gen_State : MonoBehaviour
         return false;
     }
 
+    public void ChangeSpeed(float newSpeed)
+    {
+        if (!(newSpeed == 0f))
+        {
+            agent.velocity = Vector3.one * 3.5f * newSpeed;
+        }
+        else
+        {
+            agent.velocity = Vector3.zero;
+        }
+
+    }
     public float CheckDistance() //method to return the distance between the target and the current position
     {
         return Mathf.Abs(Vector3.Magnitude(enemyT.position - targetPos));
     }
 
-    public void ChangeTarget()
+    //Probably Redundant
+    public void ChangeTarget(GameObject theObject)
     {
+        targetObject = theObject;
         
+        targetPos = targetObject.GetComponent<Transform>().position;
     }
     public void ChangeTarget(string theTag)
     {
@@ -191,15 +207,25 @@ public class AI_Gen_State : MonoBehaviour
         Vector3 tempPos = targetObject.GetComponent<Transform>().position;
         targetPos = tempPos;
     }
+    public void CheckIfPlayerDiedUpdate(GameObject obj)
+    {
+        if (!obj)
+        {
+            isAnimating = false;
+            playerObject = getRandomFromAllPlayer();
+            ChangeTarget(playerObject);
+        }
+    }
     public Vector3 CheckTarget(string theTag)
     {
         //return the AI target POSITION based on the tag
         return GameObject.FindWithTag(theTag).GetComponent<Transform>().position;
     }
-    void AIChasePlayer()
+    public Vector3 CheckTarget(GameObject obj)
     {
-        //moves towards the target
-
+        //return the AI target POSITION based on the tag
+        
+        return obj.GetComponent<Transform>().position;
     }
 
     IEnumerator FleeTimer()
@@ -233,7 +259,10 @@ public class AI_Gen_State : MonoBehaviour
             canAttack = true;
         
     }
-
-
+    IEnumerator KilledRIP()
+    {
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject);
+    }
 }
 

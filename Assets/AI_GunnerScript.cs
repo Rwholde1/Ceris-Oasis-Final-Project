@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_LobberScript : MonoBehaviour
+public class AI_GunnerScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public AI_Gen_State genState;
@@ -11,7 +11,7 @@ public class AI_LobberScript : MonoBehaviour
     public float ADT;
     public bool doSearch;
     public float damage;
-    
+
     private bool isAnimating;
     private Animator animator;
 
@@ -21,11 +21,10 @@ public class AI_LobberScript : MonoBehaviour
     public float timeBetweenAttacks;
     public float timeBetweenSearch;
 
-   
     void Start()
     {
         health = 100;
-        ADT = 12f;
+        ADT = 10f;
         timeBetweenAttacks = 3.5f;
         timeBetweenSearch = 2.5f;
         damage = 15f;
@@ -55,40 +54,40 @@ public class AI_LobberScript : MonoBehaviour
     }
     private void Update()
     {
-        if(health<=0)
+        if (health <= 0)
         {
-            
-            animator.Play("GetHitBackCombat");
+
+            animator.Play("DeathCombat");
             genState.state = AI_Gen_State.AI_STATE.DEAD;
         }
     }
 
     void rusherAttack()
     {
-
         player = genState.targetObject.GetComponent<PlayerAttributes>();
 
 
+
         if (genState.CastToPlayer(ADT))
-            {
+        {
             genState.doAttack = false;
             if (!isAnimating)
-                { 
-                animator.Play("GetHitBackCombat");
+            {
+                animator.Play("GetHitFrontAiming");
                 genState.isAnimating = true;
-                }
-
-                Debug.Log("ATTACK HIT THE PLAYER");
-                player.Damage(damage);
-                StartCoroutine(AttackCooldown());
             }
 
-             if (!genState.CastToPlayer(ADT) && doSearch)
-            {
+            Debug.Log("ATTACK HIT THE PLAYER");
+            player.Damage(damage);
+            StartCoroutine(AttackCooldown());
+        }
+
+        if (!genState.CastToPlayer(ADT) && doSearch)
+        {
             genState.state = AI_Gen_State.AI_STATE.CHASE;
             genState.doSearch = false;
             StartCoroutine(SearchRefresh());
-            }
+        }
 
     }
 

@@ -11,20 +11,25 @@ public class AI_RusherScript : MonoBehaviour
     public float ADT;
     public bool doSearch;
     public float damage;
+    public float health;
 
     [SerializeField] public bool doAttack;
     bool isAnimating = false;
     public float timeBetweenAttacks;
 
     private Animator animator;
+
+    
     void Start()
     {
-        ADT = 1.5f;
+
+        ADT = 2.0f;
         timeBetweenAttacks = 1.5f;
         damage = 10f;
         doSearch = false;
+        health = 100f;
         genState = GetComponent<AI_Gen_State>();
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerAttributes>();
+        
         animator = GetComponent<Animator>();
         
 
@@ -35,11 +40,20 @@ public class AI_RusherScript : MonoBehaviour
         genState.ADT = ADT;
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+        {
+
+            animator.Play("JumpRM");
+            genState.state = AI_Gen_State.AI_STATE.DEAD;
+        }
+        doAttack = genState.doAttack;
         isAnimating = genState.isAnimating;
-        if (genState.CheckDistance() < ADT)
+        if (doAttack)
         {
             rusherAttack();
 
@@ -47,8 +61,10 @@ public class AI_RusherScript : MonoBehaviour
 
         
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
+        
+        player = genState.targetObject.GetComponent<PlayerAttributes>();
         switch (genState.state)
         {
             case AI_Gen_State.AI_STATE.ACTIVECHASE:
@@ -60,43 +76,34 @@ public class AI_RusherScript : MonoBehaviour
                     }
                     break;
                 }
-            case AI_Gen_State.AI_STATE.ATTACK:
-                {
-                    if (!isAnimating)
-                    {
-                        animator.Play("Jump");
-                        genState.isAnimating = true;
-                    }
-                    break;
-                }
         }
     }
     void rusherAttack()
     {
+        player = genState.targetObject.GetComponent<PlayerAttributes>();
 
-        doAttack = genState.doAttack;
-        if (doAttack)
-        {
-            genState.doAttack = false;
-            if (genState.CastToPlayer(ADT))
+
+
+        if (genState.CastToPlayer(ADT))
             {
+            genState.doAttack = false;
+            animator.Play("Jump");
+                    genState.isAnimating = true;
+                
                 Debug.Log("ATTACK HIT THE PLAYER");
                 player.Damage(damage);
                 StartCoroutine(AttackCooldown());
             }
             
-
-        }
-
-        if (!genState.CastToPlayer(ADT))
-        {
+            if (!genState.CastToPlayer(ADT))
+            {
             genState.state = AI_Gen_State.AI_STATE.ACTIVECHASE;
-        }
+            }
     }
 
     IEnumerator AttackCooldown()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeBetweenAttacks);
         genState.doAttack = true;
 
     }

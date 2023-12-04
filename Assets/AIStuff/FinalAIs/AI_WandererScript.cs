@@ -11,27 +11,27 @@ public class AI_WandererScript : MonoBehaviour
     public float ADT;
     public bool doSearch;
     public float damage;
+    public float health;
+    private Animator animator;
+    private bool isAnimating;
 
     [SerializeField] public bool doAttack;
 
     public float timeBetweenAttacks;
     public float timeBetweenSearch;
 
-    void Awake()
-    {
-        ADT = 1.75f;
-        timeBetweenAttacks = 1.5f;
-        timeBetweenSearch = 2.5f;
-        damage = 15f;
-        doSearch = true;
-        
-    }
+    
     void Start()
     {
-        
+        ADT = 2.75f;
+        timeBetweenAttacks = 1.5f;
+        timeBetweenSearch = 2.5f;
+        damage = 15f; //Default 15
+        doSearch = true;
+        health = 100f;
         genState = GetComponent<AI_Gen_State>();
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerAttributes>();
-
+        
+        animator = GetComponent<Animator>();
 
         doAttack = genState.doAttack;
         damage *= genState.attackDamageModifier;
@@ -41,34 +41,79 @@ public class AI_WandererScript : MonoBehaviour
 
     }
     // Update is called once per frame
+    void FixedUpdate()
+    {
+        player = genState.targetObject.GetComponent<PlayerAttributes>();
+        switch (genState.state)
+        {
+            case AI_Gen_State.AI_STATE.ACTIVECHASE:
+                {
+                    if (!isAnimating)
+                    {
+                        animator.Play("Walk");
+                        genState.isAnimating = true;
+                    }
+                    break;
+                }
+            case AI_Gen_State.AI_STATE.CHASE:
+                {
+                    if (!isAnimating)
+                    {
+                        animator.Play("Walk");
+                        genState.isAnimating = true;
+                    }
+                    break;
+                }
+            case AI_Gen_State.AI_STATE.ATTACK:
+                {
+                    if (!isAnimating)
+                    {
+                        animator.Play("2HitComboClawsAttackForward");
+                        genState.isAnimating = true;
+                    }
+                    break;
+                }
+        }
+    }
     void Update()
     {
-        if (genState.CheckDistance() < ADT)
+        if (health <= 0)
         {
-            rusherAttack();
+
+            animator.Play("Death");
+            genState.state = AI_Gen_State.AI_STATE.DEAD;
+        }
+        doAttack = genState.doAttack;
+        doSearch = genState.doSearch;
+        isAnimating = genState.isAnimating;
+        doAttack = genState.doAttack;
+        if (doAttack)
+        {
+            wanderAttack();
 
         }
     }
 
-    void rusherAttack()
+    void wanderAttack()
     {
 
-        doAttack = genState.doAttack;
-        doSearch = genState.doSearch;
-        if (doAttack)
-        {
-            genState.doAttack = false;
-            if (genState.CastToPlayer(ADT))
+        player = genState.targetObject.GetComponent<PlayerAttributes>();
+        if (genState.CastToPlayer(ADT))
             {
+                
                 Debug.Log("ATTACK HIT THE PLAYER");
                 player.Damage(damage);
+                genState.doAttack = false;
                 StartCoroutine(AttackCooldown());
             }
 
 
-        }
+        
+        
         if (!genState.CastToPlayer(ADT)&& doSearch)
         {
+            //animator.Play("Walk");
+            genState.isAnimating = false;
             genState.state = AI_Gen_State.AI_STATE.CHASE;
             genState.doSearch = false;
             StartCoroutine(SearchRefresh());
