@@ -21,7 +21,7 @@ public class AI_Gen_State : MonoBehaviour
 
     [SerializeField] public AI_STATE state = AI_STATE.ACTIVECHASE;
     private Transform enemyT;
-
+    private float speedMod;
     private GameObject playerObject;
     private GameObject[] playerArray;
     private int playerLiveCount;
@@ -42,7 +42,7 @@ public class AI_Gen_State : MonoBehaviour
 
     void Start()
     {
-
+        speedMod = 1f;
         attackDamageModifier = 1f;
         canAttack = true;
         doAttack = false;
@@ -180,7 +180,7 @@ public class AI_Gen_State : MonoBehaviour
     {
         if (!(newSpeed == 0f))
         {
-            agent.velocity = Vector3.one * 3.5f * newSpeed;
+            agent.velocity = Vector3.one * 3.5f * newSpeed * speedMod;
         }
         else
         {
