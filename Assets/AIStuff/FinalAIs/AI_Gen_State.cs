@@ -56,7 +56,7 @@ public class AI_Gen_State : MonoBehaviour
     {
         if (!(newSpeed == 0f))
         {
-            agent.velocity = Vector3.one * newSpeed;
+            agent.velocity = Vector3.one * 3.5f * newSpeed;
         }
         else
         {
