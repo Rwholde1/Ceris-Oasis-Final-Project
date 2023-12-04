@@ -21,6 +21,8 @@ public class AI_Gen_State : MonoBehaviour
     [SerializeField] public AI_STATE state = AI_STATE.ACTIVECHASE;
     private Transform enemyT;
 
+    private GameObject playerObject;
+
     public GameObject targetObject;
 
     public float attackDamageModifier;
@@ -28,6 +30,7 @@ public class AI_Gen_State : MonoBehaviour
     public bool canAttack;
     public bool doAttack;
     public bool doSearch;
+    public bool isAnimating;
 
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
@@ -38,6 +41,7 @@ public class AI_Gen_State : MonoBehaviour
         canAttack = true;
         doAttack = false;
         doSearch = true;
+        isAnimating = false;
     }
     void Start()
     {
@@ -78,6 +82,7 @@ public class AI_Gen_State : MonoBehaviour
                     { 
                     ChangeTarget("Player");
                     state = AI_STATE.ACTIVECHASE;
+                    isAnimating = false;
                     }
                 break; 
                 }
@@ -88,10 +93,12 @@ public class AI_Gen_State : MonoBehaviour
                     if(CastToPlayer(4f))
                     {
                         state= AI_STATE.ATTACK;
+                        isAnimating = false;
                     }
                     else if(!CastToPlayer(20f)&&doSearch)
                     {
                         state = AI_STATE.CHASE;
+                        isAnimating = false;
                     }
                     break;
                 }
@@ -128,6 +135,7 @@ public class AI_Gen_State : MonoBehaviour
                     ChangeSpeed(1);
 
                     state = AI_STATE.CHASE;
+                    isAnimating = false;
                 }
 
                 /*else

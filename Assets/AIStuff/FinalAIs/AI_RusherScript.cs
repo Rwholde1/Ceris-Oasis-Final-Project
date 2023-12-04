@@ -13,9 +13,10 @@ public class AI_RusherScript : MonoBehaviour
     public float damage;
 
     [SerializeField] public bool doAttack;
-
+    bool isAnimating = false;
     public float timeBetweenAttacks;
 
+    private Animator animator;
     void Start()
     {
         ADT = 1.5f;
@@ -24,7 +25,8 @@ public class AI_RusherScript : MonoBehaviour
         doSearch = false;
         genState = GetComponent<AI_Gen_State>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerAttributes>();
-
+        animator = GetComponent<Animator>();
+        
 
         doAttack = genState.doAttack;
         damage *= genState.attackDamageModifier;
@@ -36,13 +38,39 @@ public class AI_RusherScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isAnimating = genState.isAnimating;
         if (genState.CheckDistance() < ADT)
         {
             rusherAttack();
 
         }
-    }
 
+        
+    }
+    private void FixedUpdate()
+    {
+        switch (genState.state)
+        {
+            case AI_Gen_State.AI_STATE.ACTIVECHASE:
+                {
+                    if (!isAnimating)
+                    { 
+                        animator.Play("Walk");
+                        genState.isAnimating = true;
+                    }
+                    break;
+                }
+            case AI_Gen_State.AI_STATE.ATTACK:
+                {
+                    if (!isAnimating)
+                    {
+                        animator.Play("Jump");
+                        genState.isAnimating = true;
+                    }
+                    break;
+                }
+        }
+    }
     void rusherAttack()
     {
 

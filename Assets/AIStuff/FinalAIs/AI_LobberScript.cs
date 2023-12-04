@@ -19,7 +19,7 @@ public class AI_LobberScript : MonoBehaviour
 
     void Awake()
     {
-        ADT = 7.5f;
+        ADT = 12f;
         timeBetweenAttacks = 3.5f;
         timeBetweenSearch = 2.5f;
         damage = 15f;

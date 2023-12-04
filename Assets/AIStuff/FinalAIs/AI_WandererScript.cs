@@ -24,6 +24,7 @@ public class AI_WandererScript : MonoBehaviour
         timeBetweenSearch = 2.5f;
         damage = 15f;
         doSearch = true;
+        
     }
     void Start()
     {
