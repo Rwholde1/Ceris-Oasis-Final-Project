@@ -103,6 +103,14 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         return IsLocalPlayer;
     }
 
+    public bool getIsClient() {
+        return IsClient;
+    }
+
+    public bool getIsServer() {
+        return IsServer;
+    }
+
     public int getIdentity() {
         return identity;
     }

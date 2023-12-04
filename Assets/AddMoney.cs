@@ -23,4 +23,9 @@ public class AddMoney : MonoBehaviour
             money += 50;
         }
     }
+
+    public void pay(int moneyIn) {
+        money += moneyIn;
+        Debug.Log("received " + moneyIn + " scrap");
+    }
 }

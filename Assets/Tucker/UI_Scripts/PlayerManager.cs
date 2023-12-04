@@ -92,9 +92,19 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-    void takeDamage(int damageIn) {
+    public void takeDamage(int damageIn) {
         currentHealth -= damageIn;
         healthBar.setHealth(currentHealth);
+    }
+
+    public void receiveHeals(int healthIn) {
+        if (currentHealth + healthIn > maxHealth) {
+            currentHealth = maxHealth;
+            healthBar.setHealth(currentHealth);
+        } else {
+            currentHealth += healthIn;
+            healthBar.setHealth(currentHealth);
+        }
     }
 
     public void createPing() {

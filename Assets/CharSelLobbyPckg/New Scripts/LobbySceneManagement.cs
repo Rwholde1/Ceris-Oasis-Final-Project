@@ -114,7 +114,7 @@ public class LobbySceneManagement : NetworkBehaviour
         if (renameButton == null && renameButtonHolder != null) {
             renameButton = renameButtonHolder.GetComponent<Button>();
         }
-        if (joinCodeText.text.Length == 0) {
+        if (joinCodeText != null && joinCodeText.text != null && joinCodeText.text.Length == 0) {
             joinCodeText.SetText("" + joinCode);
         }
 
@@ -130,8 +130,10 @@ public class LobbySceneManagement : NetworkBehaviour
         for (int r = 0; r < 4; r++) {
             //Player lobby info (name, ready state)
             for (int c1 = 0; c1 < 2; c1++) {
-                if (c1 == 0 && playerLobbyInfo[r, c1] != playerNames[r].text && playerLobbyInfo[r, c1] != null) {
-                    playerNames[r].text = playerLobbyInfo[r, c1];
+                if (playerNames[r] != null) {
+                    if (c1 == 0 && playerLobbyInfo[r, c1] != playerNames[r].text && playerLobbyInfo[r, c1] != null) {
+                        playerNames[r].text = playerLobbyInfo[r, c1];
+                    }
                 }
             }
         }

@@ -30,7 +30,7 @@ public class FPCOnSceneEnter : NetworkBehaviour
     void Update()
     {
         
-        if (!sceneBegin) {
+        if (!sceneBegin && SceneManager.GetActiveScene().name != "LobbyScene") {
             //Edit here
             //thisCam = beginScene.getFirstCam();
             //thisCam.SetActive(true);
