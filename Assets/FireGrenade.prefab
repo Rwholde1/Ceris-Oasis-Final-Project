@@ -150,8 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireEffectPrefab: {fileID: 1956197547661106, guid: f293a2dcc753a4a489fefe7f8f312d69, type: 3}
   igniteSound: {fileID: 8300000, guid: 3cb596e0ddb36e148b2014a73d993faa, type: 3}
+  crackleSound: {fileID: 8300000, guid: 6e5ebb8529d0f5147988e4ca6e47e20d, type: 3}
   player: {fileID: 0}
   DamageSphere: {fileID: 2013516672976690806, guid: bc82439e4ff5ae14694fd29bde3fe514, type: 3}
+  pID: -1
 --- !u!114 &403535289780251636
 MonoBehaviour:
   m_ObjectHideFlags: 0

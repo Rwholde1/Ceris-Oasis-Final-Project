@@ -57,6 +57,8 @@ public class EnemyHitRegister : NetworkBehaviour
             //takeDamageServerRpc(health, damage, playerID - 1, enemyID);
             //for testing only
             takeDamageServerRpc(health, damage, playerID - 1, enemyID + 1);
+        } else {
+            takeDamageServerRpc(health, damage, playerID - 1, enemyID + 1);
         }
         //take damage s
 

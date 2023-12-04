@@ -40,7 +40,7 @@ public class MolotovThrower : NetworkBehaviour
         */
 
         Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y - 0f, transform.position.z + 0.1f);
-        createFireGrenadeServerRpc(throwpoint, transform.forward * throwForce);
+        createFireGrenadeServerRpc(throwpoint, transform.forward * throwForce, LobbySceneManagement.singleton.getLocalPlayer().identity);
         Debug.Log("Threw molotov");
         //GameObject grenade = Instantiate(grenadePrefab, transform.position, transform.rotation);
                 //GameObject grenade = Instantiate((GameObject) grenadePrefab, throwpoint, Quaternion.identity);
@@ -68,11 +68,12 @@ public class MolotovThrower : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void createFireGrenadeServerRpc(Vector3 throwPoint, Vector3 throwDir) {
+    void createFireGrenadeServerRpc(Vector3 throwPoint, Vector3 throwDir, int playerID) {
         Debug.Log("Threw molotov serverrpc");
         NetworkObject molotov = Instantiate(grenadePrefab, throwPoint, Quaternion.identity);
         molotov.GetComponent<NetworkObject>().Spawn();
         molotov.GetComponent<Rigidbody>().AddForce(throwDir);
+        molotov.GetComponent<MolotovCocktail>().pID = playerID;
     }
 
     /*

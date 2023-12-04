@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 
 public class Gun : MonoBehaviour
 {
-    public float damage = 10f;
+    public int damage = 10;
     public float range = 100f;
     public float firerate = 15f;
     public ParticleSystem flash;
@@ -234,8 +234,15 @@ public class Gun : MonoBehaviour
                     RaycastHit hit;
                     if (Physics.Raycast(playerCamera.transform.position, accuracyfunct(playerCamera.transform.forward, accuracy), out hit, range))
                     {
-                        Debug.Log(hit.transform.name);
-                        Debug.Log(playerCamera.transform.forward);
+                        Debug.Log("Hit this: " + hit.transform.name);
+                        //Debug.Log(playerCamera.transform.forward);
+                        //Debug.Log("Hit reg: " + hit.transform.GetComponentInChildren<EnemyHitRegister>());
+                        if (hit.transform.GetComponentInChildren<EnemyHitRegister>() != null) {
+                            //Debug.Log("This is valid enemy");
+                            EnemyHitRegister enem = hit.transform.GetComponentInChildren<EnemyHitRegister>();
+                            enem.takeDamage(damage, LobbySceneManagement.singleton.getLocalPlayer().identity, "Single");
+                        }
+                        /*
                         target Target = hit.transform.GetComponent<target>();
                         if (Target != null)
                         {
@@ -244,7 +251,7 @@ public class Gun : MonoBehaviour
                                 moneytosendtoplayer = Target.gimmemoney();
                                 sendmoney();
                             }
-                        }
+                        }*/
                         GameObject impact = Instantiate(impacteffect, hit.point, Quaternion.LookRotation(hit.normal));
                         Destroy(impact, 1);
                     
@@ -270,9 +277,18 @@ public class Gun : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(playerCamera.transform.position, accuracyfunct(playerCamera.transform.forward, accuracy), out hit, range))
                 {
-                    Debug.Log(hit.transform.name);
-                    Debug.Log(playerCamera.transform.forward);
+                    Debug.Log("Hit this: " + hit.transform.name);
+                    //Debug.Log(playerCamera.transform.forward);
+                    //Debug.Log("Hit reg: " + hit.transform.GetComponentInChildren<EnemyHitRegister>());
+                    //Debug.Log("Hit reg child: " + hit.transform.gameObject.GetComponentInChildren<Transform>().GetComponentInChildren<EnemyHitRegister>());
+                    if (hit.transform.GetComponentInChildren<EnemyHitRegister>() != null) {
+                        //Debug.Log("This is valid enemy");
+                        EnemyHitRegister enem = hit.transform.GetComponentInChildren<EnemyHitRegister>();
+                        enem.takeDamage(damage, LobbySceneManagement.singleton.getLocalPlayer().identity, "Single");
+                    }
+                    /*
                     target Target = hit.transform.GetComponent<target>();
+                
                     if (Target != null)
                     {
                         if (Target.TakeDamage(damage))
@@ -281,6 +297,7 @@ public class Gun : MonoBehaviour
                             sendmoney();
                         }
                     }
+                    */
                     GameObject impact = Instantiate(impacteffect, hit.point, Quaternion.LookRotation(hit.normal));
                     Destroy(impact, 1);
                 }
@@ -289,6 +306,7 @@ public class Gun : MonoBehaviour
         }
     }
 
+    
     void sendmoney()
     {
         if (player == null)
@@ -299,6 +317,7 @@ public class Gun : MonoBehaviour
         player.GetComponent<AddMoney>().money += moneytosendtoplayer;
         moneytosendtoplayer = 0;
     }
+
     Vector3 accuracyfunct(Vector3 camForw,  float accuracy)
     {
         float random1 = 0f;

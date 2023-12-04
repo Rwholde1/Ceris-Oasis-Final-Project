@@ -150,9 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   delay: 3
-  explosion: {fileID: 8091605076831494837, guid: 1b86b302185d95f48aae7299920d016d, type: 3}
+  explosion: {fileID: 1983587375811362, guid: f1daf07642d1e4a47b6dc9e84b413ee7, type: 3}
   damage: 70
   player: {fileID: 0}
+  pID: 0
 --- !u!114 &8895931448192201472
 MonoBehaviour:
   m_ObjectHideFlags: 0
