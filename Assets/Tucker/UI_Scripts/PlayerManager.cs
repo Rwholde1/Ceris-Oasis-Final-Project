@@ -27,6 +27,9 @@ public class PlayerManager : NetworkBehaviour
     public TMP_Text ammoText;
     public Image crosshair;
 
+    public bool canDamage = true;
+    public float invincibleCooldown = 0.5f;
+
     //grenades
     //shielding?
 
@@ -157,7 +160,7 @@ public class PlayerManager : NetworkBehaviour
             //Debug.Log("client rpc got hit " + EnemyWaveManager.singleton.spawnedEnemies[enemID] + " " + gameObject);
             
             //if (gameObject == LobbySceneManagement.singleton.players[playerID].GetComponent<PlayerManager>()) {
-                if (LobbySceneManagement.singleton.playerCamObject == gameObject.GetComponent<Camera>()) {
+            if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
                 Debug.Log("I'm the victim of health! " + this + " " + healthIn);
 
                 Debug.Log("current: " + currentHealth);
@@ -203,9 +206,16 @@ public class PlayerManager : NetworkBehaviour
             //Debug.Log("client rpc got hit " + EnemyWaveManager.singleton.spawnedEnemies[enemID] + " " + gameObject);
             
             //if (gameObject == LobbySceneManagement.singleton.players[playerID].GetComponent<PlayerManager>()) {
-                if (LobbySceneManagement.singleton.playerCamObject == gameObject.GetComponent<Camera>()) {
-                Debug.Log("I'm the player victim! " + this + " " + damageIn);
 
+            //FIX CONDITION?
+            Debug.Log("checking damage identity " + LobbySceneManagement.singleton.players[playerID].transform + " against " + GetComponent<FirstPersonLook>().character);
+            if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
+                Debug.Log("I'm the player victim! " + this + " " + damageIn);
+                if (damageIn >= currentHealth) {
+                    currentHealth = 0;
+                    playerDieServerRpc(playerID);
+                    return;
+                }
                 Debug.Log("current: " + currentHealth);
                 currentHealth -= damageIn;
                 Debug.Log("New: " + currentHealth);
@@ -213,6 +223,7 @@ public class PlayerManager : NetworkBehaviour
                     currentHealth = 0;
                 }
                 healthBar.setHealth(currentHealth);
+                StartCoroutine(InvincibleTime());
                 //health -= damage;
                 //Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
                 //Credit player for damage
@@ -220,6 +231,34 @@ public class PlayerManager : NetworkBehaviour
                 //Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
             }
         }
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void playerDieServerRpc(int playerID) {
+        if (LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
+            Debug.Log("Player died on server");
+            playerDieClientRpc(playerID);
+        }
+    }
+
+    [ClientRpc] 
+    public void playerDieClientRpc(int playerID){
+        if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
+            LobbySceneManagement.singleton.statsArray[playerID, 2]++;
+            if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
+                Debug.Log("I'm the dead victim! " + this);
+                //credit player for death
+                //LobbySceneManagement.singleton.statsArray[playerID, 2]++;
+
+            }
+        }
+    }
+
+    IEnumerator InvincibleTime()
+    {
+        yield return new WaitForSeconds(invincibleCooldown);
+        canDamage = true;
     }
 
 }

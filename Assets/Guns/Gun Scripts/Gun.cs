@@ -244,11 +244,15 @@ public class Gun : MonoBehaviour
                         Debug.Log("Hit this: " + hit.transform.name);
                         //Debug.Log(playerCamera.transform.forward);
                         //Debug.Log("Hit reg: " + hit.transform.GetComponentInChildren<EnemyHitRegister>());
-                        if (hit.transform.GetComponentInChildren<EnemyHitRegister>() != null) {
-                            //Debug.Log("This is valid enemy");
-                            EnemyHitRegister enem = hit.transform.GetComponentInChildren<EnemyHitRegister>();
-                            enem.takeDamage(damage, LobbySceneManagement.singleton.getLocalPlayer().identity, "Single");
-                        }
+                    if (hit.transform.GetComponent<EnemyHitRegister>() != null) {
+                        Debug.Log("hit parent enemy mesh");
+                        EnemyHitRegister enem = hit.transform.GetComponent<EnemyHitRegister>();
+                        enem.takeDamage(damage, LobbySceneManagement.singleton.getLocalPlayer().identity, "Single");
+                    } else if (hit.transform.GetComponentInParent<EnemyHitRegister>() != null) {
+                        Debug.Log("hit child enemy mesh");
+                        EnemyHitRegister enem = hit.transform.GetComponentInParent<EnemyHitRegister>();
+                        enem.takeDamage(damage, LobbySceneManagement.singleton.getLocalPlayer().identity, "Single");
+                    }
                         /*
                         target Target = hit.transform.GetComponent<target>();
                         if (Target != null)
@@ -288,9 +292,13 @@ public class Gun : MonoBehaviour
                     //Debug.Log(playerCamera.transform.forward);
                     //Debug.Log("Hit reg: " + hit.transform.GetComponentInChildren<EnemyHitRegister>());
                     //Debug.Log("Hit reg child: " + hit.transform.gameObject.GetComponentInChildren<Transform>().GetComponentInChildren<EnemyHitRegister>());
-                    if (hit.transform.GetComponentInChildren<EnemyHitRegister>() != null) {
-                        //Debug.Log("This is valid enemy");
-                        EnemyHitRegister enem = hit.transform.GetComponentInChildren<EnemyHitRegister>();
+                    if (hit.transform.GetComponent<EnemyHitRegister>() != null) {
+                        Debug.Log("hit parent enemy mesh");
+                        EnemyHitRegister enem = hit.transform.GetComponent<EnemyHitRegister>();
+                        enem.takeDamage(damage, LobbySceneManagement.singleton.getLocalPlayer().identity, "Single");
+                    } else if (hit.transform.GetComponentInParent<EnemyHitRegister>() != null) {
+                        Debug.Log("hit child enemy mesh");
+                        EnemyHitRegister enem = hit.transform.GetComponentInParent<EnemyHitRegister>();
                         enem.takeDamage(damage, LobbySceneManagement.singleton.getLocalPlayer().identity, "Single");
                     }
                     /*

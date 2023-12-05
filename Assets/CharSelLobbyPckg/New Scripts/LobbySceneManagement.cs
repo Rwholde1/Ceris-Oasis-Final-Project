@@ -239,7 +239,7 @@ public class LobbySceneManagement : NetworkBehaviour
 
     public void renamePlayer(string text) {
         localNameText.SetText(text);
-        getLocalPlayer().renamePlayerServerRpc(text);
+        getLocalPlayer().renamePlayerServerRpc(text, getLocalPlayer().identity);
     }
 
     public void reIDPlayer() {

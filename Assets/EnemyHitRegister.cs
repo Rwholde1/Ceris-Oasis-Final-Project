@@ -5,11 +5,13 @@ using Unity.Netcode;
 
 public class EnemyHitRegister : NetworkBehaviour
 {
+    public Animator animator;
+    public AI_Gen_State genState;
 
     public int enemyID = -1;
     public int health;
     public int difficultyClass;
-    private int[,] difficultyStats = { {1, 3, 60}, {3, 5, 60}, {7, 10, 75}, {12, 20, 100} };
+    private int[,] difficultyStats = { {1, 3, 60}, {3, 5, 60}, {7, 10, 75}, {12, 20, 100}, {500, 1000, 100} };
 
     //0 is basic, 1 is easy, 2 is moderate, 3 is advanced
 
@@ -20,11 +22,21 @@ public class EnemyHitRegister : NetworkBehaviour
     {   
         payout = calculatePayouts(difficultyStats[difficultyClass, 0], difficultyStats[difficultyClass, 1], difficultyStats[difficultyClass, 2]);
         Debug.Log("Payout: " + payout + " scrap");
+        animator = GetComponent<Animator>();
+        genState = GetComponent<AI_Gen_State>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+        {
+            Debug.Log("enem deaddddddd");
+            animator.Play("Death");
+            //animator.Play("Death");
+            genState.state = AI_Gen_State.AI_STATE.DEAD;
+        }
+
         if(Input.GetKeyDown(KeyCode.N) && LobbySceneManagement.singleton.getLocalPlayer().getIsLocalPlayer())
         {
             Debug.Log("Damage timeee");
@@ -32,9 +44,10 @@ public class EnemyHitRegister : NetworkBehaviour
         }
 
         //Comment out for production
+        /*
         if (EnemyWaveManager.singleton.spawnedEnemies.Count == 0) {
            EnemyWaveManager.singleton.spawnedEnemies.Add(gameObject);
-        }
+        }*/
         
     }
 
@@ -54,11 +67,12 @@ public class EnemyHitRegister : NetworkBehaviour
     public void takeDamage(int damage, int playerID, string type) {
         Debug.Log("Hit by player " + playerID + " with damage type " + type + " for " + damage + " damage");
         if (type != "Sustained AOE") {
-            //takeDamageServerRpc(health, damage, playerID - 1, enemyID);
+            takeDamageServerRpc(health, damage, playerID - 1, enemyID);
             //for testing only
-            takeDamageServerRpc(health, damage, playerID - 1, enemyID + 1);
+            //takeDamageServerRpc(health, damage, playerID - 1, enemyID + 1);
         } else {
-            takeDamageServerRpc(health, damage, playerID - 1, enemyID + 1);
+            takeDamageServerRpc(health, damage, playerID - 1, enemyID);
+            //takeDamageServerRpc(health, damage, playerID - 1, enemyID + 1);
         }
         //take damage s
 
@@ -134,7 +148,8 @@ public class EnemyHitRegister : NetworkBehaviour
                     Debug.Log("Paid player " + payout + " scrap");    
                 }
                 
-                Destroy(gameObject.transform.parent.gameObject);
+                //Handled in AI_Gen_State
+                //Destroy(gameObject.transform.parent.gameObject);
             }
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class FirstPersonLook : MonoBehaviour
 {
     [SerializeField]
-    Transform character;
+    public Transform character;
     public float sensitivity = 2f;
     public float smoothing = 1.5f;
 

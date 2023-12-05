@@ -265,18 +265,23 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     //Renames player
     [ServerRpc(RequireOwnership = false)]
-    public void renamePlayerServerRpc(string name) {
-        if (IsServer || IsHost) {
+    public void renamePlayerServerRpc(string name, int playerID) {
+        if (IsServer) {
             //Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on server"); 
             //LobbySceneManagement.singleton.playerNames[LobbySceneManagement.singleton.mostRecentPlayerClick - 1].SetText(name);   
-            renamePlayerClientRpc(name);    
+            renamePlayerClientRpc(name, playerID - 1);    
         }
     }
 
     [ClientRpc]
-    public void renamePlayerClientRpc(string name) {
-        Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on client"); 
-        LobbySceneManagement.singleton.playerNames[LobbySceneManagement.singleton.mostRecentPlayerClick - 1].SetText(name);   
+    public void renamePlayerClientRpc(string name, int playerID) {
+        if (IsClient) {
+            Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on client"); 
+            //LobbySceneManagement.singleton.playerNames[LobbySceneManagement.singleton.mostRecentPlayerClick - 1].SetText(name); 
+            LobbySceneManagement.singleton.playerNames[playerID].SetText(name); 
+
+        }
+          
     }
 
     
@@ -393,7 +398,16 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         }
     }
 
+    //Passes damage call to playermanager
+    public void takeDamage(int damageIn, int playerID) {
+        Debug.Log("player " + playerID + " damageed by enemy for health: " + damageIn);
+        LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>().takeDamage(damageIn, playerID);
+    }
 
+    public void takeDamage(float damageIn, int playerID) {
+        Debug.Log("player " + playerID + " damageed by enemy for health: " + damageIn);
+        LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>().takeDamage((int) damageIn, playerID);
+    }
 
 }  
 

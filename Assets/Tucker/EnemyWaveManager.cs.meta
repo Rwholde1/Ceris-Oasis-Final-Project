@@ -3,7 +3,14 @@ guid: b8b7bab53aaf8f148a6713156d6d0829
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Queenie: {fileID: 5593412922382327926, guid: 8390a42aaf254ea4ba75fb76de1a62b9, type: 3}
+  - Wanderer: {fileID: 6061416584993298425, guid: 301c107479fbd01418a6c77d877afca4, type: 3}
+  - HardGunner: {fileID: 5354698617508791645, guid: 80d95103100bde2468961061449a8b24, type: 3}
+  - Lobber: {fileID: 1042199608197514870, guid: 0ac593d14ce29414898e1be66c5e6fec, type: 3}
+  - MediumGunner: {fileID: -4373253967111635738, guid: bbbfa0f3840660a4b8fa8c02eb663672, type: 3}
+  - EasyGunner: {fileID: 7911545765178255059, guid: 129e41320115c9b4c84310d7353e01dc, type: 3}
+  - Rusher: {fileID: 6030480858944522270, guid: ae43eda0e976f5c42b83280206a8471e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
