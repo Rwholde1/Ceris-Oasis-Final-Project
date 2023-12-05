@@ -38,6 +38,9 @@ public class CosmoGunScript : MonoBehaviour
         if (gun1 == null)
         {
             gun1 = Instantiate(guns[gunID1], CheckTags(gunID1));
+            //
+            gun1.SetActive(false);
+            //
             AnimChecker(gun1);
             gun1IMG.sprite = GunPNG[gunID1];
         }
@@ -50,22 +53,24 @@ public class CosmoGunScript : MonoBehaviour
         }
         if (gunactive == 1 && !gun1.activeInHierarchy)
         {
-            gun1Color.a = 1;
+            gun1Color.a = 1f;
+            gun2Color.a = 0.3f;
             gun1.SetActive(true);
             gun2.SetActive(false);
             print("GUN SWITCHED TO GUN 1");
             AnimChecker(gun1);
-            gun2Color.a = 0.3f;
+            
 
         }
         if (gunactive == 2 && !gun2.activeInHierarchy)
         {
+            gun2Color.a = 1f;
             gun1Color.a = 0.3f;
             gun2.SetActive(true);
             gun1.SetActive(false);
             print("GUN SWITCHED TO GUN 2");
             AnimChecker(gun2);
-            gun2Color.a = 1;
+            
         }
         print(gun2Color);
         gun1IMG.color = gun1Color;

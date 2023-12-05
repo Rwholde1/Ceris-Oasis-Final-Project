@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class MolotovThrower : NetworkBehaviour
+public class HealingZoneCaster : NetworkBehaviour
 {
     public float throwForce = 60f;
-    public NetworkObject grenadePrefab;
+    public NetworkObject healingPrefab;
 
     //
     public float sensitivity = 2f;
@@ -25,7 +25,7 @@ public class MolotovThrower : NetworkBehaviour
         }*/
     }
 
-    public void ThrowGrenade()
+    public void CastHeals()
     {
 
         /*
@@ -40,9 +40,9 @@ public class MolotovThrower : NetworkBehaviour
 
         */
 
-        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y - 0f, transform.position.z + 0.1f);
-        createFireGrenadeServerRpc(throwpoint, transform.forward * throwForce, LobbySceneManagement.singleton.getLocalPlayer().identity);
-        Debug.Log("Threw molotov");
+        Vector3 throwpoint = new Vector3(transform.position.x, transform.position.y - 1.4f, transform.position.z + 0.1f);
+        createHealZoneServerRpc(throwpoint, transform.forward * throwForce, LobbySceneManagement.singleton.getLocalPlayer().identity);
+        Debug.Log("Cast Healing from player " + LobbySceneManagement.singleton.getLocalPlayer().identity);
         //GameObject grenade = Instantiate(grenadePrefab, transform.position, transform.rotation);
                 //GameObject grenade = Instantiate((GameObject) grenadePrefab, throwpoint, Quaternion.identity);
 
@@ -69,12 +69,12 @@ public class MolotovThrower : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void createFireGrenadeServerRpc(Vector3 throwPoint, Vector3 throwDir, int playerID) {
-        Debug.Log("Threw molotov serverrpc");
-        NetworkObject molotov = Instantiate(grenadePrefab, throwPoint, Quaternion.identity);
-        molotov.GetComponent<NetworkObject>().Spawn();
-        molotov.GetComponent<Rigidbody>().AddForce(throwDir);
-        molotov.GetComponent<MolotovCocktail>().pID = playerID;
+    void createHealZoneServerRpc(Vector3 throwPoint, Vector3 throwDir, int playerID) {
+        Debug.Log("Heal zone serverrpc with player id " + playerID);
+        NetworkObject zone = Instantiate(healingPrefab, throwPoint, Quaternion.identity);
+        zone.GetComponent<NetworkObject>().Spawn();
+        //zone.GetComponent<Rigidbody>().AddForce(throwDir);
+        zone.GetComponent<HealingZone>().pID = playerID;
     }
 
     /*

@@ -367,6 +367,7 @@ MonoBehaviour:
   ammocount: {fileID: 0}
   burstamount: 0
   timebetweenbursts: 0
+  infAmmo: 1
 --- !u!95 &5568626181338630882
 Animator:
   serializedVersion: 5

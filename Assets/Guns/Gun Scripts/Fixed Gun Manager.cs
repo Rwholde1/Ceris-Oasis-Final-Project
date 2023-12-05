@@ -29,12 +29,18 @@ public class FixedGunManager : MonoBehaviour
         {
             gun1.SetActive(true);
             gun2.SetActive(false);
+            if (gunID1 == 0) {
+                gun2.GetComponent<Gun>().ammocount.text = "0/0";
+            }
             print("GUN SWITCHED TO GUN 1");
         }
         if(gunactive == 2 && !gun2.activeInHierarchy)
         {
             gun2.SetActive(true);
             gun1.SetActive(false);
+            if (gunID2 == 0) {
+                gun1.GetComponent<Gun>().ammocount.text = "0/0";
+            }
             print("GUN SWITCHED TO GUN 2");
         }
         HandleWeaponSwitching();

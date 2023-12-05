@@ -42,6 +42,9 @@ public class Gun : MonoBehaviour
     private int moneytosendtoplayer;
     private GameObject shop;
     private int burstshotsfired = 0;
+
+    public bool infAmmo = false;
+
     void Start()
     {
         GameObject parentObject = transform.parent.gameObject;
@@ -150,7 +153,11 @@ public class Gun : MonoBehaviour
 
             if (!cosmetic)
             {
-                ammocount.text = currentammo + "/" + maxAmmo;
+                if (infAmmo) {
+                    ammocount.text = currentammo + "/∞"; 
+                } else {
+                    ammocount.text = currentammo + "/" + maxAmmo;
+                }
                 if (crosshairImage != null)
                 {
                     float targetScale = isAiming ? 0.5f : 1f;
@@ -179,7 +186,7 @@ public class Gun : MonoBehaviour
             maxAmmo += currentammo;
             currentammo = 0;
         }
-        if(MagSize <= maxAmmo)
+        if(MagSize <= maxAmmo || infAmmo)
         {
             currentammo = MagSize;
             maxAmmo -=MagSize;

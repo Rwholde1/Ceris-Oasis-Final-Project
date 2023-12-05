@@ -146,25 +146,37 @@ public class LobbySceneManagement : NetworkBehaviour
             pingManage = pingPrefab.GetComponent<PingManager>();
         }
 
-    if (playerCamObject != null) {
-        if (localStats == null) {
-            StatsManager mng = playerCamObject.GetComponentInChildren<StatsManager>();
-            localStats = mng.playerStats;
-            for (int i = 0; i < statsPlayerId.Count; i++) {
-                Debug.Log("Setting player " + (statsPlayerId[i] + 1) + " icon to char " + (statsCharId[i] + 1));
-                mng.setSprite(statsCharId[i], statsPlayerId[i]);
-            }
+        if (playerCamObject != null) {
+            if (localStats == null) {
+                StatsManager mng = playerCamObject.GetComponentInChildren<StatsManager>();
+                localStats = mng.playerStats;
+                for (int i = 0; i < statsPlayerId.Count; i++) {
+                    //Sets class icons in selected classes
+                    Debug.Log("Setting player " + (statsPlayerId[i] + 1) + " icon to char " + (statsCharId[i] + 1));
+                    mng.setSprite(statsCharId[i], statsPlayerId[i]);
+                    //Sets player names in scene
+                    //IMPLEMENTTTTTTTTTTT
+                    //Toggle molotovs
+                    if (statsPlayerId[i] == getLocalPlayer().identity - 1) {
+                        if (statsCharId[i] == 3) {
+                            playerCamObject.GetComponentInChildren<MolotovThrower>().enabled = true;
+                        }
+                        if (statsCharId[i] == 0) {
+                            playerCamObject.GetComponentInChildren<HealingZoneCaster>().enabled = true;
+                        }
+                    }
+                    
+
+                }
             
-        } else {
-            for (int row = 0; row < 4; row++) {
-                for (int col = 0; col < 4; col++) {
-                    localStats[row, col] = statsArray[row, col];
+            } else {
+                for (int row = 0; row < 4; row++) {
+                    for (int col = 0; col < 4; col++) {
+                        localStats[row, col] = statsArray[row, col];
+                    }
                 }
             }
         }
-
-
-    }
 
 
   
@@ -274,6 +286,28 @@ public class LobbySceneManagement : NetworkBehaviour
         pingManage.setTarget(getLocalPlayer().identity, getLocalPlayerTransform());
         //Debug.Log("Layer Return: " + layersList[getLocalPlayer().identity - 1]);
         return layersList[getLocalPlayer().identity - 1];
+    }
+
+    public RegisterPlayer getPlayerByCharID(int charId) {
+        for (int i = 0; i < statsCharId.Count; i++) {
+            Debug.Log("Char id is: " + statsCharId[i]);
+            if (statsCharId[i] == charId - 1) {
+                Debug.Log("found player at index " + i);
+                Debug.Log("returning " + players[i]);
+                return players[i];
+            }
+        }
+        return null;
+    }
+
+    public RegisterPlayer getPlayerBypID(int pID) {
+        for (int i = 0; i < statsPlayerId.Count; i++) {
+            if (statsPlayerId[i] == pID - 1) {
+                Debug.Log("found player at index " + i);
+                return players[i];
+            }
+        } 
+        return null;
     }
 
 }

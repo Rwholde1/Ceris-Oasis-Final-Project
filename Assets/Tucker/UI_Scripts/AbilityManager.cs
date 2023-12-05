@@ -22,6 +22,17 @@ public class AbilityManager : MonoBehaviour
     public TextMeshProUGUI counter1;
     public TextMeshProUGUI counter2;
 
+    public MolotovThrower pirateAbility1;
+    public AkaneExample boomerAbility1;
+    public HealingZoneCaster alienAbility1;
+
+    void Start() {
+        //May need to be moved to update or something
+        //Fetches boomerang thrower
+        boomerAbility1 = LobbySceneManagement.singleton.getLocalPlayer().GetComponentInChildren<AkaneExample>();
+        
+    }
+
     //Sets ability 1's cooldown slider max
     public void setCooldown1 (int cooldownIn) {
         cooldownMax1 = (float) cooldownIn;
@@ -44,8 +55,18 @@ public class AbilityManager : MonoBehaviour
             counter1.text = "";
             //Ability 1 Trigger
             if(Input.GetKeyDown(KeyCode.Q)) {
+                checkCooldowns();
                 lockedout1 = true;
                 slider1.value = 0;
+                if (pirateAbility1.enabled) {
+                    pirateAbility1.ThrowGrenade();
+                }
+                if (boomerAbility1.enabled)  {
+                    boomerAbility1.throwBoomer();
+                }
+                if (alienAbility1.enabled)  {
+                    alienAbility1.CastHeals();
+                }
             }
         //Ability 1 On Cooldown
         } else {
@@ -86,6 +107,22 @@ public class AbilityManager : MonoBehaviour
         }
     
         
+    }
+
+    public void checkCooldowns() {
+        //Changes cooldown caps
+        if (boomerAbility1.enabled) {
+            //cooldownMax1 = 10f;
+            setCooldown1(10);
+        }
+        if (pirateAbility1.enabled) {
+            //cooldownMax1 = 15f;
+            setCooldown1(15);
+        }
+        if (alienAbility1.enabled) {
+            //cooldownMax1 = 20f;
+            setCooldown1(20);
+        }
     }
 }
 

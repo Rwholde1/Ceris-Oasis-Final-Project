@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class GrenadeThrower : NetworkBehaviour
 {
-    public float throwForce = 50f;
+    public float throwForce = 60f;
     public NetworkObject grenadePrefab;
     public int totalgrenades = 2;
     // Update is called once per frame

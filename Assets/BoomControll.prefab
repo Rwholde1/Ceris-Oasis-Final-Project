@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 8858354313919784824}
   - component: {fileID: 8375909631358666373}
   - component: {fileID: 2127235575765035903}
-  m_Layer: 20
+  - component: {fileID: 7092278587186163253}
+  - component: {fileID: 5885017932117014384}
+  m_Layer: 28
   m_Name: BoomControll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,9 +50,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c96ec42288a551b449feb18c8f6f43cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 200
-  throwForce: 10
-  maxDistance: 10
+  forwardSpeed: 10
+  returnSpeed: 15
+  flightDuration: 3
+  damage: 5
+  playerposition: {fileID: 0}
+  camposition: {fileID: 0}
+  childBoom: {fileID: 0}
 --- !u!54 &8858354313919784824
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -113,6 +119,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   child: {fileID: 4889675665317763396}
   distanceforward: 15
+  pID: 0
+  halfTime: 1
+  damage: 50
+  timePassed: 0
+--- !u!114 &7092278587186163253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572188145795571047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &5885017932117014384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572188145795571047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &5056254732959448289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 428109144211061125, guid: 994ccacd9a69d3842920fdd5526d9e4f, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 428109144211088805, guid: 994ccacd9a69d3842920fdd5526d9e4f, type: 3}
       propertyPath: m_LocalPosition.x

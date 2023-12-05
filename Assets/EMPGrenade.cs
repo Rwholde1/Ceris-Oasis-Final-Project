@@ -37,7 +37,7 @@ public class EMPGrenade : MonoBehaviour
         GameObject boom = Instantiate(explosion, transform.position, transform.rotation);
         boom.GetComponent<Transform>().eulerAngles = new Vector3(0f, 0f, 0f);
 
-        AudioSource.PlayClipAtPoint(empTrigger, boom.transform.position, 2f);
+        AudioSource.PlayClipAtPoint(empTrigger, boom.transform.position, 3f);
 
         Debug.Log("explodin time");
         if (pID == LobbySceneManagement.singleton.getLocalPlayer().identity) {

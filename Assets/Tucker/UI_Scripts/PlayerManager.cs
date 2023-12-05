@@ -36,7 +36,7 @@ public class PlayerManager : NetworkBehaviour
     {
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
-        abilities.setCooldown1(cooldown1);
+        //abilities.setCooldown1(cooldown1);
         abilities.setCooldown2(cooldown2);
     }
 
@@ -51,19 +51,20 @@ public class PlayerManager : NetworkBehaviour
             healthBar.setHealth(maxHealth);
         }
 
+        /*
         if(Input.GetKeyDown(KeyCode.J)) {
             stats.addElim(1);
         }
         if(Input.GetKeyDown(KeyCode.K)) {
             stats.addAssist(1);
-        }
+        }*/
         if(Input.GetKeyDown(KeyCode.L)) {
-            takeDamage(10);
-        }
+            takeDamage(10, LobbySceneManagement.singleton.getLocalPlayer().identity);
+        }/*
         if(Input.GetMouseButtonDown(1)) {
             var dmg = Mathf.Floor(GetComponent<Transform>().localEulerAngles.y);
             stats.addDamage(1, (int) dmg);
-        }
+        }*/
 
         if(Input.GetMouseButtonDown(2)) {
             Debug.Log("click ping");
@@ -92,10 +93,11 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    /*
     public void takeDamage(int damageIn) {
         currentHealth -= damageIn;
         healthBar.setHealth(currentHealth);
-    }
+    }*/
 
     public void receiveHeals(int healthIn) {
         if (currentHealth + healthIn > maxHealth) {
@@ -125,6 +127,99 @@ public class PlayerManager : NetworkBehaviour
         NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
         ping.GetComponent<NetworkObject>().Spawn();
     }
+
+
+
+    public void receiveHealth(int healthIn, int playerID) {
+        Debug.Log("Hit player " + playerID + " for " + healthIn + " health");
+
+        //takeDamageServerRpc(health, damage, playerID - 1, enemyID);
+        //for testing only
+        receiveHealthServerRpc(healthIn, playerID - 1);
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void receiveHealthServerRpc(int healthIn, int playerID) {
+        Debug.Log("heals server rpc");
+        if (IsServer) {
+
+            Debug.Log("Sending health to client");
+            receiveHealthClientRpc(healthIn, playerID);
+
+        }
+        
+    }
+
+    [ClientRpc] 
+    public void receiveHealthClientRpc(int healthIn, int playerID){
+        if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
+            //Debug.Log("client rpc got hit " + EnemyWaveManager.singleton.spawnedEnemies[enemID] + " " + gameObject);
+            
+            //if (gameObject == LobbySceneManagement.singleton.players[playerID].GetComponent<PlayerManager>()) {
+                if (LobbySceneManagement.singleton.playerCamObject == gameObject.GetComponent<Camera>()) {
+                Debug.Log("I'm the victim of health! " + this + " " + healthIn);
+
+                Debug.Log("current: " + currentHealth);
+                currentHealth += healthIn;
+                Debug.Log("New: " + currentHealth);
+                if (currentHealth > maxHealth) {
+                    currentHealth = maxHealth;
+                }
+                healthBar.setHealth(currentHealth);
+                //health -= damage;
+                //Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+                //Credit player for damage
+                //LobbySceneManagement.singleton.statsArray[playerID, 3] += damage;
+                //Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+            }
+        }
+    }
     
+    public void takeDamage(int damageIn, int playerID) {
+        Debug.Log("Hit player " + playerID + " for " + damageIn + " damage");
+
+        //takeDamageServerRpc(health, damage, playerID - 1, enemyID);
+        //for testing only
+        takeDamageServerRpc(damageIn, playerID - 1);
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void takeDamageServerRpc(int damageIn, int playerID) {
+        Debug.Log("player damage server rpc");
+        if (IsServer) {
+
+            Debug.Log("Sending damage to client");
+            takeDamageClientRpc(damageIn, playerID);
+
+        }
+        
+    }
+
+    [ClientRpc] 
+    public void takeDamageClientRpc(int damageIn, int playerID){
+        if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
+            //Debug.Log("client rpc got hit " + EnemyWaveManager.singleton.spawnedEnemies[enemID] + " " + gameObject);
+            
+            //if (gameObject == LobbySceneManagement.singleton.players[playerID].GetComponent<PlayerManager>()) {
+                if (LobbySceneManagement.singleton.playerCamObject == gameObject.GetComponent<Camera>()) {
+                Debug.Log("I'm the player victim! " + this + " " + damageIn);
+
+                Debug.Log("current: " + currentHealth);
+                currentHealth -= damageIn;
+                Debug.Log("New: " + currentHealth);
+                if (currentHealth < 0) {
+                    currentHealth = 0;
+                }
+                healthBar.setHealth(currentHealth);
+                //health -= damage;
+                //Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+                //Credit player for damage
+                //LobbySceneManagement.singleton.statsArray[playerID, 3] += damage;
+                //Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+            }
+        }
+    }
 
 }

@@ -18,6 +18,8 @@ public class FPCOnSceneEnter : NetworkBehaviour
     public GameObject[] classMeshPrefabs = new GameObject[4];
     public Material[] classIconColors = new Material[4];
 
+    public int meshPlayerID;
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -28,13 +30,15 @@ public class FPCOnSceneEnter : NetworkBehaviour
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
             foreach (var client in MatchplayNetworkServer.Instance.ClientData) {
                 var character = characterDatabase.GetCharacterById(client.Value.characterId);
-                Debug.Log("character is: " + character);
+                Debug.Log("character for player " + client.Value.clientId + " is: " + character);
+                //Debug.Log("character is: " + character);
                 if (character != null)
                 {   
                     Debug.Log("Local Player ID: " + LobbySceneManagement.singleton.getLocalPlayer().identity);
                     Debug.Log("Local Player Char ID: " + client.Value.characterId);
                     Debug.Log("Local Player Character: " + character);
                     Debug.Log("client id: " + client.Value.clientId);
+
                     /*
                     Debug.Log("spawning character: " + character);
                     var spawnPos = new Vector3(Random.Range(-3f, 3f), 10f, Random.Range(-3f, 3f));
@@ -62,6 +66,7 @@ public class FPCOnSceneEnter : NetworkBehaviour
         if (LobbySceneManagement.singleton.players[playerId] == gameObject.GetComponent<RegisterPlayer>()) {
             gameObject.GetComponent<RegisterPlayer>().charIdentity = charId;
             Debug.Log("passed match");
+            meshPlayerID = playerId + 1;
             classMeshPrefabs[charId].SetActive(true);
             if (charId == 1) {
                 Debug.Log("activating jetpack");
@@ -71,6 +76,7 @@ public class FPCOnSceneEnter : NetworkBehaviour
                 Debug.Log("activating boomer");
                 gameObject.GetComponent<AkaneExample>().enabled = true;
             }
+            //Molotovs handled elsewhere
             LobbySceneManagement.singleton.statsPlayerId.Add(playerId);
             LobbySceneManagement.singleton.statsCharId.Add(charId);
             Debug.Log("Fetching player cam to set icons"/* + LobbySceneManagement.singleton.playerCamObject*/);

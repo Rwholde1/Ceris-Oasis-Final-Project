@@ -6056,7 +6056,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2684354615
+    m_Bits: 2952790071
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6794,6 +6794,7 @@ GameObject:
   - component: {fileID: 576425611952873016}
   - component: {fileID: 7313147154902600916}
   - component: {fileID: 5631616828184727752}
+  - component: {fileID: 1949597150223181432}
   m_Layer: 0
   m_Name: GunManager
   m_TagString: Untagged
@@ -6907,8 +6908,8 @@ MonoBehaviour:
   - {fileID: 8411963280288052242, guid: 40c2eff72447bd3439939cea68ac6bd8, type: 3}
   - {fileID: 2467886614539273244, guid: 61e80b40b63a5594d992785d19402986, type: 3}
   - {fileID: 6490548185606528983, guid: 1bba3008ff004204abb76db17d0c44b7, type: 3}
-  gunID1: 8
-  gunID2: 7
+  gunID1: 7
+  gunID2: 0
   gun1: {fileID: 0}
   gun2: {fileID: 0}
   gunactive: 1
@@ -6934,13 +6935,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6740094280896417139}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f4fa4550450b7d4e8f42949af09244b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   throwForce: 400
   grenadePrefab: {fileID: 7126793330508074834, guid: f124b8cda6e474147967db74528f8951, type: 3}
+  sensitivity: 2
+  smoothing: 1.5
+--- !u!114 &1949597150223181432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6740094280896417139}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d887c80ae3e6724296b79a3c908f85a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 60
+  healingPrefab: {fileID: 8225172804702894332, guid: b16ca322895d3bd4db67b98eb67aaeea, type: 3}
   sensitivity: 2
   smoothing: 1.5
 --- !u!1 &7238167166311919383
@@ -7531,6 +7548,9 @@ MonoBehaviour:
   slider2: {fileID: 8097878553363894531}
   counter1: {fileID: 5642817476276767968}
   counter2: {fileID: 7362555949827959387}
+  pirateAbility1: {fileID: 5631616828184727752}
+  boomerAbility1: {fileID: 0}
+  alienAbility1: {fileID: 1949597150223181432}
 --- !u!1 &7983807117575018682
 GameObject:
   m_ObjectHideFlags: 0
