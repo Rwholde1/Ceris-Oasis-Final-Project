@@ -45,8 +45,8 @@ public class EnemyHitRegister : NetworkBehaviour
 
         //Comment out for production
         /*
-        if (EnemyWaveManager.singleton.spawnedEnemies.Count == 0) {
-           EnemyWaveManager.singleton.spawnedEnemies.Add(gameObject);
+        if (EnemyWaveSpawnerTake2.singleton.spawnedEnemies.Count == 0) {
+           EnemyWaveSpawnerTake2.singleton.spawnedEnemies.Add(gameObject);
         }*/
         
     }
@@ -98,9 +98,13 @@ public class EnemyHitRegister : NetworkBehaviour
 
     [ClientRpc] 
     public void takeDamageClientRpc(int damage, int playerID, int enemID){
+        Debug.Log("received in client damage rpc");
+        Debug.Log("Scene manager: " + LobbySceneManagement.singleton);
+        Debug.Log("Local player: " + LobbySceneManagement.singleton.getLocalPlayer());
+        /*
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
-            Debug.Log("client rpc got hit " + EnemyWaveManager.singleton.spawnedEnemies[enemID] + " " + gameObject);
-            if (gameObject == EnemyWaveManager.singleton.spawnedEnemies[enemID]) {
+            Debug.Log("client rpc got hit " + EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID] + " " + gameObject);
+            if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID]) {
                 Debug.Log("I'm the victim! " + this);
                 if (!hitBy[playerID]) {
                     hitBy[playerID] = true;
@@ -112,7 +116,20 @@ public class EnemyHitRegister : NetworkBehaviour
                 LobbySceneManagement.singleton.statsArray[playerID, 3] += damage;
                 Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
             }
-        }
+        }*/
+        Debug.Log("client rpc got hit " + EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID] + " " + gameObject);
+            if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID].gameObject) {
+                Debug.Log("I'm the victim! " + this);
+                if (!hitBy[playerID]) {
+                    hitBy[playerID] = true;
+                }
+
+                health -= damage;
+                Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+                //Credit player for damage
+                LobbySceneManagement.singleton.statsArray[playerID, 3] += damage;
+                Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+            }
     }
 
 
@@ -126,7 +143,7 @@ public class EnemyHitRegister : NetworkBehaviour
     [ClientRpc] 
     public void dieClientRpc(int playerID, int enemID){
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
-            if (gameObject == EnemyWaveManager.singleton.spawnedEnemies[enemID]) {
+            if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID].gameObject) {
                 Debug.Log("I'm the dead victim! " + this);
                 //credit player for remaining health as damage
                 LobbySceneManagement.singleton.statsArray[playerID, 3] += health;
@@ -159,5 +176,5 @@ public class EnemyHitRegister : NetworkBehaviour
         //log who dealt it in assists
         //on death, post assists and killer to scoreboard, send scrap to killer
 
-        //write enem manager singleton script as EnemyWaveManager
+        //write enem manager singleton script as EnemyWaveSpawnerTake2
 }

@@ -409,6 +409,41 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>().takeDamage((int) damageIn, playerID);
     }
 
+
+
+    //Enemy spawning scripts because why the fuck won't they work on the actual spawner
+    [ServerRpc(RequireOwnership = false)]
+    public void spawnTestServerRpc(int j, int i, int spawnInd) {
+        if (IsServer) {
+            Debug.Log("server received " + j + " " + i + " " + spawnInd);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void spawnEnemyServerRpc(int DC, int indexInDC, int spawnerIndex) {
+        if (IsClient) {
+            spawnEnemyClientRpc(DC,indexInDC, spawnerIndex);
+            Debug.Log("entering spawner rpc");
+            Debug.Log("server spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
+            //spawnEnemyClientRpc(DC, indexInDC, spawnerIndex);
+            Debug.Log(EnemyWaveSpawnerTake2.singleton.DCListHolder[DC][indexInDC]);
+            NetworkObject newEnem = Instantiate(EnemyWaveSpawnerTake2.singleton.DCListHolder[DC][indexInDC], EnemyWaveSpawnerTake2.singleton.enemSpawners[spawnerIndex].position, Quaternion.identity);
+            newEnem.GetComponent<NetworkObject>().Spawn();
+            //zone.GetComponent<Rigidbody>().AddForce(throwDir);
+            newEnem.GetComponent<EnemyHitRegister>().enemyID = EnemyWaveSpawnerTake2.singleton.spawnedEnemies.Count;
+            EnemyWaveSpawnerTake2.singleton.spawnedEnemies.Add(newEnem);
+        }
+    }
+
+    
+    [ClientRpc]
+    public void spawnEnemyClientRpc(int DC, int indexInDC, int spawnerIndex) {
+        if (IsClient) {
+            Debug.Log("client spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
+        }
+
+    }
+
 }  
 
 //General structure: local object - singleton function - register player server rpc - register player client rpc

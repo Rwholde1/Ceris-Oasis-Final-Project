@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class EnemyWaveSpawnerTake2 : NetworkBehaviour
 {
@@ -92,12 +92,14 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
         Debug.Log("started: " + started);
 
         //Destroys on all but host instance
+        
         if (!LobbySceneManagement.singleton.getLocalPlayer().getIsHost()) {
             Debug.Log("Destroying wave manager on client manager");
             Destroy(gameObject);
         } else {
             isServer = true;
         }
+        
 
         if (SceneManager.GetActiveScene().name != "LobbyScene") {
             if (timeToStart > 0f) {
@@ -138,12 +140,12 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
                 //newEnem.GetComponent<EnemyHitRegister>().enemyID = spawnedEnemies.Count;
                 //spawnedEnemies.Add(newEnem);
                 Debug.Log(j + " " + i + " " + spawnInd);
-                spawnTestServerRpc(j, i, spawnInd);
-                spawnEnemyServerRpc(j, i, spawnInd);
-                spawnTestServerRpc(j, i, spawnInd);
+                LobbySceneManagement.singleton.getLocalPlayer().spawnTestServerRpc(j, i, spawnInd);
+                LobbySceneManagement.singleton.getLocalPlayer().spawnEnemyServerRpc(j, i, spawnInd);
+                LobbySceneManagement.singleton.getLocalPlayer().spawnTestServerRpc(j, i, spawnInd);
                 Debug.Log("ending spawn rpc");
             }
-            j++;
+            //j++;
         }
     }
 
@@ -153,31 +155,6 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
 
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void spawnTestServerRpc(int j, int i, int spawnInd) {
-        Debug.Log("server received " + j + " " + i + " " + spawnInd);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void spawnEnemyServerRpc(int DC, int indexInDC, int spawnerIndex) {
-        spawnEnemyClientRpc(DC,indexInDC, spawnerIndex);
-        Debug.Log("entering spawner rpc");
-        Debug.Log("server spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
-        //spawnEnemyClientRpc(DC, indexInDC, spawnerIndex);
-        Debug.Log(DCListHolder[DC][indexInDC]);
-        //NetworkObject newEnem = Instantiate(DCListHolder[DC][indexInDC], enemSpawners[spawnerIndex].position, Quaternion.identity);
-        //newEnem.GetComponent<NetworkObject>().Spawn();
-        //zone.GetComponent<Rigidbody>().AddForce(throwDir);
-        //newEnem.GetComponent<EnemyHitRegister>().enemyID = spawnedEnemies.Count;
-        //spawnedEnemies.Add(newEnem);
-    }
-
     
-    [ClientRpc]
-    public void spawnEnemyClientRpc(int DC, int indexInDC, int spawnerIndex) {
-        Debug.Log("client spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
-
-
-    }
     
 }

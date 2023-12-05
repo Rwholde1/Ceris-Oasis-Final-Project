@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2675763543103449113}
-  - component: {fileID: -6221210788833708930}
   - component: {fileID: 2318479999327431092}
-  - component: {fileID: 5132360503405594782}
+  - component: {fileID: -2064937063342992623}
+  - component: {fileID: -2623067902329436641}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -34,36 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6221210788833708930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3019042892384972682}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8b7bab53aaf8f148a6713156d6d0829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnedEnemies: []
-  enemSpawners: []
-  Queenie: {fileID: 5593412922382327926, guid: 8390a42aaf254ea4ba75fb76de1a62b9, type: 3}
-  DC4Enems: []
-  Wanderer: {fileID: 6061416584993298425, guid: 301c107479fbd01418a6c77d877afca4, type: 3}
-  DC3Enems: []
-  HardGunner: {fileID: 5354698617508791645, guid: 80d95103100bde2468961061449a8b24, type: 3}
-  Lobber: {fileID: 1042199608197514870, guid: 0ac593d14ce29414898e1be66c5e6fec, type: 3}
-  DC2Enems: []
-  MediumGunner: {fileID: -4373253967111635738, guid: bbbfa0f3840660a4b8fa8c02eb663672, type: 3}
-  DC1Enems: []
-  EasyGunner: {fileID: 7911545765178255059, guid: 129e41320115c9b4c84310d7353e01dc, type: 3}
-  Rusher: {fileID: 6030480858944522270, guid: ae43eda0e976f5c42b83280206a8471e, type: 3}
-  DC0Enems: []
-  isServer: 0
-  timeToStart: 5
-  started: 0
-  waveNum: 0
 --- !u!114 &2318479999327431092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +64,37 @@ MonoBehaviour:
   timeToStart: 5
   started: 0
   waveNum: 0
---- !u!114 &5132360503405594782
+--- !u!114 &-2064937063342992623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3019042892384972682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &-2623067902329436641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
