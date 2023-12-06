@@ -2595,7 +2595,7 @@ MonoBehaviour:
   levelImages:
   - {fileID: 21300000, guid: 673f18d87f47ca34a8b486a5ac0291fc, type: 3}
   - {fileID: 21300000, guid: e498a801abd9f5f40bc40ba4357d81fe, type: 3}
-  - {fileID: 21300000, guid: 0fca28892f34375439c32b1ee1c8d655, type: 3}
+  - {fileID: 21300000, guid: b308f878c0632334abce940e0c1bdd83, type: 3}
   levelDescriptions:
   - "A once bustling city now still in the Uprising\u2019s wake. Defend the world\u2019s
     largest metropolitan area from C.A.P.S. and Barct alike."
@@ -3122,7 +3122,7 @@ MonoBehaviour:
     - m_Text: Skyline
       m_Image: {fileID: 21300000, guid: e498a801abd9f5f40bc40ba4357d81fe, type: 3}
     - m_Text: Pherris Reactor
-      m_Image: {fileID: 21300000, guid: 0fca28892f34375439c32b1ee1c8d655, type: 3}
+      m_Image: {fileID: 21300000, guid: b308f878c0632334abce940e0c1bdd83, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

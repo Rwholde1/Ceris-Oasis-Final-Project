@@ -77,6 +77,8 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled == false) { allowshooting = false; }
         //Async start astuff
         if (playerCamera == null) {
             //playerCamera = LobbySceneManagement.singleton.playerCamObject.GetComponent<Camera>();
@@ -98,12 +100,12 @@ public class Gun : MonoBehaviour
         else if(burstshotsfired == burstamount)
         {
             burstshotsfired = 0;
-            allowshooting = true;
+            Invoke("allowShoot", 0.1f);
         }
          shop = GameObject.Find("Shop");
         if (shop == null)
         {
-            allowshooting = true;
+            Invoke("allowShoot", 0.1f);
         }
         else
         { 
@@ -172,6 +174,11 @@ public class Gun : MonoBehaviour
         }
 
     }
+
+    public void allowShoot() {
+        allowshooting = true;
+    }
+
     IEnumerator Reload()
     {
         isreloading = true;

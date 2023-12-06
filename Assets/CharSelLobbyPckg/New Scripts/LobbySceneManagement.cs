@@ -71,6 +71,8 @@ public class LobbySceneManagement : NetworkBehaviour
     public List<int> statsCharId;
     public List<int> statsPlayerId;
 
+    public bool isInShop = false;
+
     
 
     void Awake() {

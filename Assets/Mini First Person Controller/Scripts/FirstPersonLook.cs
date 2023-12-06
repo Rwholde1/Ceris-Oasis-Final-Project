@@ -102,27 +102,31 @@ public class FirstPersonLook : MonoBehaviour
 
         //if (character.GetC)
         // Get smooth velocity.
-        Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-        Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
-        frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
-        velocity += frameVelocity;
-        velocity.y = Mathf.Clamp(velocity.y, -90, 90);
+        bool canLook = LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled;
+        if (canLook) {
+            Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
+            frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
+            velocity += frameVelocity;
+            velocity.y = Mathf.Clamp(velocity.y, -90, 90);
 
 
-        transform.position = character.transform.position;
-        transform.position += new Vector3(0f, 1.488f, 0f);
+            transform.position = character.transform.position;
+            transform.position += new Vector3(0f, 1.488f, 0f);
 
 
-        // Rotate camera up-down and controller left-right from velocity.
-        //Debug.Log("updated mouse look " + velocity.y);
+            // Rotate camera up-down and controller left-right from velocity.
+            //Debug.Log("updated mouse look " + velocity.y);
 
-        //transform.rotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
-        //transform.rotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
-        transform.eulerAngles = new Vector3(-velocity.y, velocity.x, 0f);
+            //transform.rotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
+            //transform.rotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+            transform.eulerAngles = new Vector3(-velocity.y, velocity.x, 0f);
 
-        //character.localRotation = Quaternion.AngleAxis( velocity.y, Vector3.right);
+            //character.localRotation = Quaternion.AngleAxis( velocity.y, Vector3.right);
 
-        character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+            character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+        }
+        
 
         if (minimapCam != null) {
             //minimapCam.GetComponent<Transform>().rotation = Quaternion.identity;

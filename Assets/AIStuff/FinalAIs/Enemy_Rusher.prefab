@@ -483,7 +483,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   genState: {fileID: 0}
   enemyID: -1
-  health: 15
+  health: 3
   difficultyClass: 0
   hitBy: 00000000
   payoutModifier: 1

@@ -17,12 +17,24 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !inHelpMenu) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !inHelpMenu && !LobbySceneManagement.singleton.isInShop) {
             if (isPaused) {
                 Resume();
             } else {
                 Pause();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && LobbySceneManagement.singleton.isInShop) {
+            //escape shop
+
+            Cursor.lockState = CursorLockMode.Locked;
+
+
+
+
+
+            
         }
 
         //Closes tab stats menu if needed
@@ -37,6 +49,8 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         pauseMenuUI.SetActive(true);
         HUDUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = false;
         //Time.timeScale = 0f;
     }
 
@@ -45,6 +59,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         HUDUI.SetActive(true);
         //Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = true;
     }
 
     public void LoadMenu() {
