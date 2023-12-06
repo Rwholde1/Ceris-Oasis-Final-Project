@@ -8,7 +8,7 @@ using TMPro;
 public class PlayerManager : NetworkBehaviour
 {
 
-    [SerializeField] int maxHealth = 100;
+    [SerializeField] int maxHealth = 300;
     private int currentHealth;
 
     [SerializeField] int cooldown1 = 10;

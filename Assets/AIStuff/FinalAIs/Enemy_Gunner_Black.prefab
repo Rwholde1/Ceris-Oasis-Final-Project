@@ -272,11 +272,11 @@ MonoBehaviour:
   playerTargetID: -1
   ADT: 10
   doSearch: 0
-  damage: 15
+  damage: 5
   animator: {fileID: 0}
   health: 0
   doAttack: 0
-  timeBetweenAttacks: 3.5
+  timeBetweenAttacks: 5
   timeBetweenSearch: 2.5
 --- !u!114 &5557706326441500715
 MonoBehaviour:
@@ -413,6 +413,7 @@ MonoBehaviour:
   health: 150
   difficultyClass: 2
   hitBy: 00000000
+  payoutModifier: 1
   payout: 0
 --- !u!114 &-1943212424452713532
 MonoBehaviour:

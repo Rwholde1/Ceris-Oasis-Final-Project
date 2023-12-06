@@ -63,7 +63,16 @@ MonoBehaviour:
   isServer: 0
   timeToStart: 5
   started: 0
-  waveNum: 0
+  waveCount: 0
+  waveIndex: 0
+  spawnCountModifier: 1
+  payoutModifier: 0
+  waveDuration: 60
+  timeRemaining: 0
+  isCountingDown: 0
+  startedWaveStuff: 0
+  spawnPerTick: 0
+  enemsInWaveSpawned: 0
 --- !u!114 &-2064937063342992623
 MonoBehaviour:
   m_ObjectHideFlags: 0

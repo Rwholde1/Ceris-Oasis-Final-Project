@@ -420,7 +420,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void spawnEnemyServerRpc(int DC, int indexInDC, int spawnerIndex) {
+    public void spawnEnemyServerRpc(int DC, int indexInDC, int spawnerIndex, float payoutMod) {
         if (IsClient) {
             spawnEnemyClientRpc(DC,indexInDC, spawnerIndex);
             Debug.Log("entering spawner rpc");
@@ -431,6 +431,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             newEnem.GetComponent<NetworkObject>().Spawn();
             //zone.GetComponent<Rigidbody>().AddForce(throwDir);
             newEnem.GetComponent<EnemyHitRegister>().enemyID = EnemyWaveSpawnerTake2.singleton.spawnedEnemies.Count;
+            newEnem.GetComponent<EnemyHitRegister>().payoutModifier = payoutMod;
             EnemyWaveSpawnerTake2.singleton.spawnedEnemies.Add(newEnem);
         }
     }
@@ -442,6 +443,38 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             Debug.Log("client spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
         }
 
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void setupWaveServerRpc(int secsIn, int waveCount, bool isBreak) {
+        if (IsServer) {
+            Debug.Log("setting wave " + waveCount + " on server");
+            setupWaveClientRpc(secsIn, waveCount, isBreak);
+        }
+    }
+
+    [ClientRpc]
+    public void setupWaveClientRpc(int secsIn, int waveCount, bool isBreak) {
+        if (IsClient) {
+            Debug.Log("setting wave " + waveCount + " on client");
+            LobbySceneManagement.singleton.playerCamObject.GetComponentInChildren<WaveCounterHUD>().newWave(secsIn, waveCount, isBreak);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void decrementSecondServerRpc() {
+        if (IsServer) {
+            Debug.Log("second passed on server");
+            decrementSecondClientRpc();
+        }
+    }
+
+    [ClientRpc]
+    public void decrementSecondClientRpc() {
+        if (IsClient) {
+            Debug.Log("second passed on client");
+            LobbySceneManagement.singleton.playerCamObject.GetComponentInChildren<WaveCounterHUD>().decrementSecond();
+        }
     }
 
 }  

@@ -16,6 +16,7 @@ public class EnemyHitRegister : NetworkBehaviour
     //0 is basic, 1 is easy, 2 is moderate, 3 is advanced
 
     [SerializeField] private bool[] hitBy = { false, false, false, false };
+    public float payoutModifier = 1f;
     [SerializeField] private int payout;
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,7 @@ public class EnemyHitRegister : NetworkBehaviour
     private int calculatePayouts(int low, int high, int odds) {
         float dropOdds = (float) odds * 0.01f;
         int payNum = (int) Mathf.Ceil(Random.Range((float) low - 1f, (float) high));
+        payNum = (int) ((float) payNum * payoutModifier);
         float theseOdds = Random.Range(0f, 1f);
         Debug.Log(dropOdds + " " + payNum + " " + theseOdds); 
         if (theseOdds <= odds) {

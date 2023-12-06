@@ -326,7 +326,7 @@ MonoBehaviour:
   playerTargetID: -1
   ADT: 2
   doSearch: 0
-  damage: 10
+  damage: 7
   doAttack: 0
   timeBetweenAttacks: 1.5
 --- !u!114 &221579668494972696
@@ -486,6 +486,7 @@ MonoBehaviour:
   health: 15
   difficultyClass: 0
   hitBy: 00000000
+  payoutModifier: 1
   payout: 0
 --- !u!114 &-886395428390157905
 MonoBehaviour:

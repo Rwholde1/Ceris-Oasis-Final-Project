@@ -444,7 +444,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   health: 0
   doAttack: 0
-  timeBetweenAttacks: 3.5
+  timeBetweenAttacks: 5
   timeBetweenSearch: 2.5
 --- !u!114 &999031550615603196
 MonoBehaviour:
@@ -581,6 +581,7 @@ MonoBehaviour:
   health: 20
   difficultyClass: 0
   hitBy: 00000000
+  payoutModifier: 1
   payout: 0
 --- !u!114 &-5345512513690110848
 MonoBehaviour:
