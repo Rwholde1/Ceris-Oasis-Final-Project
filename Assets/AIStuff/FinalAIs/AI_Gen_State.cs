@@ -68,24 +68,25 @@ public class AI_Gen_State : MonoBehaviour
     
     // Update is called once per frame
     void Update()
-    {
-        CheckIfPlayerDiedUpdate(playerObject);
-        agent.destination = targetPos;
-        switch (state)
-        {
-            case AI_STATE.CHASE:
+    {   
+        if (LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
+            CheckIfPlayerDiedUpdate(playerObject);
+            agent.destination = targetPos;
+            switch (state)
+            {
+                case AI_STATE.CHASE:
                 {
                     Debug.Log("Chasing to RANDOM target");
 
                     if (CastToPlayer(50f))
                     { 
-                    ChangeTarget(targetObject);
-                    state = AI_STATE.ACTIVECHASE;
-                    isAnimating = false;
+                        ChangeTarget(targetObject);
+                        state = AI_STATE.ACTIVECHASE;
+                        isAnimating = false;
                     }
-                break; 
+                    break; 
                 }
-            case AI_STATE.ACTIVECHASE:
+                case AI_STATE.ACTIVECHASE:
                 {
                     ChangeTarget(targetObject);
                     Debug.Log("ACTIVELY Chasing");
@@ -101,26 +102,28 @@ public class AI_Gen_State : MonoBehaviour
                     }
                     break;
                 }
-            case AI_STATE.FLEE:
-        
-                Debug.Log("Fleeing");
-                Vector3 diff = new Vector3();
-                diff = enemyT.position- targetPos;
-                diff.Normalize();
-                diff *= 15;
+                case AI_STATE.FLEE:
+                {
+                    Debug.Log("Fleeing");
+                    Vector3 diff = new Vector3();
+                    diff = enemyT.position- targetPos;
+                    diff.Normalize();
+                    diff *= 15;
 
-                targetPos = targetPos+ diff;
-                StartCoroutine(FleeTimer());
-                state = AI_STATE.ACTIVECHASE;
-                break;
+                    targetPos = targetPos+ diff;
+                    StartCoroutine(FleeTimer());
+                    state = AI_STATE.ACTIVECHASE;
+                    break;
+                }
         
             case AI_STATE.WAIT:
-        
-                Debug.Log("Waiting");
-                ChangeSpeed(0);
-                targetPos = enemyT.position;
+                {
+                    Debug.Log("Waiting");
+                    ChangeSpeed(0);
+                    targetPos = enemyT.position;
 
-                break;
+                    break;
+                }
         
             case AI_STATE.ATTACK:
                 
@@ -151,6 +154,8 @@ public class AI_Gen_State : MonoBehaviour
                 Debug.Log("NOTHING)");
                 break;
         }  
+        }
+        
     }
 
 
@@ -225,7 +230,7 @@ public class AI_Gen_State : MonoBehaviour
     //Change parameter to handle player death
     public void CheckIfPlayerDiedUpdate(GameObject obj)
     {
-        if (!obj)
+        if (obj.GetComponent<RegisterPlayer>().isDead)
         {
             isAnimating = false;
             playerObject = getRandomFromAllPlayer();

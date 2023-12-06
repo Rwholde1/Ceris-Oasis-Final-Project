@@ -38,6 +38,8 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     private GameObject holder;
 
+    public bool isDead;
+
     /*
     *
     * INHERENT & EVENT FUNCTIONS
@@ -490,6 +492,9 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         Debug.Log("killing player");
         LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = false;
         LobbySceneManagement.singleton.dead = true;
+        LobbySceneManagement.singleton.getLocalPlayer().isDead = true;
+        PlayerManager mng = LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>();
+        mng.alive = false;
         foreach (Animator anim in animatorsList) {
             if (anim.gameObject.active == true) {
                 Debug.Log("Making mesh die");
@@ -513,6 +518,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         LobbySceneManagement.singleton.dead = false;
         PlayerManager mng = LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>();
         mng.alive = true;
+        LobbySceneManagement.singleton.getLocalPlayer().isDead = false;
         mng.receiveHealth(mng.maxHealth, LobbySceneManagement.singleton.getLocalPlayer().identity);
         holder.SetActive(true);
         foreach (Animator anim in animatorsList) {
