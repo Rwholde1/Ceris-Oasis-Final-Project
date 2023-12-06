@@ -16,7 +16,7 @@ public class HealSphere : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, 7f);
-        // Debug.Log("Sphere exists");
+        Debug.Log("Sphere exists");
 
         timer = 1f / applicationsPerSecond;
     }

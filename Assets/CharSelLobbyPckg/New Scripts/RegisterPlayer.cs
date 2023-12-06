@@ -37,7 +37,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     public Animator[] animatorsList = new Animator[4];
 
     private GameObject holder;
-
+    private GameObject gunStuff;
     public bool isDead;
 
     /*
@@ -505,7 +505,11 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         if (holder == null) {
             holder = LobbySceneManagement.singleton.playerCamObject.transform.Find("Holder").gameObject;
         }
+        if (gunStuff == null) {
+            gunStuff = LobbySceneManagement.singleton.playerCamObject.transform.Find("GunManager").gameObject;
+        }
         holder.SetActive(false);
+        gunStuff.SetActive(false);
         /*
         foreach (GameObject child in children) {
             child.SetActive(false);
@@ -521,6 +525,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         LobbySceneManagement.singleton.getLocalPlayer().isDead = false;
         mng.receiveHealth(mng.maxHealth, LobbySceneManagement.singleton.getLocalPlayer().identity);
         holder.SetActive(true);
+        gunStuff.SetActive(true);
         foreach (Animator anim in animatorsList) {
             if (anim.gameObject.active == true) {
                 Debug.Log("Making mesh live");

@@ -75,6 +75,7 @@ public class HealingZoneCaster : NetworkBehaviour
         zone.GetComponent<NetworkObject>().Spawn();
         //zone.GetComponent<Rigidbody>().AddForce(throwDir);
         zone.GetComponent<HealingZone>().pID = playerID;
+        Debug.Log("Zone pid is " + zone.GetComponent<HealingZone>().pID);
     }
 
     /*

@@ -209,6 +209,7 @@ public class PlayerManager : NetworkBehaviour
             //if (gameObject == LobbySceneManagement.singleton.players[playerID].GetComponent<PlayerManager>()) {
 
             //FIX CONDITION?
+            Debug.Log("damage id in is " + playerID);
             Debug.Log("checking damage identity " + LobbySceneManagement.singleton.players[playerID].transform + " against " + GetComponent<FirstPersonLook>().character);
             if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
                 Debug.Log("I'm the player victim! " + this + " " + damageIn);

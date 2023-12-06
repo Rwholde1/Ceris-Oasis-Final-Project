@@ -87,12 +87,13 @@ public class ShopKeep : MonoBehaviour
 
     public void NewGun(int gunwanted)
     {
-        Debug.Log("player tries to but new gun");
+        Debug.Log("player tries to buy new gun " + gunwanted);
        lastcheckedmoney = player.GetComponent<AddMoney>().money;
        Debug.Log("With money " + lastcheckedmoney);
         if (costofeachgun[gunwanted] <= lastcheckedmoney)
                 {
                     Debug.Log("player bought gun");
+                    Debug.Log(player.GetComponentInChildren<FixedGunManager>());
             player.GetComponentInChildren<FixedGunManager>().AddNewGun(gunwanted);
             player.GetComponent<AddMoney>().money -= costofeachgun[gunwanted];
         }
