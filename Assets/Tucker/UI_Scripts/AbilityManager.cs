@@ -10,6 +10,9 @@ public class AbilityManager : MonoBehaviour
     public Slider slider1;
     public Slider slider2;
 
+    public Image icon1;
+    public Image icon2;
+
     private float cooldownMax1;
     private float cooldownMax2;
 
@@ -18,6 +21,8 @@ public class AbilityManager : MonoBehaviour
 
     private bool lockedout1 = false;
     private bool lockedout2 = false;
+
+    public int abilIndex = -1;
     
     public TextMeshProUGUI counter1;
     public TextMeshProUGUI counter2;
@@ -26,6 +31,10 @@ public class AbilityManager : MonoBehaviour
     public AkaneExample boomerAbility1;
     public HealingZoneCaster alienAbility1;
     public Jetpack commandoAbility1;
+
+    public Sprite[] abilityIcons = new Sprite[4];
+
+    public Sprite thisIcon;
 
     void Start() {
         //May need to be moved to update or something
@@ -37,6 +46,8 @@ public class AbilityManager : MonoBehaviour
             //cooldownMax1 = 20f;
             setCooldown1(99);
         }
+
+        counter1.text = "";
     }
 
     //Sets ability 1's cooldown slider max
@@ -56,6 +67,11 @@ public class AbilityManager : MonoBehaviour
     }
 
     void Update() {
+
+        if (thisIcon == null) {
+            icon1.enabled = false;
+            checkCooldowns();
+        }
         //Jetpack
         if (commandoAbility1.enabled) {
             Debug.Log("has jets");
@@ -63,7 +79,7 @@ public class AbilityManager : MonoBehaviour
             int fuel = (int) Mathf.Floor(rawFuel);
             if (fuel > 99) { fuel = 99; }
             cooldown1 = fuel;
-            counter1.text = "" + cooldown1;
+            //counter1.text = "" + cooldown1;
             slider1.value = cooldown1;
         }
 
@@ -94,9 +110,12 @@ public class AbilityManager : MonoBehaviour
                 counter1.text = "";
             //Coolding down
             } else {
-                cooldown1 -= Time.deltaTime;
-                counter1.text = "" + Mathf.Ceil(cooldown1);
-                slider1.value = cooldownMax1 - cooldown1;
+                if (!commandoAbility1.enabled) {
+                    cooldown1 -= Time.deltaTime;
+                    counter1.text = "" + Mathf.Ceil(cooldown1);
+                    slider1.value = cooldownMax1 - cooldown1;
+                }
+
             }
         }
 
@@ -122,7 +141,13 @@ public class AbilityManager : MonoBehaviour
                 slider2.value = cooldownMax2 - cooldown2;
             }
         }
-    
+
+        if (counter1.text == "") {
+            icon1.enabled = true;
+            icon1.sprite = thisIcon;
+        } else {
+            //icon1.enabled = false;
+        }
         
     }
 
@@ -131,15 +156,22 @@ public class AbilityManager : MonoBehaviour
         if (boomerAbility1.enabled) {
             //cooldownMax1 = 10f;
             setCooldown1(10);
+            abilIndex = 2;
         }
         if (pirateAbility1.enabled) {
             //cooldownMax1 = 15f;
             setCooldown1(15);
+            abilIndex = 3;
         }
         if (alienAbility1.enabled) {
             //cooldownMax1 = 20f;
             setCooldown1(20);
+            abilIndex = 0;
         }
+        if (commandoAbility1.enabled) {
+            abilIndex = 1;
+        }
+        thisIcon = abilityIcons[abilIndex];
     }
 }
 

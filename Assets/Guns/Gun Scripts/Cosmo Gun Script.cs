@@ -40,6 +40,8 @@ public class CosmoGunScript : MonoBehaviour
             gun1 = Instantiate(guns[gunID1], CheckTags(gunID1));
             //
             gun1.SetActive(false);
+            gun1IMG.sprite = GunPNG[gunID1];
+            gun2IMG.sprite = GunPNG[gunID2];
             //
             AnimChecker(gun1);
             gun1IMG.sprite = GunPNG[gunID1];
@@ -48,6 +50,8 @@ public class CosmoGunScript : MonoBehaviour
         {
             gun2 = Instantiate(guns[gunID2], CheckTags(gunID2));
             gun2.SetActive(false);
+            gun1IMG.sprite = GunPNG[gunID1];
+            gun2IMG.sprite = GunPNG[gunID2];
             AnimChecker(gun2);
             gun2IMG.sprite = GunPNG[gunID2];
         }
@@ -55,6 +59,8 @@ public class CosmoGunScript : MonoBehaviour
         {
             gun1Color.a = 1f;
             gun2Color.a = 0.3f;
+            gun1IMG.sprite = GunPNG[gunID1];
+            gun2IMG.sprite = GunPNG[gunID2];
             gun1.SetActive(true);
             gun2.SetActive(false);
             print("GUN SWITCHED TO GUN 1");
@@ -66,6 +72,8 @@ public class CosmoGunScript : MonoBehaviour
         {
             gun2Color.a = 1f;
             gun1Color.a = 0.3f;
+            gun1IMG.sprite = GunPNG[gunID1];
+            gun2IMG.sprite = GunPNG[gunID2];
             gun2.SetActive(true);
             gun1.SetActive(false);
             print("GUN SWITCHED TO GUN 2");
