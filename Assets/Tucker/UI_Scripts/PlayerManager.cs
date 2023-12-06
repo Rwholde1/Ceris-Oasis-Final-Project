@@ -8,13 +8,13 @@ using TMPro;
 public class PlayerManager : NetworkBehaviour
 {
 
-    [SerializeField] int maxHealth = 1200;
-    private int currentHealth;
+    [SerializeField] public int maxHealth = 1200;
+    public int currentHealth;
 
     [SerializeField] int cooldown1 = 10;
     [SerializeField] int cooldown2 = 10;
 
-    private bool alive = true;
+    public bool alive = true;
     [SerializeField] object primaryWeapon;
     [SerializeField] object secondaryWeapon;
     public HealthBar healthBar;
@@ -46,8 +46,9 @@ public class PlayerManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0 && alive == true) {
             alive = false;
+            LobbySceneManagement.singleton.getLocalPlayer().playerDies();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             stats.addDeath(1);
             currentHealth = maxHealth;

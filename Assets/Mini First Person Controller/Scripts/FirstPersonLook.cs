@@ -103,6 +103,9 @@ public class FirstPersonLook : MonoBehaviour
         //if (character.GetC)
         // Get smooth velocity.
         bool canLook = LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled;
+        if (LobbySceneManagement.singleton.dead) {
+            canLook = true;
+        }
         if (canLook) {
             Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);

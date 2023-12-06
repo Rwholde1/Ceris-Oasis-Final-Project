@@ -73,6 +73,8 @@ public class LobbySceneManagement : NetworkBehaviour
 
     public bool isInShop = false;
 
+    public bool dead;
+
     
 
     void Awake() {

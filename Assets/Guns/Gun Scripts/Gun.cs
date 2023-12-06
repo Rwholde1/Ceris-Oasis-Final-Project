@@ -79,6 +79,7 @@ public class Gun : MonoBehaviour
     {
 
         if (LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled == false) { allowshooting = false; }
+        if (LobbySceneManagement.singleton.dead) { allowshooting = false; }
         //Async start astuff
         if (playerCamera == null) {
             //playerCamera = LobbySceneManagement.singleton.playerCamObject.GetComponent<Camera>();

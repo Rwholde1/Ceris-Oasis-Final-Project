@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ShopKeep : MonoBehaviour
 {
+
+    /// <summary>
+    /// NOTE! Currently the buttons do nothing, You cannot Exit with F, The hud does not disable, and the pause menu still appears
+    /// </summary>
     private bool isShopOpen = false;
     private GameObject player;
     public GameObject shop;
@@ -13,7 +17,7 @@ public class ShopKeep : MonoBehaviour
     public int[] costofeachgun;
     private void Start()
     {
-        cg = GUI.GetComponent<CanvasGroup>();
+        //cg = GUI.GetComponent<CanvasGroup>();
         
     }
     public void ToggleShop()
@@ -40,7 +44,7 @@ public class ShopKeep : MonoBehaviour
 
 
         }
-        if (cg == null) { print("ERROR NULL"); }
+        //if (cg == null) { print("ERROR NULL"); }
 
     }
 
@@ -49,7 +53,11 @@ public class ShopKeep : MonoBehaviour
         // Activate your shop UI panel here
         Cursor.lockState = CursorLockMode.None;
         shop.SetActive(true);
-        cg.alpha = 0;
+        CanvasGroup[] cg = GUI.GetComponentsInChildren<CanvasGroup>();
+        foreach(CanvasGroup canvas in cg) {
+            canvas.alpha = 0f;
+        }
+        //GUI.SetActive(false)
         Debug.Log("Shop opened");
         player.GetComponent<FirstPersonMovement>().SetMovementEnabled(false);
     }
@@ -59,20 +67,27 @@ public class ShopKeep : MonoBehaviour
         // Deactivate your shop UI panel here
         Cursor.lockState = CursorLockMode.Locked;
         shop.SetActive(false);
-        cg.alpha = 1.0f;
+        CanvasGroup[] cg = GUI.GetComponentsInChildren<CanvasGroup>();
+        foreach(CanvasGroup canvas in cg) {
+            canvas.alpha = 1.0f;
+        }
         Debug.Log("Shop closed");
         player.GetComponent<FirstPersonMovement>().SetMovementEnabled(true);
     }
     public void getInteractionPoint(GameObject inputplayer)
     {
-        player = inputplayer;
+        //player = inputplayer;
+        player = LobbySceneManagement.singleton.getLocalPlayer().gameObject;
     }
 
     public void NewGun(int gunwanted)
     {
+        Debug.Log("player tries to but new gun");
        lastcheckedmoney = player.GetComponent<AddMoney>().money;
+       Debug.Log("With money " + lastcheckedmoney);
         if (costofeachgun[gunwanted] <= lastcheckedmoney)
                 {
+                    Debug.Log("player bought gun");
             player.GetComponentInChildren<FixedGunManager>().AddNewGun(gunwanted);
             player.GetComponent<AddMoney>().money -= costofeachgun[gunwanted];
         }
@@ -87,4 +102,22 @@ public class ShopKeep : MonoBehaviour
             player.GetComponent<AddMoney>().money -= costofeachgun[7];
         }
     }
+
+    public void MoreAmmo()
+    {
+        FixedGunManager[] deez = player.GetComponentsInChildren<FixedGunManager>();
+        foreach(FixedGunManager nutz in deez)
+        {
+            if(nutz.gameObject.GetComponentInChildren<Gun>() != null)
+            {
+                if (nutz.gameObject.GetComponentInChildren<Gun>().gameObject.activeInHierarchy)
+                {
+                    nutz.gameObject.GetComponentInChildren<Gun>().maxAmmo += 25;
+                }
+            }
+
+        }
+    }
 }
+
+

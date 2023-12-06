@@ -26,7 +26,7 @@ public class Jetpack : NetworkBehaviour
     void Update()
     {
         // Check for input to trigger the jetpack
-        if (Input.GetKeyDown(jetpackKey) && currentFuel > 0)
+        if (Input.GetKeyDown(jetpackKey) && currentFuel > 0 && LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled == true)
         {
             isUsingJetpack = true;
         }

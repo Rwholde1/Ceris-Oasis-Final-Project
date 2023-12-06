@@ -27,7 +27,7 @@ public class Jump : MonoBehaviour
     void LateUpdate()
     {
         // Jump when the Jump button is pressed and we are on the ground.
-        if (Input.GetButtonDown("Jump") && (!groundCheck || groundCheck.isGrounded))
+        if (Input.GetButtonDown("Jump") && (!groundCheck || groundCheck.isGrounded) && LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled == true)
         {
             rigidbody.AddForce(Vector3.up * 100 * jumpStrength);
             Jumped?.Invoke();

@@ -91,6 +91,7 @@ public class FixedGunManager : MonoBehaviour
 
     public void AddNewGun(int newgun)
     {
+        Debug.Log("new gun timeeee");
         if(gunactive == 1)
         {
             Destroy(gun1);

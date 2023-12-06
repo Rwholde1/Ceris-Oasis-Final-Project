@@ -10,17 +10,10 @@ public class enemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyObjects;
     [SerializeField] private bool hasSpawned = false;
     [SerializeField] private int spawnMode;
+    private Transform transform;
 
     [SerializeField] private float respawnTime;
-    [SerializeField] private Transform transform;
-
-
-    public bool instantSpawn = false;
     // Start is called before the first frame update
-    private void Awake()
-    {
-        respawnTime = 20f;
-    }
     void Start()
     {
         transform = GetComponent<Transform>();
@@ -28,10 +21,6 @@ public class enemySpawner : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(instantSpawn)
-        {
-            InstantSpawn();
-        }
         SpawnEnemies();
     }
     public void SpawnEnemies()
@@ -46,70 +35,27 @@ public class enemySpawner : MonoBehaviour
                 float newX = Random.Range(-radius, radius);
                 //float newY = Random.Range(-radius, radius);
                 float newZ = Random.Range(-radius, radius);
-
-                switch (spawnMode)
+                if(spawnMode == 1) //spawns FIRST enemy in the enemyObjects list
                 {
-                    case (1):
-                        {
-                            Instantiate(enemyObjects[0], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                            break;
-                        }
-                    case (2):
-                        {
-                            Instantiate(enemyObjects[1], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                            break;
-                        }
-                    case (3):
-                        {
-                            Instantiate(enemyObjects[2], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                            break;
-                        }
-                    case (4):
-                        {
-                            int theSelection = Random.Range(0, 3);
-                            Instantiate(enemyObjects[theSelection], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                            break;
-                        }
-                    default:
-                        {
-                            break;
-                        }
+                    Instantiate(enemyObjects[0], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
+                }
+                if (spawnMode == 2) //spawns SECOND enemy in the enemyObjects list
+                {
+                    Instantiate(enemyObjects[1], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
+                }
+                if (spawnMode == 3) //spawns THIRD enemy in the enemyObjects list
+                {
+                    Instantiate(enemyObjects[2], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
+                }
+                if (spawnMode == 4) //randomly spawns from all enemy types
+                {
+                    int theSelection = Random.Range(0, 3);
+                    Instantiate(enemyObjects[theSelection], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
                 }
                 
             }
             hasSpawned = true;
             StartCoroutine(RefreshSpawn());
-        }
-    }
-    void InstantSpawn()
-    {
-        instantSpawn = false;
-        float newX = Random.Range(-radius, radius);
-        //float newY = Random.Range(-radius, radius);
-        float newZ = Random.Range(-radius, radius);
-        switch (spawnMode)
-        {
-            case (1):
-                {
-                    Instantiate(enemyObjects[0], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                    break;
-                }
-            case (2):
-                {
-                    Instantiate(enemyObjects[1], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                    break;
-                }
-            case (3):
-                {
-                    Instantiate(enemyObjects[2], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                    break;
-                }
-            case (4):
-                {
-                    int theSelection = Random.Range(0, 3);
-                    Instantiate(enemyObjects[theSelection], new Vector3(transform.position.x + newX, transform.position.y, transform.position.z + newZ), Quaternion.identity);
-                    break;
-                }
         }
     }
 

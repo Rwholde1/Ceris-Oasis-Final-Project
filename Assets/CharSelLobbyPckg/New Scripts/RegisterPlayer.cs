@@ -34,6 +34,10 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     public int charIdentity = -1;
 
+    public Animator[] animatorsList = new Animator[4];
+
+    private GameObject holder;
+
     /*
     *
     * INHERENT & EVENT FUNCTIONS
@@ -457,7 +461,12 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     public void setupWaveClientRpc(int secsIn, int waveCount, bool isBreak) {
         if (IsClient) {
             Debug.Log("setting wave " + waveCount + " on client");
+            if (LobbySceneManagement.singleton.dead) {
+                Debug.Log("trying to res player");
+                revivePlayer();
+            }
             LobbySceneManagement.singleton.playerCamObject.GetComponentInChildren<WaveCounterHUD>().newWave(secsIn, waveCount, isBreak);
+            
         }
     }
 
@@ -475,6 +484,52 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             Debug.Log("second passed on client");
             LobbySceneManagement.singleton.playerCamObject.GetComponentInChildren<WaveCounterHUD>().decrementSecond();
         }
+    }
+
+    public void playerDies() {
+        Debug.Log("killing player");
+        LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = false;
+        LobbySceneManagement.singleton.dead = true;
+        foreach (Animator anim in animatorsList) {
+            if (anim.gameObject.active == true) {
+                Debug.Log("Making mesh die");
+                anim.SetBool("Death", true);
+            }
+        }
+        //GameObject[] children = LobbySceneManagement.singleton.playerCamObject.GetComponentsInChildren<GameObject>();
+        if (holder == null) {
+            holder = LobbySceneManagement.singleton.playerCamObject.transform.Find("Holder").gameObject;
+        }
+        holder.SetActive(false);
+        /*
+        foreach (GameObject child in children) {
+            child.SetActive(false);
+        }*/
+    }
+
+    public void revivePlayer() {
+        Debug.Log("resing player");
+        LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = true;
+        LobbySceneManagement.singleton.dead = false;
+        PlayerManager mng = LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>();
+        mng.alive = true;
+        mng.receiveHealth(mng.maxHealth, LobbySceneManagement.singleton.getLocalPlayer().identity);
+        holder.SetActive(true);
+        foreach (Animator anim in animatorsList) {
+            if (anim.gameObject.active == true) {
+                Debug.Log("Making mesh live");
+                anim.SetBool("Death", false);
+            }
+        }
+        /*
+        GameObject[] children = LobbySceneManagement.singleton.playerCamObject.GetComponentsInChildren<GameObject>();
+        foreach (GameObject child in children) {
+            child.SetActive(true);
+        }*/
+
+        
+
+        gameObject.transform.position = LobbySceneManagement.singleton.playerSpawnZone.position;
     }
 
 }  

@@ -2044,6 +2044,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identity: -1
   charIdentity: -1
+  animatorsList:
+  - {fileID: 7414533552499363353}
+  - {fileID: 6422386132961933204}
+  - {fileID: 441707334195016235}
+  - {fileID: 250443241347548069}
 --- !u!114 &7146304993476054103
 MonoBehaviour:
   m_ObjectHideFlags: 0
