@@ -25,12 +25,18 @@ public class AbilityManager : MonoBehaviour
     public MolotovThrower pirateAbility1;
     public AkaneExample boomerAbility1;
     public HealingZoneCaster alienAbility1;
+    public Jetpack commandoAbility1;
 
     void Start() {
         //May need to be moved to update or something
         //Fetches boomerang thrower
         boomerAbility1 = LobbySceneManagement.singleton.getLocalPlayer().GetComponentInChildren<AkaneExample>();
-        
+        commandoAbility1 = LobbySceneManagement.singleton.getLocalPlayer().GetComponentInChildren<Jetpack>();
+        checkCooldowns();
+        if (commandoAbility1.enabled) {
+            //cooldownMax1 = 20f;
+            setCooldown1(99);
+        }
     }
 
     //Sets ability 1's cooldown slider max
@@ -50,8 +56,19 @@ public class AbilityManager : MonoBehaviour
     }
 
     void Update() {
+        //Jetpack
+        if (commandoAbility1.enabled) {
+            Debug.Log("has jets");
+            float rawFuel = commandoAbility1.currentFuel;
+            int fuel = (int) Mathf.Floor(rawFuel);
+            if (fuel > 99) { fuel = 99; }
+            cooldown1 = fuel;
+            counter1.text = "" + cooldown1;
+            slider1.value = cooldown1;
+        }
+
         //Ability 1 Available
-        if (!lockedout1) {
+        if (!lockedout1 && !commandoAbility1.enabled) {
             counter1.text = "";
             //Ability 1 Trigger
             if(Input.GetKeyDown(KeyCode.Q)) {

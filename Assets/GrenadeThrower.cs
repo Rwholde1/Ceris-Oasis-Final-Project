@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using TMPro;
 
 public class GrenadeThrower : NetworkBehaviour
 {
     public float throwForce = 60f;
     public NetworkObject grenadePrefab;
     public int totalgrenades = 2;
+    public TMP_Text nadeText;
     // Update is called once per frame
     void Update()
     {
@@ -15,6 +17,8 @@ public class GrenadeThrower : NetworkBehaviour
         {
             ThrowGrenade();
         }
+        nadeText.text = "" + totalgrenades;
+
     }
 
     void ThrowGrenade()

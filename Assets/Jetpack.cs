@@ -8,7 +8,7 @@ public class Jetpack : NetworkBehaviour
     public float fuelConsumptionRate = 5f;  // Rate at which fuel is consumed
     private KeyCode jetpackKey = KeyCode.Space; // Key to trigger the jetpack
     public GameObject jets;
-    private float currentFuel;              // Current fuel level
+    public float currentFuel;              // Current fuel level
     private bool isUsingJetpack;            // Flag to check if the jetpack is being used
     public float timetowait;
     public float refillrate;

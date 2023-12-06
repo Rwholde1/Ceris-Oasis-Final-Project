@@ -92,16 +92,24 @@ public class FixedGunManager : MonoBehaviour
     public void AddNewGun(int newgun)
     {
         Debug.Log("new gun timeeee");
-        if(gunactive == 1)
-        {
+        //Ensures empty slot is filled before overwriting existing gun
+        if (gunID1 == 0) {
             Destroy(gun1);
             gunID1 = newgun;
-        }
-        else if (gunactive == 2)
-        {
+        } else if (gunID2 == 0) {
             Destroy(gun2);
             gunID2 = newgun;
+        } else {
+            //Overwrites existing gun
+            if(gunactive == 1) {
+                Destroy(gun1);
+                gunID1 = newgun;
+            } else if (gunactive == 2) {
+                Destroy(gun2);
+                gunID2 = newgun;
+            }
         }
+        
     }
 
 }

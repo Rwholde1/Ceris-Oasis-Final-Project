@@ -15,8 +15,14 @@ public class PlayerInteractionScript : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.forward, out hit, 2f))
             {
                 print("hit smth");
+                Debug.Log(hit);
                 // Check if the hit object has an Interactable script
+                Debug.Log(hit.collider);
                 ShopKeep shop = hit.collider.GetComponent<ShopKeep>();
+                if (shop == null) {
+                    shop = hit.collider.GetComponentInChildren<ShopKeep>();
+                    Debug.Log("found shopkeep on child");
+                }
                 if (shop != null)
                 {
                     print("is Shop");

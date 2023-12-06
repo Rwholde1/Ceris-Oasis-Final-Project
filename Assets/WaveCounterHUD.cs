@@ -26,12 +26,12 @@ public class WaveCounterHUD : MonoBehaviour
         if (waveCount == 0) {
             EnemyWaveSpawnerTake2.singleton.waveCount++;
             waveHeader.SetText("Game starts in:");
-            waveCounter.SetText("Preparation");
+            waveCounter.SetText("Prep");
             timeOnClock = secsIn;
             waveTimer.SetText(formatTime(timeOnClock));
         } else if (isBreak) {
             waveHeader.SetText("Break ends in:");
-            waveCounter.SetText("Preparation");
+            waveCounter.SetText("Prep");
             timeOnClock = secsIn;
             waveTimer.SetText(formatTime(timeOnClock));
         } else if (waveCount != 26) {

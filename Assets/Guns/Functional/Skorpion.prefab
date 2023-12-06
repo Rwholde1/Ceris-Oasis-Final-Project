@@ -42,7 +42,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 1f807c3f90cf95e49aed5e415dec9498, type: 3}
       propertyPath: m_Name
-      value: SM_SciFiSkorp-IO
+      value: Skorpion
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1f807c3f90cf95e49aed5e415dec9498, type: 3}
       propertyPath: m_TagString
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f807c3f90cf95e49aed5e415dec9498, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f807c3f90cf95e49aed5e415dec9498, type: 3}
       propertyPath: m_LocalPosition.y
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f807c3f90cf95e49aed5e415dec9498, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.281
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f807c3f90cf95e49aed5e415dec9498, type: 3}
       propertyPath: m_LocalRotation.w
@@ -163,7 +163,11 @@ MonoBehaviour:
   adsFOV: 40
   adsSpeed: 5
   crosshairImage: {fileID: 0}
+  allowshooting: 0
   ammocount: {fileID: 0}
+  burstamount: 0
+  timebetweenbursts: 0
+  infAmmo: 0
 --- !u!4 &672754247056946311 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 1f807c3f90cf95e49aed5e415dec9498, type: 3}

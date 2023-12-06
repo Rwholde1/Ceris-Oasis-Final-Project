@@ -39,6 +39,8 @@ public class StatsManager : MonoBehaviour
     public Sprite[] charSprites = new Sprite[4];
     public TMP_Text[] playerNames = new TMP_Text[4];
 
+    public Image localClassIcon;
+
     void Start() {
         /*
         TextMeshProUGUI[] transforms = StatsUI.GetComponentsInChildren<TextMeshProUGUI>();
@@ -60,7 +62,7 @@ public class StatsManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !pauseMenuUI.active) {
+        if (Input.GetKeyDown(KeyCode.Tab) && !pauseMenuUI.active && LobbySceneManagement.singleton.getLocalPlayer().gameObject.GetComponentInChildren<FirstPersonMovement>().isMovementEnabled) {
             open();
         } 
         if (Input.GetKeyUp(KeyCode.Tab) && !pauseMenuUI.active) {
@@ -129,5 +131,8 @@ public class StatsManager : MonoBehaviour
     public void setSprite(int charId, int playerId) {
         Debug.Log("setting icon");
         playerIcons[playerId].sprite = charSprites[charId];
+        if (playerId == LobbySceneManagement.singleton.getLocalPlayer().identity - 1) {
+            localClassIcon.sprite = charSprites[charId];
+        }
     }
 }

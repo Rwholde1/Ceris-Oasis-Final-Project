@@ -53,11 +53,13 @@ public class ShopKeep : MonoBehaviour
         // Activate your shop UI panel here
         Cursor.lockState = CursorLockMode.None;
         shop.SetActive(true);
+
+        /*
         CanvasGroup[] cg = GUI.GetComponentsInChildren<CanvasGroup>();
         foreach(CanvasGroup canvas in cg) {
             canvas.alpha = 0f;
-        }
-        //GUI.SetActive(false)
+        }*/
+        GUI.SetActive(false);
         Debug.Log("Shop opened");
         player.GetComponent<FirstPersonMovement>().SetMovementEnabled(false);
     }
@@ -67,17 +69,20 @@ public class ShopKeep : MonoBehaviour
         // Deactivate your shop UI panel here
         Cursor.lockState = CursorLockMode.Locked;
         shop.SetActive(false);
+        /*
         CanvasGroup[] cg = GUI.GetComponentsInChildren<CanvasGroup>();
         foreach(CanvasGroup canvas in cg) {
             canvas.alpha = 1.0f;
-        }
+        }*/
+        GUI.SetActive(true);
         Debug.Log("Shop closed");
         player.GetComponent<FirstPersonMovement>().SetMovementEnabled(true);
     }
     public void getInteractionPoint(GameObject inputplayer)
     {
         //player = inputplayer;
-        player = LobbySceneManagement.singleton.getLocalPlayer().gameObject;
+        //player = LobbySceneManagement.singleton.getLocalPlayer().gameObject;
+        player = LobbySceneManagement.singleton.playerCamObject.gameObject;
     }
 
     public void NewGun(int gunwanted)
