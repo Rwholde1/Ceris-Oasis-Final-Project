@@ -30,6 +30,16 @@ public class CosmoGunScript : MonoBehaviour
         CopyOtherScript();
         gun1Color.a = 1;
         gun2Color.a = 0.3f;
+        
+        //AnimChecker(gun1);
+    }
+
+    void toggleGunActive() {
+        if (gunactive == 1) {
+            gunactive = 2;
+        } else {
+            gunactive = 1;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -38,6 +48,11 @@ public class CosmoGunScript : MonoBehaviour
         {
             animator = LobbySceneManagement.singleton.getLocalPlayer().gameObject.GetComponent<FirstPersonMovement>().animator;
             getTransforms();
+            if (animator != null) {
+                Invoke("toggleGunActive", 0.03f);
+                Invoke("toggleGunActive", 0.05f);
+                AnimChecker(gun1);
+            }
         }
         CopyOtherScript();
         if (gun1 == null)
