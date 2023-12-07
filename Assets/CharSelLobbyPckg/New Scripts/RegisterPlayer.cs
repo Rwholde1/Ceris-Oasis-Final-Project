@@ -524,6 +524,9 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     public void revivePlayer() {
         Debug.Log("resing player");
+        if (holder == null) {
+            holder = LobbySceneManagement.singleton.playerCamObject.transform.Find("Holder").gameObject;
+        }
         LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = true;
         LobbySceneManagement.singleton.dead = false;
         PlayerManager mng = LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>();
@@ -539,8 +542,8 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             }
         }
         mng.canDamage = true;
-        mng.currentHealth = maxHealth;
-        mng.healthBar.setHealth(maxHealth);
+        mng.currentHealth = mng.maxHealth;
+        mng.healthBar.setHealth(mng.maxHealth);
         /*
         GameObject[] children = LobbySceneManagement.singleton.playerCamObject.GetComponentsInChildren<GameObject>();
         foreach (GameObject child in children) {
