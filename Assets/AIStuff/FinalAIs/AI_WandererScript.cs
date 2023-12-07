@@ -97,12 +97,12 @@ public class AI_WandererScript : MonoBehaviour
     void wanderAttack()
     {
         playerTargetID = genState.targetID;
-        
+
         //player = genState.targetObject.GetComponent<PlayerAttributes>();
         if (genState.CastToPlayer(ADT * 1.1f))
             {
                 
-                Debug.Log("ATTACK HIT THE PLAYER");
+                Debug.Log("ATTACK HIT THE PLAYER " + playerTargetID);
                 LobbySceneManagement.singleton.getLocalPlayer().takeDamage(damage, playerTargetID + 1);                
                 genState.doAttack = false;
                 StartCoroutine(AttackCooldown());

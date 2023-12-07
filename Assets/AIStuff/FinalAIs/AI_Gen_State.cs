@@ -176,7 +176,7 @@ public class AI_Gen_State : MonoBehaviour
         playerArray = LobbySceneManagement.singleton.players;
         playerLiveCount = playerArray.Length;
         
-        int randPick = Random.Range(0, LobbySceneManagement.singleton.statsPlayerId.Count - 1);
+        int randPick = Random.Range(0, LobbySceneManagement.singleton.statsPlayerId.Count);
         targetID = randPick;
         //Debug.Log("player hunted is " + playerArray[randPick].gameObject);
         return playerArray[randPick].gameObject;
@@ -188,7 +188,8 @@ public class AI_Gen_State : MonoBehaviour
         playerArray = players;
         playerLiveCount = playerArray.Length;
         
-        int randPick = Random.Range(0, playerLiveCount - 1);
+        //int randPick = Random.Range(0, playerLiveCount - 1);
+        int randPick = Random.Range(0, LobbySceneManagement.singleton.statsPlayerId.Count);
         targetID = randPick;
         //Debug.Log("player hunted is " + playerArray[randPick].gameObject);
         return playerArray[randPick].gameObject;

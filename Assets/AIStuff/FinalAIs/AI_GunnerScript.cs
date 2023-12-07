@@ -127,7 +127,7 @@ public class AI_GunnerScript : MonoBehaviour
                 genState.isAnimating = true;
             }
 
-            Debug.Log("ATTACK HIT THE PLAYER");
+            Debug.Log("ATTACK HIT THE PLAYER " + playerTargetID);
             LobbySceneManagement.singleton.getLocalPlayer().takeDamage(damage, playerTargetID + 1);
             StartCoroutine(AttackCooldown());
         }

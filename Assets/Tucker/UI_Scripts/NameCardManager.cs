@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-//using Unity.Netcode;
+using Unity.Netcode;
 
-public class NameCardManager : MonoBehaviour
+public class NameCardManager : NetworkBehaviour
 {
 
     [SerializeField] float scaleFactor;
@@ -68,7 +68,7 @@ public class NameCardManager : MonoBehaviour
         dist = Vector3.Distance(ping.transform.position, target.transform.position);
         //Debug.Log("distance to player: " + Mathf.Round(dist));
         TextMeshPro distanceText = ping.GetComponentInChildren<TextMeshPro>();
-        distanceText.text = LobbySceneManagement.singleton.playerNamesText[GetComponentInParent<RegisterPlayer>().identity - 1];
+        setHeaderNameServerRpc(LobbySceneManagement.singleton.playerNamesText[GetComponentInParent<RegisterPlayer>().identity - 1]);
 
         if (dist > MinDist) {
             float ratio = dist / MinDist * scaleFactor * scaleFactor;
@@ -103,6 +103,22 @@ public class NameCardManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void setHeaderNameServerRpc(string nameIn) {
+        if (LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
+            setHeaderNameClientRpc(nameIn);
+        }
+    }
+
+    [ClientRpc]
+    public void setHeaderNameClientRpc(string nameIn) {
+        card1.GetComponentInChildren<TextMeshPro>().text = nameIn;
+        card2.GetComponentInChildren<TextMeshPro>().text = nameIn;
+        card3.GetComponentInChildren<TextMeshPro>().text = nameIn;
+        card4.GetComponentInChildren<TextMeshPro>().text = nameIn;
+        
     }
 }
 
