@@ -100,7 +100,7 @@ public class Gun : MonoBehaviour
         {
             allowshooting = false;
         }
-        else if(burstshotsfired == burstamount)
+        else if(burstshotsfired == burstamount-1)
         {
             burstshotsfired = 0;
             Invoke("allowShoot", 0.1f);
