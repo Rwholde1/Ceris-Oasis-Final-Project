@@ -58,6 +58,10 @@ public class LobbySceneManagement : NetworkBehaviour
 
     public PingManager pingManage;
 
+    public GameObject nameCardPrefab;
+    public NameCardManager nameCardManage;
+
+
     public Transform playerSpawnZone;
     public float playerSpawnZoneRadius;
 
@@ -114,6 +118,7 @@ public class LobbySceneManagement : NetworkBehaviour
         Debug.Log("Layer IDs: " + layer1 + " " + layer2 + " " + layer3 + " " + layer4 + " ");
 
         pingManage = pingPrefab.GetComponent<PingManager>();
+        nameCardManage = nameCardPrefab.GetComponent<NameCardManager>();
     }
 
     // Update is called once per frame
@@ -149,6 +154,9 @@ public class LobbySceneManagement : NetworkBehaviour
 
         if(pingManage == null) {
             pingManage = pingPrefab.GetComponent<PingManager>();
+        }
+        if(nameCardManage == null) {
+            nameCardManage = nameCardPrefab.GetComponent<NameCardManager>();
         }
 
         if (playerCamObject != null) {
@@ -289,6 +297,8 @@ public class LobbySceneManagement : NetworkBehaviour
         layersList[3] = layer4;
 
         pingManage.setTarget(getLocalPlayer().identity, getLocalPlayerTransform());
+        nameCardManage.setTarget(getLocalPlayer().identity, getLocalPlayerTransform());
+
         //Debug.Log("Layer Return: " + layersList[getLocalPlayer().identity - 1]);
         return layersList[getLocalPlayer().identity - 1];
     }

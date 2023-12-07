@@ -118,8 +118,11 @@ public class ShopKeep : MonoBehaviour
             {
                 if (nutz.gameObject.GetComponentInChildren<Gun>().gameObject.activeInHierarchy)
                 {
-                    nutz.gameObject.GetComponentInChildren<Gun>().maxAmmo += 25;
-                    player.GetComponent<AddMoney>().money -= 25;
+                    if (25 <= lastcheckedmoney)
+                    {
+                        nutz.gameObject.GetComponentInChildren<Gun>().maxAmmo += 25;
+                        player.GetComponent<AddMoney>().money -= 25;
+                    }
                 }
             }
 

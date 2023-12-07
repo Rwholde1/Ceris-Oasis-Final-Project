@@ -31,6 +31,12 @@ public class MolotovSphere : MonoBehaviour
         // /Debug.Log()
         if (timer <= 0f) {
             EnemyHitRegister enem = other.transform.GetComponentInChildren<EnemyHitRegister>();
+            if (enem == null) {
+                enem = other.transform.GetComponent<EnemyHitRegister>();
+            }
+            if (enem == null) {
+                enem = other.transform.GetComponentInParent<EnemyHitRegister>();
+            }
             Debug.Log("damaging enem " + enem + " for " + damagepersecond + " per second");
             if (enem != null) {
                 StartCoroutine(doDamage(enem));

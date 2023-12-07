@@ -35,7 +35,8 @@ public class EnemyHitRegister : NetworkBehaviour
         if (health <= 0)
         {
             Debug.Log("enem deaddddddd");
-            animator.Play("Death");
+            //playDeathServerRpc();
+            //animator.Play("Death");
             //animator.Play("Death");
             genState.state = AI_Gen_State.AI_STATE.DEAD;
             StartCoroutine(ConfirmDeath());
@@ -214,6 +215,7 @@ public class EnemyHitRegister : NetworkBehaviour
                     LobbySceneManagement.singleton.playerCamObject.GetComponent<AddMoney>().pay(payout);
                     Debug.Log("Paid player " + payout + " scrap");    
                 }
+                animator.Play("Death");
         }
     }
 

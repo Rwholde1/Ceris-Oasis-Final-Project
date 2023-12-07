@@ -74,6 +74,7 @@ public class AI_LobberScript : MonoBehaviour
     {
 
         //player = genState.targetObject;
+        playerTargetID = genState.targetID;
 
 
         if (genState.CastToPlayer(ADT * 1.2f))

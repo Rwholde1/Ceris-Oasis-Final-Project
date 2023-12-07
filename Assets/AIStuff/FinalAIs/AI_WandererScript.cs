@@ -96,7 +96,8 @@ public class AI_WandererScript : MonoBehaviour
 
     void wanderAttack()
     {
-
+        playerTargetID = genState.targetID;
+        
         //player = genState.targetObject.GetComponent<PlayerAttributes>();
         if (genState.CastToPlayer(ADT * 1.1f))
             {

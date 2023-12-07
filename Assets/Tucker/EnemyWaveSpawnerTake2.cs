@@ -222,9 +222,9 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
         if (Input.GetKey(KeyCode.T)) {
             //Debug.Log("passing time");
             //Debug.Log("tick");
-            timeRemaining--;
             if(timeRemaining > 0) {
-
+            
+            timeRemaining--;
             
             LobbySceneManagement.singleton.getLocalPlayer().decrementSecondServerRpc();
             } else {

@@ -43,12 +43,15 @@ public class StatsManager : MonoBehaviour
 
     public Image localClassIcon;
 
+    //public string[] names;
+
     void Start() {
         /*
         TextMeshProUGUI[] transforms = StatsUI.GetComponentsInChildren<TextMeshProUGUI>();
         foreach(TextMeshProUGUI trans in transforms) {
             Debug.Log(trans);
         }*/
+        /*
         string[] names = LobbySceneManagement.singleton.playerNamesText;
         for (int i = 0; i < 4; i++) {
             if (i < LobbySceneManagement.singleton.getCurrentPlayerCount()) {
@@ -60,7 +63,8 @@ public class StatsManager : MonoBehaviour
             } else {
                 playerInfoGroups[i].SetActive(false);
             }
-        }
+        }*/
+        //names = LobbySceneManagement.singleton.playerNamesText;
     }
 
     // Update is called once per frame
@@ -146,6 +150,24 @@ public class StatsManager : MonoBehaviour
         playerIcons[playerId].sprite = charSprites[charId];
         if (playerId == LobbySceneManagement.singleton.getLocalPlayer().identity - 1) {
             localClassIcon.sprite = charSprites[charId];
+        }
+
+        assignNames();
+        
+    }
+
+    public void assignNames() {
+        string[] names = LobbySceneManagement.singleton.playerNamesText;
+        for (int i = 0; i < 4; i++) {
+            if (i < LobbySceneManagement.singleton.statsPlayerId.Count) {
+                Debug.Log("player " + (i + 1) + " is named " + names[i]);
+                playerNames[i].text = names[i];
+                if (names[i] == "") {
+                    playerNames[i].text = "Player " + (i + 1);
+                }
+            } else {
+                playerInfoGroups[i].SetActive(false);
+            }
         }
     }
 }

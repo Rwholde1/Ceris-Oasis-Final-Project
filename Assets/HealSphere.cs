@@ -49,7 +49,7 @@ public class HealSphere : MonoBehaviour
 
     private IEnumerator doHeals(PlayerManager play)
     {   
-        Debug.Log("Do heals to player");
+        Debug.Log("Do heals to player " + LobbySceneManagement.singleton.getLocalPlayer().identity);
         if (play != null) {
             Debug.Log("This is valid healing target");
 

@@ -39,7 +39,7 @@ public class EMPGrenade : MonoBehaviour
 
         AudioSource.PlayClipAtPoint(empTrigger, boom.transform.position, 3f);
 
-        Debug.Log("explodin time");
+        Debug.Log("explodin time " + pID);
         if (pID == LobbySceneManagement.singleton.getLocalPlayer().identity) {
             //Debug.Log()
             Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
@@ -60,6 +60,12 @@ public class EMPGrenade : MonoBehaviour
                     }
                 }*/
                 EnemyHitRegister enem = nearbyObject.transform.GetComponentInChildren<EnemyHitRegister>();
+                if (enem == null) {
+                    enem = nearbyObject.transform.GetComponent<EnemyHitRegister>();
+                }
+                if (enem == null) {
+                    enem = nearbyObject.transform.GetComponentInParent<EnemyHitRegister>();
+                }
                 if (enem != null) {
                     float distance = Vector3.Distance(nearbyObject.transform.position, transform.position);
                     float distancePercentage = Mathf.Clamp01(radius / distance );
