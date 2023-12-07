@@ -402,6 +402,7 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
 
     private void spawnFirstPortion(float portion) {
         int numToSpawn = ((int) (portion * enemsInWave.Count));
+        if (numToSpawn < 1) { numToSpawn = 1; }
         //Debug.Log("first portion: " + numToSpawn);
         for (int i = enemsInWaveSpawned; i < numToSpawn; i++) {
             //Debug.Log("calling enem spawn for enem " + enemsInWave[i][1] + " of dc " + enemsInWave[i][0] + " to spawn on spawner " + enemsInWave[i][2]);
