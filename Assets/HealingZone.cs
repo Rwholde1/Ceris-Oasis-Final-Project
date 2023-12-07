@@ -12,10 +12,16 @@ public class HealingZone : MonoBehaviour
     public GameObject player;
     public GameObject HealSphere;
     public int pID = -1;
+    private bool canHit = false;
 
-    private void OnCollisionEnter(Collision collision)
+    void Update() {
+        if (pID > -1) {
+            canHit = true;
+        }
+    }
+    private void OnCollisionStay(Collision collision)
     {        
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" || !canHit)
         {
             return;
         }
@@ -41,6 +47,8 @@ public class HealingZone : MonoBehaviour
             AudioSource.PlayClipAtPoint(castSound, healEffect.transform.position);
             //AudioSource.PlayClipAtPoint(persistentSound, healEffect.transform.position, 0.7f);
 
+            canHit = false;
+            pID = -1;
             // Destroy the Molotov cocktail object (you might want to disable it instead, depending on your game design)
             Destroy(healEffect, 7f);
             Destroy(gameObject, 7f);
