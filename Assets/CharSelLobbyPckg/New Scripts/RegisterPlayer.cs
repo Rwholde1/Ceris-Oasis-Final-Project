@@ -539,6 +539,8 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             }
         }
         mng.canDamage = true;
+        mng.currentHealth = maxHealth;
+        mng.healthBar.setHealth(maxHealth);
         /*
         GameObject[] children = LobbySceneManagement.singleton.playerCamObject.GetComponentsInChildren<GameObject>();
         foreach (GameObject child in children) {

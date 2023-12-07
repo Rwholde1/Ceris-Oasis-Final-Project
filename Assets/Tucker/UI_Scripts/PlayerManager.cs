@@ -159,7 +159,7 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("heals server rpc");
         if (IsServer) {
 
-            Debug.Log("Sending health to client");
+            Debug.Log("Sending health to client " + playerID);
             receiveHealthClientRpc(healthIn, playerID);
 
         }
@@ -265,7 +265,7 @@ public class PlayerManager : NetworkBehaviour
     public void playerDieClientRpc(int playerID){
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
             LobbySceneManagement.singleton.statsArray[playerID, 2]++;
-            Debug.Log("trying to die on client");
+            Debug.Log("trying to die on client " + playerID);
             if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
                 Debug.Log("I'm the dead victim! " + this);
                 LobbySceneManagement.singleton.getLocalPlayer().playerDies();
