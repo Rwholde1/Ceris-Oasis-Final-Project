@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4263292700469495927}
-  m_Layer: 31
+  m_Layer: 3
   m_Name: Magazine_Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5044441637854683506}
   - component: {fileID: 1417754985801534100}
-  m_Layer: 31
+  m_Layer: 3
   m_Name: Barrel_Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9068163318145414498}
-  m_Layer: 31
+  m_Layer: 3
   m_Name: Ejection_Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6904721206520731058}
-  m_Layer: 31
+  m_Layer: 3
   m_Name: M1911 Rustbucket
   m_TagString: Pistol
   m_Icon: {fileID: 0}
@@ -201,11 +201,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
       propertyPath: m_Name
@@ -213,15 +213,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
       propertyPath: m_RootOrder
@@ -372,11 +372,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1992675705445476, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_LocalScale.x

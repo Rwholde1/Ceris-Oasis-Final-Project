@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9046473610207793295}
-  m_Layer: 31
+  m_Layer: 3
   m_Name: ShotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000011085071264, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_Name
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_IsActive
@@ -58,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011730688910, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1000012812333644, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1000012812333644, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_IsActive
@@ -281,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e35efd58ef107c847b1a50070e23147f, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e35efd58ef107c847b1a50070e23147f, type: 3}
       propertyPath: m_TagString

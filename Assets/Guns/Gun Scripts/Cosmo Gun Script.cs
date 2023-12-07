@@ -34,6 +34,11 @@ public class CosmoGunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (animator == null)
+        {
+            animator = LobbySceneManagement.singleton.getLocalPlayer().gameObject.GetComponent<FirstPersonMovement>().animator;
+            getTransforms();
+        }
         CopyOtherScript();
         if (gun1 == null)
         {
@@ -85,6 +90,15 @@ public class CosmoGunScript : MonoBehaviour
         gun2IMG.color = gun2Color;
     }
 
+    void getTransforms()
+    {
+        print(LobbySceneManagement.singleton.getLocalPlayer().charIdentity);
+        pistolpos = LobbySceneManagement.singleton.getLocalPlayer().gunpositions[LobbySceneManagement.singleton.getLocalPlayer().charIdentity * 3 + 0];
+        riflepos = LobbySceneManagement.singleton.getLocalPlayer().gunpositions[LobbySceneManagement.singleton.getLocalPlayer().charIdentity * 3 + 1];
+        shotpos = LobbySceneManagement.singleton.getLocalPlayer().gunpositions[LobbySceneManagement.singleton.getLocalPlayer().charIdentity * 3 + 2];
+        print("POOPOOPEEPEE");
+
+    }
     void CopyOtherScript()
     {
         if(gunID1 != Gman.gunID1)
