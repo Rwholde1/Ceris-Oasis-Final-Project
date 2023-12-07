@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8505352776949421996}
   - component: {fileID: 4481136952371562046}
   - component: {fileID: 6153646991151285986}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: double_barreled_gun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2631876334013488174}
   - component: {fileID: 7532896726870765087}
   - component: {fileID: 7541742378352645995}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Double-barrel_gun 1
   m_TagString: Shotgun
   m_Icon: {fileID: 0}
@@ -154,6 +154,7 @@ MonoBehaviour:
   ammocount: {fileID: 0}
   burstamount: 0
   timebetweenbursts: 0
+  infAmmo: 0
 --- !u!95 &7541742378352645995
 Animator:
   serializedVersion: 5
@@ -186,7 +187,7 @@ GameObject:
   - component: {fileID: 4370969897504160989}
   - component: {fileID: 2719022568937572706}
   - component: {fileID: 3420177498029189047}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: double_barreled_gun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,11 +273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1992675705445476, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_LocalScale.x

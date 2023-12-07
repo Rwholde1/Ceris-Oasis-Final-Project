@@ -40,6 +40,11 @@ public class FirstPersonMovement : NetworkBehaviour
 
     void FixedUpdate()
     {   
+        if(animator == null)
+        {
+            Animator[] arr = GetComponent<RegisterPlayer>().animatorsList;
+            animator = arr[GetComponent<RegisterPlayer>().charIdentity];
+        }
         //Debug.Log(isMovementEnabled);
         if(!LobbySceneManagement.singleton.getLocalPlayer().getIsLocalPlayer() || !isMovementEnabled) {
             //Debug.Log("isn't local player");

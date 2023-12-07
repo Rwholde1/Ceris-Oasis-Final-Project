@@ -35,7 +35,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     public int charIdentity = -1;
 
     public Animator[] animatorsList = new Animator[4];
-
+    public Transform[] gunpositions;
     private GameObject holder;
     private GameObject gunStuff;
     public bool isDead;
