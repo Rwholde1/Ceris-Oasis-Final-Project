@@ -166,8 +166,9 @@ public class EnemyHitRegister : NetworkBehaviour
     public void dieClientRpc(int playerID, int enemID){
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
             Debug.Log("enem is dying to player " + (playerID + 1) + " on client");
+            /*
             if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID].gameObject) {
-                /*
+                
                 Debug.Log("I'm the dead victim! " + this);
                 //credit player for remaining health as damage
                 LobbySceneManagement.singleton.statsArray[playerID, 3] += health;
@@ -187,11 +188,11 @@ public class EnemyHitRegister : NetworkBehaviour
                 if (playerID == LobbySceneManagement.singleton.getLocalPlayer().identity - 1) {
                     LobbySceneManagement.singleton.playerCamObject.GetComponent<AddMoney>().pay(payout);
                     Debug.Log("Paid player " + payout + " scrap");    
-                }*/
+                }
                 
                 //Handled in AI_Gen_State
                 //Destroy(gameObject.transform.parent.gameObject);
-            }
+            }*/
 
             Debug.Log("I'm the dead victim! " + this);
                 //credit player for remaining health as damage
