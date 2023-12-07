@@ -527,6 +527,9 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         if (holder == null) {
             holder = LobbySceneManagement.singleton.playerCamObject.transform.Find("Holder").gameObject;
         }
+        if (gunStuff == null) {
+            gunStuff = LobbySceneManagement.singleton.playerCamObject.transform.Find("GunManager").gameObject;
+        }
         LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = true;
         LobbySceneManagement.singleton.dead = false;
         PlayerManager mng = LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>();
