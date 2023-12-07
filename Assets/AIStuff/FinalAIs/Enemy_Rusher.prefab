@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genState: {fileID: 0}
   playerTargetID: -1
-  ADT: 3
+  ADT: 4
   doSearch: 0
   damage: 10
   doAttack: 0

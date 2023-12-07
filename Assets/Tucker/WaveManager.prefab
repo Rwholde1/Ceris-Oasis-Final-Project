@@ -65,7 +65,7 @@ MonoBehaviour:
   started: 0
   waveCount: 0
   waveIndex: 0
-  spawnCountModifier: 1
+  spawnCountModifier: 0.5
   payoutModifier: 0
   waveDuration: 60
   timeRemaining: 0
@@ -73,6 +73,7 @@ MonoBehaviour:
   startedWaveStuff: 0
   spawnPerTick: 0
   enemsInWaveSpawned: 0
+  buffer: 0
 --- !u!114 &-2064937063342992623
 MonoBehaviour:
   m_ObjectHideFlags: 0

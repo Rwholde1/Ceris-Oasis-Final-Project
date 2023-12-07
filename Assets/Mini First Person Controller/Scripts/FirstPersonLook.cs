@@ -44,15 +44,19 @@ public class FirstPersonLook : MonoBehaviour
         //ThisChar.GetComponent<FirstPersonMovement>().animator = thisAnim;
 
         //character = ThisChar.GetComponent<Transform>();
-
+        
         Debug.Log("deleting meshes");
+        
         SkinnedMeshRenderer[] theseMeshes = ThisChar.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach(SkinnedMeshRenderer thisMesh in theseMeshes) {
             //Debug.Log("go " + thisMesh.gameObject);
             //Debug.Log("layer is: " + thisMesh.gameObject.layer);
             if (thisMesh.gameObject.layer != 30) {
-                Debug.Log(thisMesh + " deleted");
-                thisMesh.enabled = false;
+                Debug.Log(thisMesh + " disabled");
+                //thisMesh.enabled = false;
+                //thisMesh.gameObject.layer = LayerMask.NameToLayer("LocalMesh");
+                thisMesh.gameObject.layer = 3;
+                
             }
             
         }
@@ -60,8 +64,10 @@ public class FirstPersonLook : MonoBehaviour
         foreach(MeshRenderer thisMesh in thoseMeshes) {
             //Debug.Log("layer is: " + thisMesh.gameObject.layer);
             if (thisMesh.gameObject.layer != 30) {
-                Debug.Log(thisMesh + " deleted");
-                thisMesh.enabled = false;
+                Debug.Log(thisMesh + " disable");
+                //thisMesh.enabled = false;
+                //thisMesh.gameObject.layer = LayerMask.NameToLayer("LocalMesh");
+                thisMesh.gameObject.layer = 3;
             }
         }
 
@@ -128,6 +134,7 @@ public class FirstPersonLook : MonoBehaviour
             //character.localRotation = Quaternion.AngleAxis( velocity.y, Vector3.right);
 
             character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+            //character.localRotation = Quaternion.Euler(transform.rotation.x, 90f, transform.rotation.z);
         }
         
 
@@ -138,7 +145,30 @@ public class FirstPersonLook : MonoBehaviour
             newPos.y = minimapCam.GetComponent<Transform>().transform.position.y;
             minimapCam.GetComponent<Transform>().transform.position = newPos;
 
-            minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, LobbySceneManagement.singleton.getLocalPlayerTransform().eulerAngles.y, 0f);
+            //minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, LobbySceneManagement.singleton.getLocalPlayerTransform().eulerAngles.y, 0f);
+
+            if(transform.parent == null)
+            {
+                //rig.velocity = transform.rotation * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
+                //Debug.Log(rig.velocity);
+                minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, transform.rotation.y, 90f);
+
+
+            }
+            else
+            {
+                /*
+                Quaternion cam = transform.rotation;
+                Vector3 temp = cam.eulerAngles;
+                cam = Quaternion.Euler(0, temp.y, 0);
+                */
+
+                minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, LobbySceneManagement.singleton.getLocalPlayerTransform().localRotation.y, 90f);                
+
+                //rig.velocity = cam * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
+                //Debug.Log(rig.velocity);
+
+            }
         }
 
 

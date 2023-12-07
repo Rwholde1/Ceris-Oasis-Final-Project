@@ -39,6 +39,8 @@ public class StatsManager : MonoBehaviour
     public Sprite[] charSprites = new Sprite[4];
     public TMP_Text[] playerNames = new TMP_Text[4];
 
+    public GameObject[] playerInfoGroups = new GameObject[4];
+
     public Image localClassIcon;
 
     void Start() {
@@ -47,7 +49,18 @@ public class StatsManager : MonoBehaviour
         foreach(TextMeshProUGUI trans in transforms) {
             Debug.Log(trans);
         }*/
-
+        string[] names = LobbySceneManagement.singleton.playerNamesText;
+        for (int i = 0; i < 4; i++) {
+            if (i < LobbySceneManagement.singleton.getCurrentPlayerCount()) {
+                Debug.Log("player " + (i + 1) + " is named " + names[i]);
+                playerNames[i].text = names[i];
+                if (names[i] == "") {
+                    playerNames[i].text = "Player " + (i + 1);
+                }
+            } else {
+                playerInfoGroups[i].SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame

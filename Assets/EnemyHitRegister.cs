@@ -36,6 +36,7 @@ public class EnemyHitRegister : NetworkBehaviour
             animator.Play("Death");
             //animator.Play("Death");
             genState.state = AI_Gen_State.AI_STATE.DEAD;
+            StartCoroutine(ConfirmDeath());
         }
 
         if(Input.GetKeyDown(KeyCode.N) && LobbySceneManagement.singleton.getLocalPlayer().getIsLocalPlayer())
@@ -137,6 +138,7 @@ public class EnemyHitRegister : NetworkBehaviour
 
     [ServerRpc(RequireOwnership = false)]
     public void dieServerRpc(int playerID, int enemID) {
+        Debug.Log("enem is dying to player " + (playerID + 1) + " on server");
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
             dieClientRpc(playerID, enemID);
         }
@@ -145,6 +147,7 @@ public class EnemyHitRegister : NetworkBehaviour
     [ClientRpc] 
     public void dieClientRpc(int playerID, int enemID){
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
+            Debug.Log("enem is dying to player " + (playerID + 1) + " on client");
             if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID].gameObject) {
                 Debug.Log("I'm the dead victim! " + this);
                 //credit player for remaining health as damage
@@ -171,6 +174,12 @@ public class EnemyHitRegister : NetworkBehaviour
                 //Destroy(gameObject.transform.parent.gameObject);
             }
         }
+    }
+
+    public IEnumerator ConfirmDeath() {
+        yield return new WaitForSeconds(3f);
+        Debug.Log("enforcing enem death");
+        Destroy(gameObject);
     }
 
     //take damage

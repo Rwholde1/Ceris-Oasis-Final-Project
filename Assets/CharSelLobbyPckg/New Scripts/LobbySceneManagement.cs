@@ -19,6 +19,7 @@ public class LobbySceneManagement : NetworkBehaviour
     
     [SerializeField] public PlayerCard[] playerCards;
     [SerializeField] public TMP_Text[] playerNames;
+    public string[] playerNamesText = {"Player 1", "Player 2", "Player 3", "Player 4"};
     [SerializeField] public bool[] playerReady;
     //[SerializeField] private PlayerCard[] playerCards;
 
@@ -266,7 +267,7 @@ public class LobbySceneManagement : NetworkBehaviour
     }
 
     public void changeReady(string ready) {
-        getLocalPlayer().changeReadyServerRpc(ready);
+        getLocalPlayer().changeReadyServerRpc(ready, getLocalPlayer().identity - 1);
     }
 
     public void updateSelectedLevel() {
@@ -312,6 +313,10 @@ public class LobbySceneManagement : NetworkBehaviour
             }
         } 
         return null;
+    }
+
+    public int getCurrentPlayerCount() {
+        return NetworkManager.ConnectedClientsIds.Count;
     }
 
 }

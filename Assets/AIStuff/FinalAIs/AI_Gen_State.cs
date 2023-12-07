@@ -78,7 +78,7 @@ public class AI_Gen_State : MonoBehaviour
                 {
                     Debug.Log("Chasing to RANDOM target");
 
-                    if (CastToPlayer(50f))
+                    if (CastToPlayer(50f) && !targetObject.GetComponent<RegisterPlayer>().isDead)
                     { 
                         ChangeTarget(targetObject);
                         state = AI_STATE.ACTIVECHASE;
@@ -122,6 +122,8 @@ public class AI_Gen_State : MonoBehaviour
                     ChangeSpeed(0);
                     targetPos = enemyT.position;
 
+                    StartCoroutine(FleeTimer());
+                    state = AI_STATE.CHASE;
                     break;
                 }
         
@@ -166,6 +168,18 @@ public class AI_Gen_State : MonoBehaviour
         playerLiveCount = playerArray.Length;
         
         int randPick = Random.Range(0, LobbySceneManagement.singleton.statsPlayerId.Count - 1);
+        targetID = randPick;
+        Debug.Log("player hunted is " + playerArray[randPick].gameObject);
+        return playerArray[randPick].gameObject;
+    }
+
+    public GameObject getRandomFromAllPlayer(RegisterPlayer[] players)
+    {
+        //playerArray = GameObject.FindGameObjectsWithTag("Player");
+        playerArray = players;
+        playerLiveCount = playerArray.Length;
+        
+        int randPick = Random.Range(0, playerLiveCount - 1);
         targetID = randPick;
         Debug.Log("player hunted is " + playerArray[randPick].gameObject);
         return playerArray[randPick].gameObject;
@@ -230,11 +244,27 @@ public class AI_Gen_State : MonoBehaviour
     //Change parameter to handle player death
     public void CheckIfPlayerDiedUpdate(GameObject obj)
     {
+        Debug.Log("checking for target death");
         if (obj.GetComponent<RegisterPlayer>().isDead)
         {
-            isAnimating = false;
-            playerObject = getRandomFromAllPlayer();
-            ChangeTarget(playerObject);
+            Debug.Log("target is dead");
+            bool allDead = true;
+            RegisterPlayer[] validTargets = new RegisterPlayer[4];
+            int i = 0;
+            foreach (RegisterPlayer player in LobbySceneManagement.singleton.players) {
+                if (player != null && !player.isDead) {
+                    allDead = false;
+                    validTargets[i] = player;
+                    i++;
+                }
+            }
+            if (allDead) {
+                state = AI_STATE.WAIT;
+            } else {
+                isAnimating = false;
+                playerObject = getRandomFromAllPlayer(validTargets);
+                ChangeTarget(playerObject);
+            }
         }
     }
 

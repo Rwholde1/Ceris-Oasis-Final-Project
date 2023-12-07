@@ -46,13 +46,14 @@ public class PlayerManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth <= 0 && alive == true) {
+        if (currentHealth <= 0 && alive && !LobbySceneManagement.singleton.dead && canDamage) {
             alive = false;
             LobbySceneManagement.singleton.getLocalPlayer().playerDies();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             stats.addDeath(1);
             currentHealth = maxHealth;
             healthBar.setHealth(maxHealth);
+            canDamage = false;
         }
 
         /*
@@ -63,7 +64,7 @@ public class PlayerManager : NetworkBehaviour
             stats.addAssist(1);
         }*/
         if(Input.GetKeyDown(KeyCode.L)) {
-            takeDamage(10, LobbySceneManagement.singleton.getLocalPlayer().identity);
+            takeDamage(30, LobbySceneManagement.singleton.getLocalPlayer().identity);
         }/*
         if(Input.GetMouseButtonDown(1)) {
             var dmg = Mathf.Floor(GetComponent<Transform>().localEulerAngles.y);
@@ -78,10 +79,12 @@ public class PlayerManager : NetworkBehaviour
                 Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
                 Debug.Log("call ping");
                 if(Physics.Raycast(ray, out RaycastHit hit)) {
-                    Debug.Log("ping");
-                    //Sets height offset and instantiates ping
-                    Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
-                    createPingServerRpc(offset);
+                    if (hit.transform.gameObject.layer != 26) {
+                        Debug.Log("ping");
+                        //Sets height offset and instantiates ping
+                        Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
+                        createPingServerRpc(offset);
+                    }
                 }
             }
         }
@@ -117,12 +120,14 @@ public class PlayerManager : NetworkBehaviour
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
         Debug.Log("call ping");
         if(Physics.Raycast(ray, out RaycastHit hit)) {
-            Debug.Log("ping");
-            //Sets height offset and instantiates ping
-            Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
-            NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
-            ping.GetComponent<NetworkObject>().Spawn();
-            //ping.SpawnWithOwnership(OwnerClientId);
+            if (hit.transform.gameObject.layer != 26) {
+                Debug.Log("ping");
+                //Sets height offset and instantiates ping
+                Vector3 offset = new Vector3 (hit.point.x, hit.point.y + 0.1f, hit.point.z);
+                NetworkObject ping = Instantiate(basicPing, offset, Quaternion.identity);
+                ping.GetComponent<NetworkObject>().Spawn();
+                //ping.SpawnWithOwnership(OwnerClientId);
+            }
         }
     }
     

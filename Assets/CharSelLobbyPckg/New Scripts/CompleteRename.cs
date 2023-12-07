@@ -44,8 +44,10 @@ public class CompleteRename : MonoBehaviour
 
         Debug.Log("local rename");
         LobbySceneManagement.singleton.renamePlayer(renamePopupText.text);
-        var id = LobbySceneManagement.singleton.localPlayerID;
-        LobbySceneManagement.singleton.playerLobbyInfo[LobbySceneManagement.singleton.mostRecentPlayerClick - 1, 0] = renamePopupText.text;
+        //var id = LobbySceneManagement.singleton.localPlayerID;
+        //LobbySceneManagement.singleton.playerLobbyInfo[LobbySceneManagement.singleton.mostRecentPlayerClick - 1, 0] = renamePopupText.text;
+        LobbySceneManagement.singleton.playerLobbyInfo[LobbySceneManagement.singleton.getLocalPlayer().identity - 1, 0] = renamePopupText.text;
+        //LobbySceneManagement.singleton.playerNamesText[id] = renamePopupText.text
 
         renamePopup.SetActive(false);
 

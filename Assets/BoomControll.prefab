@@ -121,7 +121,7 @@ MonoBehaviour:
   distanceforward: 15
   pID: 0
   halfTime: 1
-  damage: 50
+  damage: 120
   timePassed: 0
 --- !u!114 &7092278587186163253
 MonoBehaviour:

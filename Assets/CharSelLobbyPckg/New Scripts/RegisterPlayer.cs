@@ -284,7 +284,11 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         if (IsClient) {
             Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on client"); 
             //LobbySceneManagement.singleton.playerNames[LobbySceneManagement.singleton.mostRecentPlayerClick - 1].SetText(name); 
-            LobbySceneManagement.singleton.playerNames[playerID].SetText(name); 
+            LobbySceneManagement.singleton.playerNames[playerID].SetText(name);
+            if (name.Length > 0) {
+                LobbySceneManagement.singleton.playerNamesText[playerID] = name; 
+            }
+            
 
         }
           
@@ -338,15 +342,17 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     //Changes player ready status
     [ServerRpc(RequireOwnership = false)]
-    public void changeReadyServerRpc(string ready) {
+    public void changeReadyServerRpc(string ready, int id) {
         if (IsServer) {
-            changeReadyClientRpc(ready);
+            changeReadyClientRpc(ready, id);
         }
     }
 
     [ClientRpc]
-    public void changeReadyClientRpc(string ready) {
-        LobbySceneManagement.singleton.playerLobbyInfo[LobbySceneManagement.singleton.mostRecentPlayerClick - 1, 1] = ready;
+    public void changeReadyClientRpc(string ready, int id) {
+        //LobbySceneManagement.singleton.playerLobbyInfo[LobbySceneManagement.singleton.mostRecentPlayerClick - 1, 1] = ready;
+        LobbySceneManagement.singleton.playerLobbyInfo[id, 1] = ready;
+
     }
 
 
@@ -532,6 +538,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
                 anim.SetBool("Death", false);
             }
         }
+        LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>().canDamage = true;
         /*
         GameObject[] children = LobbySceneManagement.singleton.playerCamObject.GetComponentsInChildren<GameObject>();
         foreach (GameObject child in children) {

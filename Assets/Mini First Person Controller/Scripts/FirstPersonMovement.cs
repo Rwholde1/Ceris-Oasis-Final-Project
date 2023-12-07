@@ -45,7 +45,7 @@ public class FirstPersonMovement : NetworkBehaviour
             //Debug.Log("isn't local player");
             return;
         }
-        //Debug.Log("is local player");
+        Debug.Log("animating local player");
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.LeftShift))
         {
             //walking forward
@@ -148,8 +148,25 @@ public class FirstPersonMovement : NetworkBehaviour
         Debug.Log(runSpeed + " " + speed);
         // Apply movement.
         Rigidbody rig = gameObject.GetComponent<Rigidbody>();
+        /*
         rig.velocity = transform.rotation * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
-        Debug.Log(rig.velocity);
+        Debug.Log(rig.velocity);*/
+        //(here for walker compatability)
+        if(transform.parent == null)
+        {
+            rig.velocity = transform.rotation * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
+            //Debug.Log(rig.velocity);
+
+        }
+        else
+        {
+            Quaternion cam = LobbySceneManagement.singleton.playerCamObject.transform.rotation;
+            Vector3 temp = cam.eulerAngles;
+            cam = Quaternion.Euler(0, temp.y, 0); ;
+            rig.velocity = cam * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
+            //Debug.Log(rig.velocity);
+
+        }
     }
 
     public void SetMovementEnabled(bool isEnabled)
