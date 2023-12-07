@@ -227,7 +227,7 @@ public class PlayerManager : NetworkBehaviour
             
             if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage && alive) {
                 Debug.Log("I'm the player victim! " + this + " " + damageIn);
-                if (damageIn >= currentHealth && alive) {
+                if (damageIn >= currentHealth && alive && canDamage) {
                     currentHealth = -1;
                     alive = false;
                     //LobbySceneManagement.singleton.getLocalPlayer().playerDies();
@@ -266,7 +266,10 @@ public class PlayerManager : NetworkBehaviour
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
             LobbySceneManagement.singleton.statsArray[playerID, 2]++;
             Debug.Log("trying to die on client " + playerID);
-            if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
+            Debug.Log(LobbySceneManagement.singleton.players[playerID].transform);
+            Debug.Log(GetComponent<FirstPersonLook>().character);
+            Debug.Log(canDamage);
+            if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character/* && canDamage*/) {
                 Debug.Log("I'm the dead victim! " + this);
                 LobbySceneManagement.singleton.getLocalPlayer().playerDies();
                 //credit player for death
