@@ -498,7 +498,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         Debug.Log("killing player");
         LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled = false;
         LobbySceneManagement.singleton.dead = true;
-        LobbySceneManagement.singleton.getLocalPlayer().isDead = true;
+        isDead = true;
         PlayerManager mng = LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>();
         mng.alive = false;
         foreach (Animator anim in animatorsList) {

@@ -46,15 +46,20 @@ public class PlayerManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Alive " + alive);
+        Debug.Log("Alive " + alive);
+        /*
         if (currentHealth <= 0 && alive && !LobbySceneManagement.singleton.dead && canDamage) {
             alive = false;
             LobbySceneManagement.singleton.getLocalPlayer().playerDies();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            stats.addDeath(1);
+            //stats.addDeath(1);
             currentHealth = maxHealth;
             healthBar.setHealth(maxHealth);
             canDamage = false;
+        }
+        */
+        if (currentHealth <= 0) {
+            alive = false;
         }
 
         /*
@@ -216,12 +221,16 @@ public class PlayerManager : NetworkBehaviour
 
             //FIX CONDITION?
             Debug.Log("damage id in is " + playerID);
+            if (playerID == -1) { return; }
             Debug.Log("checking damage identity " + LobbySceneManagement.singleton.players[playerID].transform + " against " + GetComponent<FirstPersonLook>().character);
-            if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
+            if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage && alive) {
                 Debug.Log("I'm the player victim! " + this + " " + damageIn);
-                if (damageIn >= currentHealth) {
-                    currentHealth = 0;
+                if (damageIn >= currentHealth && alive) {
+                    currentHealth = -1;
+                    alive = false;
+                    //LobbySceneManagement.singleton.getLocalPlayer().playerDies();
                     playerDieServerRpc(playerID);
+                    canDamage = false;
                     return;
                 }
                 Debug.Log("current: " + currentHealth);
@@ -256,6 +265,7 @@ public class PlayerManager : NetworkBehaviour
             LobbySceneManagement.singleton.statsArray[playerID, 2]++;
             if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
                 Debug.Log("I'm the dead victim! " + this);
+                LobbySceneManagement.singleton.getLocalPlayer().playerDies();
                 //credit player for death
                 //LobbySceneManagement.singleton.statsArray[playerID, 2]++;
 

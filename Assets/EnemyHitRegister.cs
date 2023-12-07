@@ -103,12 +103,24 @@ public class EnemyHitRegister : NetworkBehaviour
 
     [ClientRpc] 
     public void takeDamageClientRpc(int damage, int playerID, int enemID){
-        Debug.Log("received in client damage rpc");
-        Debug.Log("Scene manager: " + LobbySceneManagement.singleton);
-        Debug.Log("Local player: " + LobbySceneManagement.singleton.getLocalPlayer());
-        /*
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
-            Debug.Log("client rpc got hit " + EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID] + " " + gameObject);
+            Debug.Log("received in client damage rpc");
+            Debug.Log("Scene manager: " + LobbySceneManagement.singleton);
+            Debug.Log("Local player: " + LobbySceneManagement.singleton.getLocalPlayer());
+            
+            Debug.Log("I'm the victim! " + this);
+                    if (!hitBy[playerID]) {
+                        hitBy[playerID] = true;
+                    }
+
+                    health -= damage;
+                    Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+                    //Credit player for damage
+                    LobbySceneManagement.singleton.statsArray[playerID, 3] += damage;
+                    Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+            /*
+            if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
+                Debug.Log("client rpc got hit " + EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID] + " " + gameObject);
             if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID]) {
                 Debug.Log("I'm the victim! " + this);
                 if (!hitBy[playerID]) {
@@ -120,21 +132,25 @@ public class EnemyHitRegister : NetworkBehaviour
                 //Credit player for damage
                 LobbySceneManagement.singleton.statsArray[playerID, 3] += damage;
                 Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
-            }
-        }*/
-        Debug.Log("client rpc got hit " + EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID] + " " + gameObject);
-            if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID].gameObject) {
-                Debug.Log("I'm the victim! " + this);
-                if (!hitBy[playerID]) {
-                    hitBy[playerID] = true;
                 }
+            }*/
+            /*
+            Debug.Log("client rpc got hit " + EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID] + " " + gameObject);
+                if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID].gameObject) {
+                    Debug.Log("I'm the victim! " + this);
+                    if (!hitBy[playerID]) {
+                        hitBy[playerID] = true;
+                    }
 
-                health -= damage;
-                Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
-                //Credit player for damage
-                LobbySceneManagement.singleton.statsArray[playerID, 3] += damage;
-                Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
-            }
+                    health -= damage;
+                    Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+                    //Credit player for damage
+                    
+                    Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
+                }
+            */
+        }
+        
     }
 
 
