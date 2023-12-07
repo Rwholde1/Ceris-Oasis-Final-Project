@@ -96,15 +96,7 @@ public class Gun : MonoBehaviour
 
 
 
-        if(burstshotsfired>0)
-        {
-            allowshooting = false;
-        }
-        else if(burstshotsfired == burstamount-1)
-        {
-            burstshotsfired = 0;
-            Invoke("allowShoot", 0.1f);
-        }
+
          shop = GameObject.Find("Shop");
         if (shop == null)
         {
@@ -234,7 +226,6 @@ public class Gun : MonoBehaviour
     private void Shoot() {
         if (burstamount != 0)
         {
-            allowshooting = false;
             StartCoroutine(ShootBurst());
             return;
         }

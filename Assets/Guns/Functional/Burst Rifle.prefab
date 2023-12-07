@@ -121,6 +121,7 @@ MonoBehaviour:
   ammocount: {fileID: 0}
   burstamount: 3
   timebetweenbursts: 0.2
+  infAmmo: 0
 --- !u!95 &7289010936832539711
 Animator:
   serializedVersion: 5
@@ -131,7 +132,7 @@ Animator:
   m_GameObject: {fileID: 2467886614539273244}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d06f28475de9f2641a06de89e67b2ed5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9ddf30618b0dff6428eb9f743c6b6499, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
