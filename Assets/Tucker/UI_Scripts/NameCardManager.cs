@@ -68,7 +68,7 @@ public class NameCardManager : MonoBehaviour
         dist = Vector3.Distance(ping.transform.position, target.transform.position);
         //Debug.Log("distance to player: " + Mathf.Round(dist));
         TextMeshPro distanceText = ping.GetComponentInChildren<TextMeshPro>();
-        distanceText.text = Mathf.Round(dist) + "m";
+        distanceText.text = LobbySceneManagement.singleton.playerNamesText[GetComponentInParent<RegisterPlayer>().identity - 1];
 
         if (dist > MinDist) {
             float ratio = dist / MinDist * scaleFactor * scaleFactor;

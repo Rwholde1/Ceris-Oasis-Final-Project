@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0017938614, y: -0.44711143}
-  m_SizeDelta: {x: 1, y: 0.5}
+  m_SizeDelta: {x: 4, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4089012713737351630
 MeshRenderer:
@@ -297,7 +297,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9182754262258252338}
-  - component: {fileID: 6333852609567075624}
   - component: {fileID: 4987066989346479788}
   m_Layer: 4
   m_Name: playerNameCard
@@ -325,29 +324,6 @@ Transform:
   - {fileID: 4007806346951833325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6333852609567075624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3667044058954630614}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97175c3cf624f274a9255cf32c169f3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleFactor: 0.5
-  MinDist: 3
-  lifetime: 0
-  ping1: {fileID: 5085371717866782921}
-  ping2: {fileID: 2144396231660616484}
-  ping3: {fileID: 5657295580829927233}
-  ping4: {fileID: 7947513712438993361}
-  target1: {fileID: 0}
-  target2: {fileID: 0}
-  target3: {fileID: 0}
-  target4: {fileID: 0}
 --- !u!114 &4987066989346479788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +466,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0017938614, y: -0.44711143}
-  m_SizeDelta: {x: 1, y: 0.5}
+  m_SizeDelta: {x: 4, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1241311535486095566
 MeshRenderer:
@@ -745,7 +721,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0017938614, y: -0.44711143}
-  m_SizeDelta: {x: 1, y: 0.5}
+  m_SizeDelta: {x: 4, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &326816399552094491
 MeshRenderer:
@@ -1099,7 +1075,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0017938614, y: -0.44711143}
-  m_SizeDelta: {x: 1, y: 0.5}
+  m_SizeDelta: {x: 4, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &9090849410192167278
 MeshRenderer:
