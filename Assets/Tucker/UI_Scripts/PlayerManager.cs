@@ -265,6 +265,7 @@ public class PlayerManager : NetworkBehaviour
     public void playerDieClientRpc(int playerID){
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
             LobbySceneManagement.singleton.statsArray[playerID, 2]++;
+            Debug.Log("trying to die on client");
             if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage) {
                 Debug.Log("I'm the dead victim! " + this);
                 LobbySceneManagement.singleton.getLocalPlayer().playerDies();
