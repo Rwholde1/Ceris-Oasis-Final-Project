@@ -223,6 +223,7 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("damage id in is " + playerID);
             if (playerID == -1) { return; }
             Debug.Log("checking damage identity " + LobbySceneManagement.singleton.players[playerID].transform + " against " + GetComponent<FirstPersonLook>().character);
+            
             if (LobbySceneManagement.singleton.players[playerID].transform == GetComponent<FirstPersonLook>().character && canDamage && alive) {
                 Debug.Log("I'm the player victim! " + this + " " + damageIn);
                 if (damageIn >= currentHealth && alive) {

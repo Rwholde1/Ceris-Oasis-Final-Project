@@ -167,6 +167,7 @@ public class EnemyHitRegister : NetworkBehaviour
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
             Debug.Log("enem is dying to player " + (playerID + 1) + " on client");
             if (gameObject == EnemyWaveSpawnerTake2.singleton.spawnedEnemies[enemID].gameObject) {
+                /*
                 Debug.Log("I'm the dead victim! " + this);
                 //credit player for remaining health as damage
                 LobbySceneManagement.singleton.statsArray[playerID, 3] += health;
@@ -186,11 +187,32 @@ public class EnemyHitRegister : NetworkBehaviour
                 if (playerID == LobbySceneManagement.singleton.getLocalPlayer().identity - 1) {
                     LobbySceneManagement.singleton.playerCamObject.GetComponent<AddMoney>().pay(payout);
                     Debug.Log("Paid player " + payout + " scrap");    
-                }
+                }*/
                 
                 //Handled in AI_Gen_State
                 //Destroy(gameObject.transform.parent.gameObject);
             }
+
+            Debug.Log("I'm the dead victim! " + this);
+                //credit player for remaining health as damage
+                LobbySceneManagement.singleton.statsArray[playerID, 3] += health;
+                health = 0;
+                //credit player for kill
+                Debug.Log("Player " + (playerID + 1) + " killed me");
+                LobbySceneManagement.singleton.statsArray[playerID, 0]++;
+                //credit all players with assists who aren't the killer with assists
+                for (int i = 0; i < 4; i++) {
+                    if (i != playerID && hitBy[i]) {
+                        Debug.Log("assisted by player " + i);
+                        LobbySceneManagement.singleton.statsArray[i, 1]++;
+                    }
+                }
+                
+                //pay player
+                if (playerID == LobbySceneManagement.singleton.getLocalPlayer().identity - 1) {
+                    LobbySceneManagement.singleton.playerCamObject.GetComponent<AddMoney>().pay(payout);
+                    Debug.Log("Paid player " + payout + " scrap");    
+                }
         }
     }
 
