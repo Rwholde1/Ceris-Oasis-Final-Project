@@ -42,6 +42,8 @@ public class AI_QueenScript : MonoBehaviour
         genState.timeAttack = timeBetweenAttacks;
         genState.ADT = ADT;
         isAnimating = false;
+
+        GetComponent<AI_Gen_State>().queenScript = this;
     }
     // Update is called once per frame
     void Update()

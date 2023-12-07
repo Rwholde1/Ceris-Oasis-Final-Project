@@ -164,6 +164,14 @@ public class FirstPersonMovement : NetworkBehaviour
             Vector3 temp = cam.eulerAngles;
             cam = Quaternion.Euler(0, temp.y, 0); ;
             rig.velocity = cam * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
+           ///Debug.Log("Global transform " + transform.rotation);
+            //Debug.Log("Local transform " + transform.localRotation);
+            //Debug.Log("Global camera transform " + LobbySceneManagement.singleton.playerCamObject.transform.rotation);
+            //Debug.Log("Local camera transform " + LobbySceneManagement.singleton.playerCamObject.transform.localRotation);
+            
+            //transform.rotation = LobbySceneManagement.singleton.playerCamObject.transform.localRotation;
+            //transform.localRotation = Quaternion.Euler(LobbySceneManagement.singleton.playerCamObject.transform.rotation.x, transform.localRotation.y, transform.localRotation.z);
+            //Debug.Log("adjusted local transform " + transform.localRotation);
             //Debug.Log(rig.velocity);
 
         }

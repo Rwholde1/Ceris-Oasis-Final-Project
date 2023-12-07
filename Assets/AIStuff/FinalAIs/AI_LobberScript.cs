@@ -41,6 +41,8 @@ public class AI_LobberScript : MonoBehaviour
         genState.timeAttack = timeBetweenAttacks;
         genState.ADT = ADT;
         isAnimating = false;
+
+        GetComponent<AI_Gen_State>().lobScript = this;
     }
     // Update is called once per frame
     void Update()

@@ -42,6 +42,8 @@ public class AI_GunnerScript : MonoBehaviour
         genState.timeAttack = timeBetweenAttacks;
         genState.ADT = ADT;
         isAnimating = false;
+
+        GetComponent<AI_Gen_State>().gunScript = this;
     }
     // Update is called once per frame
     void FixedUpdate()

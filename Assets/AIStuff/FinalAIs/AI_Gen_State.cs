@@ -37,7 +37,12 @@ public class AI_Gen_State : MonoBehaviour
 
     public float ADTMod = 1.01f;
 
-    
+    public EnemyHitRegister hitReg;
+    public AI_GunnerScript gunScript;
+    public AI_RusherScript rushScript;
+    public AI_LobberScript lobScript;
+    public AI_WandererScript wanderScript;
+    public AI_QueenScript queenScript;
 
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
@@ -46,23 +51,27 @@ public class AI_Gen_State : MonoBehaviour
 
     void Start()
     {
-        speedMod = 1f;
-        // /attackDamageModifier = 1f;
-        canAttack = true;
-        doAttack = false;
+        if (!LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
+            Invoke("killClientBrain", 0.5f);
+        } else {
+            speedMod = 1f;
+            // /attackDamageModifier = 1f;
+            canAttack = true;
+            doAttack = false;
         
-        isAnimating = false;
-        //state = AI_STATE.CHASE;
-        agent = GetComponent<NavMeshAgent>();
-        enemyT = GetComponent<Transform>();
-        //targetPos = targetPos;
-        timeAttack = 5f;
-        //TEMP RESET TARGET TO 0
-        //targetPos = new Vector3(0, 0, 0);
-        //ChangeTarget("Player");
-        state = AI_STATE.ACTIVECHASE;
-        playerObject = getRandomFromAllPlayer();
-        targetObject = playerObject;
+            isAnimating = false;
+            //state = AI_STATE.CHASE;
+            agent = GetComponent<NavMeshAgent>();
+            enemyT = GetComponent<Transform>();
+            //targetPos = targetPos;
+            timeAttack = 5f;
+            //TEMP RESET TARGET TO 0
+            //targetPos = new Vector3(0, 0, 0);
+            //ChangeTarget("Player");
+            state = AI_STATE.ACTIVECHASE;
+            playerObject = getRandomFromAllPlayer();
+            targetObject = playerObject;
+        }
     }
     
     
@@ -155,7 +164,7 @@ public class AI_Gen_State : MonoBehaviour
             default:
                 Debug.Log("NOTHING)");
                 break;
-        }  
+            }  
         }
         
     }
@@ -316,6 +325,26 @@ public class AI_Gen_State : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
         Destroy(gameObject);
+    }
+
+    public void killClientBrain() {
+        Debug.Log("disabling client AI scripts");
+            hitReg.enabled = false;
+            if (gunScript != null) {
+                gunScript.enabled = false;
+            }
+            if (rushScript != null) {
+                rushScript.enabled = false;
+            }
+            if (lobScript != null) {
+                lobScript.enabled = false;
+            }
+            if (wanderScript != null) {
+                wanderScript.enabled = false;
+            }
+            if (queenScript != null) {
+                queenScript.enabled = false;
+            }
     }
 }
 

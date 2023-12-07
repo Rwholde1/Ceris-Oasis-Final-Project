@@ -132,9 +132,16 @@ public class FirstPersonLook : MonoBehaviour
             transform.eulerAngles = new Vector3(-velocity.y, velocity.x, 0f);
 
             //character.localRotation = Quaternion.AngleAxis( velocity.y, Vector3.right);
+            /*
+            if (transform.parent == null) {
+                character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+            } else {
+                //character.localRotation = Quaternion.AngleAxis(transform.InverseTransformDirection(velocity).x, Vector3.up);
+                character.rotation = Quaternion.Euler(transform.localRotation.x, 90f, transform.localRotation.z);
+            }   */
+                            character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
 
-            character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
-            //character.localRotation = Quaternion.Euler(transform.rotation.x, 90f, transform.rotation.z);
+            //character.localRotation = Quaternion.Euler(transform.localRotation.x, 90f, transform.localRotation.z);
         }
         
 
@@ -163,8 +170,8 @@ public class FirstPersonLook : MonoBehaviour
                 cam = Quaternion.Euler(0, temp.y, 0);
                 */
 
-                minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, LobbySceneManagement.singleton.getLocalPlayerTransform().localRotation.y, 90f);                
-
+                //minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, LobbySceneManagement.singleton.getLocalPlayerTransform().localRotation.y, 90f);                
+                //minimapCam.GetComponent<Transform>().transform.rotation = Quaternion.Euler(90f, transform.rotation.y, 90f);
                 //rig.velocity = cam * new Vector3(targetVelocity.x, rig.velocity.y, targetVelocity.y);
                 //Debug.Log(rig.velocity);
 

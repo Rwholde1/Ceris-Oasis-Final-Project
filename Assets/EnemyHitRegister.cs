@@ -25,6 +25,8 @@ public class EnemyHitRegister : NetworkBehaviour
         Debug.Log("Payout: " + payout + " scrap");
         animator = GetComponent<Animator>();
         genState = GetComponent<AI_Gen_State>();
+
+        GetComponent<AI_Gen_State>().hitReg = this;
     }
 
     // Update is called once per frame

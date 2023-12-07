@@ -40,6 +40,8 @@ public class AI_RusherScript : MonoBehaviour
         genState.doSearch = doSearch;
         genState.timeAttack = timeBetweenAttacks;
         genState.ADT = ADT;
+
+        GetComponent<AI_Gen_State>().rushScript = this;
     }
 
 

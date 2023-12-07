@@ -41,6 +41,8 @@ public class AI_WandererScript : MonoBehaviour
         genState.timeAttack = timeBetweenAttacks;
         genState.ADT = ADT;
 
+        GetComponent<AI_Gen_State>().wanderScript = this;
+
     }
 
     // Update is called once per frame
