@@ -47,7 +47,7 @@ public class AI_Gen_State : MonoBehaviour
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 targetPos;
 
-    public int targetID = -1;
+    public int targetID = -3;
 
     void Start()
     {

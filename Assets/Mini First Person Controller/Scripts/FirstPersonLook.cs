@@ -51,23 +51,34 @@ public class FirstPersonLook : MonoBehaviour
         foreach(SkinnedMeshRenderer thisMesh in theseMeshes) {
             //Debug.Log("go " + thisMesh.gameObject);
             //Debug.Log("layer is: " + thisMesh.gameObject.layer);
-            if (thisMesh.gameObject.layer != 30) {
+            
+            if (thisMesh.gameObject.layer != 30 && thisMesh.gameObject.layer != 12) {
                 Debug.Log(thisMesh + " disabled");
                 //thisMesh.enabled = false;
                 //thisMesh.gameObject.layer = LayerMask.NameToLayer("LocalMesh");
                 thisMesh.gameObject.layer = 3;
                 
             }
+
+            //Turns on local gun
+            if (thisMesh.gameObject.layer == 12) {
+                thisMesh.gameObject.layer = 31;
+            }
             
         }
         MeshRenderer[] thoseMeshes = ThisChar.GetComponentsInChildren<MeshRenderer>();
         foreach(MeshRenderer thisMesh in thoseMeshes) {
             //Debug.Log("layer is: " + thisMesh.gameObject.layer);
-            if (thisMesh.gameObject.layer != 30) {
+            
+            if (thisMesh.gameObject.layer != 30 && thisMesh.gameObject.layer != 12) {
                 Debug.Log(thisMesh + " disable");
                 //thisMesh.enabled = false;
                 //thisMesh.gameObject.layer = LayerMask.NameToLayer("LocalMesh");
                 thisMesh.gameObject.layer = 3;
+            }
+            //Turns on local gun
+            if (thisMesh.gameObject.layer == 12) {
+                thisMesh.gameObject.layer = 31;
             }
         }
 

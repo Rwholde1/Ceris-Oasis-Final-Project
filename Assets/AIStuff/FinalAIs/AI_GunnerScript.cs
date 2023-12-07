@@ -9,7 +9,7 @@ public class AI_GunnerScript : MonoBehaviour
     AI_Gen_State state;
     //PlayerAttributes player;
     //PlayerManager player;
-    public int playerTargetID = -1;
+    public int playerTargetID = -3;
 
     public float ADT;
     public bool doSearch;

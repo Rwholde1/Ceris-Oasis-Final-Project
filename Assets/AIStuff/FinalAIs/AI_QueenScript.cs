@@ -73,7 +73,7 @@ public class AI_QueenScript : MonoBehaviour
     void rusherAttack()
     {
         //player = genState.targetObject.GetComponent<PlayerAttributes>();
-
+        playerTargetID = genState.targetID;
 
 
         if (genState.CastToPlayer(ADT * 1.05f))

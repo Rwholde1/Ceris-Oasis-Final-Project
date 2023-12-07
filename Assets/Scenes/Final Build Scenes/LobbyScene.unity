@@ -5319,6 +5319,10 @@ PrefabInstance:
       value: SceneManager
       objectReference: {fileID: 0}
     - target: {fileID: 6785913270727258467, guid: 1df5a39a1da3542428f9fd2968be5c01, type: 3}
+      propertyPath: nameCardPrefab
+      value: 
+      objectReference: {fileID: 3667044058954630614, guid: 71770a2ed210d4f418a4e28148954f31, type: 3}
+    - target: {fileID: 6785913270727258467, guid: 1df5a39a1da3542428f9fd2968be5c01, type: 3}
       propertyPath: playerCards.Array.data[0]
       value: 
       objectReference: {fileID: 547052505}

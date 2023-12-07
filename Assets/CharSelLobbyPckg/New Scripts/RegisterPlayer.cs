@@ -544,9 +544,21 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
                 anim.SetBool("Death", false);
             }
         }
+        //Resets health
         mng.canDamage = true;
         mng.currentHealth = mng.maxHealth;
         mng.healthBar.setHealth(mng.maxHealth);
+
+        //Zeroes money
+        LobbySceneManagement.singleton.playerCamObject.gameObject.GetComponent<AddMoney>().money = 0;
+
+        //Resets guns
+        LobbySceneManagement.singleton.playerCamObject.gameObject.GetComponentInChildren<FixedGunManager>().ResetGuns();
+
+        //Resets nades
+        LobbySceneManagement.singleton.playerCamObject.gameObject.GetComponentInChildren<GrenadeThrower>().totalgrenades = 3;
+
+        
         /*
         GameObject[] children = LobbySceneManagement.singleton.playerCamObject.GetComponentsInChildren<GameObject>();
         foreach (GameObject child in children) {

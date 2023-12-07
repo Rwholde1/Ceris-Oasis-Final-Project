@@ -112,4 +112,33 @@ public class FixedGunManager : MonoBehaviour
         
     }
 
+    public void ResetGuns()
+    {
+        /*
+        Debug.Log("new gun timeeee");
+        //Ensures empty slot is filled before overwriting existing gun
+        if (gunID1 == 0) {
+            Destroy(gun1);
+            gunID1 = newgun;
+        } else if (gunID2 == 0) {
+            Destroy(gun2);
+            gunID2 = newgun;
+        } else {
+            //Overwrites existing gun
+            if(gunactive == 1) {
+                Destroy(gun1);
+                gunID1 = newgun;
+            } else if (gunactive == 2) {
+                Destroy(gun2);
+                gunID2 = newgun;
+        }
+        }*/
+        Debug.Log("resetting guns");
+        Destroy(gun1);
+        Destroy(gun2);
+        gunID1 = 7;
+        gunID2 = 0;
+        gunactive = 1;
+    }
+
 }
