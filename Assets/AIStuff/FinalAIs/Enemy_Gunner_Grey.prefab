@@ -981,7 +981,6 @@ GameObject:
   - component: {fileID: 1988796986523140810}
   - component: {fileID: 3038901804939940817}
   - component: {fileID: 5615228543305452926}
-  - component: {fileID: 3510635344524342883}
   - component: {fileID: 3494865639872939776}
   - component: {fileID: -3224018058437640450}
   - component: {fileID: 389075364955706026}
@@ -1054,6 +1053,12 @@ MonoBehaviour:
   doSearch: 0
   isAnimating: 0
   ADTMod: 1.01
+  hitReg: {fileID: 0}
+  gunScript: {fileID: 0}
+  rushScript: {fileID: 0}
+  lobScript: {fileID: 0}
+  wanderScript: {fileID: 0}
+  queenScript: {fileID: 0}
   targetID: -1
 --- !u!114 &1988796986523140810
 MonoBehaviour:
@@ -1122,28 +1127,6 @@ CapsuleCollider:
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!64 &3510635344524342883
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3967619146413298632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!54 &3494865639872939776
 Rigidbody:
   m_ObjectHideFlags: 0

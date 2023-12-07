@@ -400,9 +400,6 @@ PrefabInstance:
       addedObject: {fileID: 5235423107456269828}
     - targetCorrespondingSourceObject: {fileID: 100086, guid: 36ac9fcf34538d14583f301307731951, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1608317076744446157}
-    - targetCorrespondingSourceObject: {fileID: 100086, guid: 36ac9fcf34538d14583f301307731951, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7184439500497553530}
     - targetCorrespondingSourceObject: {fileID: 100086, guid: 36ac9fcf34538d14583f301307731951, type: 3}
       insertIndex: -1
@@ -468,6 +465,12 @@ MonoBehaviour:
   doSearch: 0
   isAnimating: 0
   ADTMod: 1.01
+  hitReg: {fileID: 0}
+  gunScript: {fileID: 0}
+  rushScript: {fileID: 0}
+  lobScript: {fileID: 0}
+  wanderScript: {fileID: 0}
+  queenScript: {fileID: 0}
   targetID: -1
 --- !u!54 &5701604164346604151
 Rigidbody:
@@ -519,28 +522,6 @@ CapsuleCollider:
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!64 &1608317076744446157
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885658167117187788}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!195 &7184439500497553530
 NavMeshAgent:
   m_ObjectHideFlags: 0
