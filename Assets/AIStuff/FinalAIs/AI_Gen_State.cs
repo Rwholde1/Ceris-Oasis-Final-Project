@@ -85,7 +85,7 @@ public class AI_Gen_State : MonoBehaviour
             {
                 case AI_STATE.CHASE:
                 {
-                    Debug.Log("Chasing to RANDOM target");
+                    //Debug.Log("Chasing to RANDOM target");
 
                     if (CastToPlayer(50f) && !targetObject.GetComponent<RegisterPlayer>().isDead)
                     { 
@@ -98,7 +98,7 @@ public class AI_Gen_State : MonoBehaviour
                 case AI_STATE.ACTIVECHASE:
                 {
                     ChangeTarget(targetObject);
-                    Debug.Log("ACTIVELY Chasing");
+                    //Debug.Log("ACTIVELY Chasing");
                     if(CastToPlayer(ADT * 1.1f))
                     {
                         state = AI_STATE.ATTACK;
@@ -113,7 +113,7 @@ public class AI_Gen_State : MonoBehaviour
                 }
                 case AI_STATE.FLEE:
                 {
-                    Debug.Log("Fleeing");
+                    //Debug.Log("Fleeing");
                     Vector3 diff = new Vector3();
                     diff = enemyT.position- targetPos;
                     diff.Normalize();
@@ -127,7 +127,7 @@ public class AI_Gen_State : MonoBehaviour
         
             case AI_STATE.WAIT:
                 {
-                    Debug.Log("Waiting");
+                    //Debug.Log("Waiting");
                     ChangeSpeed(0);
                     targetPos = enemyT.position;
 
@@ -140,13 +140,13 @@ public class AI_Gen_State : MonoBehaviour
                 
                 if(/*CheckDistance()<=ADT*1.1f*/     CastToPlayer(ADT * 1.2f))
                 {
-                    Debug.Log("ACTIVE ATTACK STATE)");
+                    //Debug.Log("ACTIVE ATTACK STATE)");
                     ChangeSpeed(0);
                     AIAttack();
                 }
                 else //if (!CastToPlayer(ADT * 1.2f) && CheckDistance()>=ADT*2)
                 {
-                    Debug.Log("They Ran Away!)");
+                    //Debug.Log("They Ran Away!)");
                     ChangeSpeed(1);
 
                     state = AI_STATE.ACTIVECHASE;
@@ -162,7 +162,7 @@ public class AI_Gen_State : MonoBehaviour
                     break;
                 }
             default:
-                Debug.Log("NOTHING)");
+                //Debug.Log("NOTHING)");
                 break;
             }  
         }
@@ -178,7 +178,7 @@ public class AI_Gen_State : MonoBehaviour
         
         int randPick = Random.Range(0, LobbySceneManagement.singleton.statsPlayerId.Count - 1);
         targetID = randPick;
-        Debug.Log("player hunted is " + playerArray[randPick].gameObject);
+        //Debug.Log("player hunted is " + playerArray[randPick].gameObject);
         return playerArray[randPick].gameObject;
     }
 
@@ -190,7 +190,7 @@ public class AI_Gen_State : MonoBehaviour
         
         int randPick = Random.Range(0, playerLiveCount - 1);
         targetID = randPick;
-        Debug.Log("player hunted is " + playerArray[randPick].gameObject);
+        //Debug.Log("player hunted is " + playerArray[randPick].gameObject);
         return playerArray[randPick].gameObject;
     }
 
@@ -207,11 +207,11 @@ public class AI_Gen_State : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                print("Player hit raycasted");
+                //print("Player hit raycasted");
                 return true;
             }
         }
-        print("Player Not HIT");
+        //print("Player Not HIT");
         return false;
     }
 
@@ -253,10 +253,10 @@ public class AI_Gen_State : MonoBehaviour
     //Change parameter to handle player death
     public void CheckIfPlayerDiedUpdate(GameObject obj)
     {
-        Debug.Log("checking for target death");
+        //Debug.Log("checking for target death");
         if (obj.GetComponent<RegisterPlayer>().isDead)
         {
-            Debug.Log("target is dead");
+            //Debug.Log("target is dead");
             bool allDead = true;
             RegisterPlayer[] validTargets = new RegisterPlayer[4];
             int i = 0;
@@ -306,7 +306,7 @@ public class AI_Gen_State : MonoBehaviour
         //activates attack, refresh on attack most likely stored in here
         if(canAttack)
         {
-            Debug.Log("Attacking");
+            //Debug.Log("Attacking");
             StartCoroutine(ResetAttack());
             canAttack = false;
             doAttack = true;
@@ -328,7 +328,7 @@ public class AI_Gen_State : MonoBehaviour
     }
 
     public void killClientBrain() {
-        Debug.Log("disabling client AI scripts");
+        //Debug.Log("disabling client AI scripts");
             hitReg.enabled = false;
             if (gunScript != null) {
                 gunScript.enabled = false;

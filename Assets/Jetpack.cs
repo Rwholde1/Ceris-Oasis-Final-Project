@@ -43,7 +43,7 @@ public class Jetpack : NetworkBehaviour
         {
             currentFuel += refillrate * Time.deltaTime;
             currentFuel = Mathf.Clamp(currentFuel, 0f, maxFuel);
-            print("REFUEL:" + currentFuel);
+            //print("REFUEL:" + currentFuel);
 
         }
     }
@@ -58,7 +58,7 @@ public class Jetpack : NetworkBehaviour
 
             // Consume fuel
             currentFuel -= fuelConsumptionRate * Time.fixedDeltaTime;
-            print("FUEL:" + currentFuel);
+            //print("FUEL:" + currentFuel);
             hasusedjetpack = true;
         }
 
@@ -86,14 +86,14 @@ public class Jetpack : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void setJetsActiveServerRpc(bool isJetpackOn) {
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsServer()) {
-            Debug.Log("setting jets to " + isJetpackOn);
+            //Debug.Log("setting jets to " + isJetpackOn);
             setJetsActiveClientRpc(isJetpackOn);
         }
     }
 
     [ClientRpc]
     public void setJetsActiveClientRpc(bool isJetpackOn) {
-        Debug.Log("turning jetpack status " + isJetpackOn);
+        //Debug.Log("turning jetpack status " + isJetpackOn);
         jets.SetActive(isJetpackOn);
     }
 }

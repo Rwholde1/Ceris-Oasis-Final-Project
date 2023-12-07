@@ -48,7 +48,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     
     void Awake() {
         addJoinCodeServerRpc();
-        Debug.Log("awake");
+        //Debug.Log("awake");
     }
 
     // Start is called before the first frame update
@@ -60,7 +60,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     void Update()
     {   
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return)) {
-            Debug.Log("Player clicked local");
+            //Debug.Log("Player clicked local");
             OnPlayerClick(this, System.EventArgs.Empty);
             Debug.Log(IsLocalPlayer + " " + IsHost + " " + IsClient + " " + IsServer);
         }  
@@ -190,7 +190,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             var thisPlayerLobbyInfo = Serialize2DString(LobbySceneManagement.singleton.playerLobbyInfo);
             var thisStatsArray = Serialize2DInt(LobbySceneManagement.singleton.statsArray);
 
-            Debug.Log("Manager Data: " + /*thisPlayerCount + " " + thisPlayer1 + " " + thisPlayer2 + " " + thisPlayer3 + " " + thisPlayer4 + " " + */thisCamsTaken1 + " " + thisCamsTaken2 + " " + thisCamsTaken3 + " " + thisCamsTaken4 + " " + thisJoinCode);
+            //Debug.Log("Manager Data: " + /*thisPlayerCount + " " + thisPlayer1 + " " + thisPlayer2 + " " + thisPlayer3 + " " + thisPlayer4 + " " + */thisCamsTaken1 + " " + thisCamsTaken2 + " " + thisCamsTaken3 + " " + thisCamsTaken4 + " " + thisJoinCode);
             startManagerClientRpc(/*thisPlayerCount, thisPlayer1, thisPlayer2, thisPlayer3, thisPlayer4,*/ thisCamsTaken1, thisCamsTaken2, thisCamsTaken3, thisCamsTaken4, thisJoinCode, thisPlayerLobbyInfo, thisStatsArray);
         }
     }
@@ -215,11 +215,11 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
         LobbySceneManagement.singleton.camsTaken[3] = thisCamsTaken4;
 
         if (identity <= 0) {
-            Debug.Log("assigning player id");
+            //Debug.Log("assigning player id");
             identity = LobbySceneManagement.singleton.identifyPlayer(this);
         }
         
-        Debug.Log("re-iding player");
+        //Debug.Log("re-iding player");
         LobbySceneManagement.singleton.reIDPlayer();
 
         LobbySceneManagement.singleton.joinCode = thisJoinCode;
@@ -229,7 +229,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             //Player lobby info (name, ready state)
             for (int c1 = 0; c1 < 2; c1++) {
                 LobbySceneManagement.singleton.playerLobbyInfo[r, c1] = Deserialize2DString(thisPlayerLobbyInfo)[r, c1];
-                Debug.Log("PLI " + r + " " + c1 + " = " + Deserialize2DString(thisPlayerLobbyInfo)[r, c1]);
+                //Debug.Log("PLI " + r + " " + c1 + " = " + Deserialize2DString(thisPlayerLobbyInfo)[r, c1]);
                 if (c1 == 0 && Deserialize2DString(thisPlayerLobbyInfo)[r, c1] != null) {
                     LobbySceneManagement.singleton.playerNames[r].SetText(LobbySceneManagement.singleton.playerLobbyInfo[r, c1]);
                 }
@@ -238,7 +238,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
             //Stats
             for (int c2 = 0; c2 < 4; c2++) {
                 LobbySceneManagement.singleton.statsArray[r, c2] = Deserialize2DInt(thisStatsArray)[r, c2];
-                Debug.Log("Stats Array " + r + " " + c2 + " = " + Deserialize2DInt(thisStatsArray)[r, c2]);
+                //Debug.Log("Stats Array " + r + " " + c2 + " = " + Deserialize2DInt(thisStatsArray)[r, c2]);
                 //Add bit to update newly joining client stats window
             }
         }
@@ -252,7 +252,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     //Updates Most Recent Player Clicked
     [ServerRpc(RequireOwnership = false)]
     public void ClickedServerRpc(int playerID) {
-        Debug.Log("player clicked server");
+        //Debug.Log("player clicked server");
         LobbySceneManagement.singleton.mostRecentPlayerClick = playerID;
         Debug.Log(LobbySceneManagement.singleton.mostRecentPlayerClick);
         if (IsServer) {
@@ -262,7 +262,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     [ClientRpc]
     public void ClickedClientRpc(int playerID) {
-        Debug.Log("player clicked client");
+        //Debug.Log("player clicked client");
         LobbySceneManagement.singleton.mostRecentPlayerClick = playerID;
         Debug.Log(LobbySceneManagement.singleton.mostRecentPlayerClick);
     }
@@ -282,7 +282,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     [ClientRpc]
     public void renamePlayerClientRpc(string name, int playerID) {
         if (IsClient) {
-            Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on client"); 
+            //Debug.Log("Renaming player " + LobbySceneManagement.singleton.mostRecentPlayerClick + " to: " + name + " on client"); 
             //LobbySceneManagement.singleton.playerNames[LobbySceneManagement.singleton.mostRecentPlayerClick - 1].SetText(name); 
             LobbySceneManagement.singleton.playerNames[playerID].SetText(name);
             if (name.Length > 0) {
@@ -324,7 +324,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     //Updates join code on all clients
     [ServerRpc(RequireOwnership = false)] 
     public void addJoinCodeServerRpc() {
-        Debug.Log("hit server rpc");
+        //Debug.Log("hit server rpc");
         //LobbySceneManagement.singleton.joinCodeText.SetText(code);
         if (IsServer) {
             addJoinCodeClientRpc(LobbySceneManagement.singleton.joinCode);
@@ -333,7 +333,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
 
     [ClientRpc]
     public void addJoinCodeClientRpc(string code) {
-        Debug.Log("Join code: " + code);
+        //Debug.Log("Join code: " + code);
         LobbySceneManagement.singleton.joinCode = code;
         LobbySceneManagement.singleton.joinCodeText.SetText(code);
     }
@@ -375,7 +375,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     public async void updateLobbyInfo() {
         try
         {
-            Debug.Log("attempting to update name");
+            //Debug.Log("attempting to update name");
             UpdateLobbyOptions options = new UpdateLobbyOptions();
             options.Name = LobbySceneManagement.singleton.SceneToPlay;  
             //options.MaxPlayers = 4;
@@ -427,7 +427,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     [ServerRpc(RequireOwnership = false)]
     public void spawnTestServerRpc(int j, int i, int spawnInd) {
         if (IsServer) {
-            Debug.Log("server received " + j + " " + i + " " + spawnInd);
+            //Debug.Log("server received " + j + " " + i + " " + spawnInd);
         }
     }
 
@@ -435,8 +435,8 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     public void spawnEnemyServerRpc(int DC, int indexInDC, int spawnerIndex, float payoutMod) {
         if (IsClient) {
             spawnEnemyClientRpc(DC,indexInDC, spawnerIndex);
-            Debug.Log("entering spawner rpc");
-            Debug.Log("server spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
+            //Debug.Log("entering spawner rpc");
+            //Debug.Log("server spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
             //spawnEnemyClientRpc(DC, indexInDC, spawnerIndex);
             Debug.Log(EnemyWaveSpawnerTake2.singleton.DCListHolder[DC][indexInDC]);
             NetworkObject newEnem = Instantiate(EnemyWaveSpawnerTake2.singleton.DCListHolder[DC][indexInDC], EnemyWaveSpawnerTake2.singleton.enemSpawners[spawnerIndex].position, Quaternion.identity);
@@ -452,7 +452,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     [ClientRpc]
     public void spawnEnemyClientRpc(int DC, int indexInDC, int spawnerIndex) {
         if (IsClient) {
-            Debug.Log("client spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
+            //Debug.Log("client spawning enemy " + indexInDC + " of DC " + DC + " on spawner " + spawnerIndex);
         }
 
     }
@@ -460,7 +460,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
     [ServerRpc(RequireOwnership = false)]
     public void setupWaveServerRpc(int secsIn, int waveCount, bool isBreak) {
         if (IsServer) {
-            Debug.Log("setting wave " + waveCount + " on server");
+            //Debug.Log("setting wave " + waveCount + " on server");
             setupWaveClientRpc(secsIn, waveCount, isBreak);
         }
     }
@@ -538,7 +538,7 @@ public class RegisterPlayer : NetworkBehaviour/*, INetworkSerializable*/
                 anim.SetBool("Death", false);
             }
         }
-        LobbySceneManagement.singleton.playerCamObject.GetComponent<PlayerManager>().canDamage = true;
+        mng.canDamage = true;
         /*
         GameObject[] children = LobbySceneManagement.singleton.playerCamObject.GetComponentsInChildren<GameObject>();
         foreach (GameObject child in children) {

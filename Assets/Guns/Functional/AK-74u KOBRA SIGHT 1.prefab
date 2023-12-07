@@ -360,10 +360,10 @@ MonoBehaviour:
   impacteffect: {fileID: 6704534940747636505, guid: a4b44ade50eeba84583f76d4321b50e9, type: 3}
   accuracy: 10
   cosmetic: 0
-  maxAmmoReserviour: 250
-  maxAmmo: 100
-  MagSize: 10
-  reloadtime: 1
+  maxAmmoReserviour: 240
+  maxAmmo: 120
+  MagSize: 30
+  reloadtime: 1.5
   bulletspershot: 1
   normalFOV: 60
   adsFOV: 30
@@ -371,6 +371,9 @@ MonoBehaviour:
   crosshairImage: {fileID: 0}
   allowshooting: 0
   ammocount: {fileID: 0}
+  burstamount: 0
+  timebetweenbursts: 0
+  infAmmo: 0
 --- !u!95 &2522295981957639649
 Animator:
   serializedVersion: 5

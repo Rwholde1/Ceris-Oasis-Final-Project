@@ -46,6 +46,7 @@ public class PlayerManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Alive " + alive);
         if (currentHealth <= 0 && alive && !LobbySceneManagement.singleton.dead && canDamage) {
             alive = false;
             LobbySceneManagement.singleton.getLocalPlayer().playerDies();

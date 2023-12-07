@@ -80,7 +80,7 @@ public class CosmoGunScript : MonoBehaviour
             AnimChecker(gun2);
             
         }
-        print(gun2Color);
+        //print(gun2Color);
         gun1IMG.color = gun1Color;
         gun2IMG.color = gun2Color;
     }

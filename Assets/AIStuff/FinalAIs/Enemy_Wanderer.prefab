@@ -669,6 +669,12 @@ MonoBehaviour:
   doSearch: 0
   isAnimating: 0
   ADTMod: 1.01
+  hitReg: {fileID: 0}
+  gunScript: {fileID: 0}
+  rushScript: {fileID: 0}
+  lobScript: {fileID: 0}
+  wanderScript: {fileID: 0}
+  queenScript: {fileID: 0}
   targetID: -1
 --- !u!195 &5881044183094323468
 NavMeshAgent:
@@ -756,9 +762,10 @@ MonoBehaviour:
   animator: {fileID: 0}
   genState: {fileID: 0}
   enemyID: -1
-  health: 1000
+  health: 500
   difficultyClass: 3
   hitBy: 00000000
+  payoutModifier: 1
   payout: 0
 --- !u!114 &6764669220514842765
 MonoBehaviour:

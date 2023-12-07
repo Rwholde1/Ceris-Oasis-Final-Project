@@ -74,7 +74,7 @@ public class AbilityManager : MonoBehaviour
         }
         //Jetpack
         if (commandoAbility1.enabled) {
-            Debug.Log("has jets");
+            //Debug.Log("has jets");
             float rawFuel = commandoAbility1.currentFuel;
             int fuel = (int) Mathf.Floor(rawFuel);
             if (fuel > 99) { fuel = 99; }

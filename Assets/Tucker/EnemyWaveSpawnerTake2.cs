@@ -178,12 +178,12 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {   
-        Debug.Log("started: " + started);
+        //Debug.Log("started: " + started);
 
         //Destroys on all but host instance
         
         if (!LobbySceneManagement.singleton.getLocalPlayer().getIsHost()) {
-            Debug.Log("Destroying wave manager on client manager");
+            //Debug.Log("Destroying wave manager on client manager");
             Destroy(gameObject);
         } else {
             isServer = true;
@@ -206,22 +206,22 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
         }*/
 
         if (startedWaveStuff && !isCountingDown && LobbySceneManagement.singleton.playerCamObject != null) {
-            Debug.Log("called wave index " + waveIndex);
+            //Debug.Log("called wave index " + waveIndex);
             startWave();
         }
 
         if (SceneManager.GetActiveScene().name != "LobbyScene" && !startedWaveStuff && LobbySceneManagement.singleton.playerCamObject != null) {
-            Debug.Log("Starting first wave");
+            //Debug.Log("Starting first wave");
             spawnCountModifier = 0.25f * (float) NetworkManager.ConnectedClientsIds.Count;
             payoutModifier = 1f / spawnCountModifier;
-            Debug.Log("spawn modifier: " + spawnCountModifier + " pay modifier: " + payoutModifier);
+            //Debug.Log("spawn modifier: " + spawnCountModifier + " pay modifier: " + payoutModifier);
             startWave();
         }
 
         //For testing
         if (Input.GetKey(KeyCode.T)) {
-            Debug.Log("passing time");
-            Debug.Log("tick");
+            //Debug.Log("passing time");
+            //Debug.Log("tick");
             timeRemaining--;
             if(timeRemaining > 0) {
 
@@ -242,9 +242,9 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
         foreach(List<NetworkObject> dcList in DCListHolder) {
             i = -1;
             foreach(NetworkObject enem in dcList) {
-                Debug.Log("DC " + j + " enem " + i);
+                //Debug.Log("DC " + j + " enem " + i);
                 int spawnInd = pickRandomSpawner();
-                Debug.Log("Spawner " + spawnInd);
+                //Debug.Log("Spawner " + spawnInd);
                 //Debug.Log(DCListHolder[j][i]);
                 //spawnEnemyServerRpc(j, i, spawnInd);
                 i++;
@@ -254,11 +254,11 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
                 //NetworkObject newEnem = Instantiate(DCListHolder[j][i], enemSpawners[spawnInd].position, Quaternion.identity);
                 //newEnem.GetComponent<EnemyHitRegister>().enemyID = spawnedEnemies.Count;
                 //spawnedEnemies.Add(newEnem);
-                Debug.Log(j + " " + i + " " + spawnInd);
+                //Debug.Log(j + " " + i + " " + spawnInd);
                 //LobbySceneManagement.singleton.getLocalPlayer().spawnTestServerRpc(j, i, spawnInd);
                 LobbySceneManagement.singleton.getLocalPlayer().spawnEnemyServerRpc(j, i, spawnInd, payoutModifier);
                 //LobbySceneManagement.singleton.getLocalPlayer().spawnTestServerRpc(j, i, spawnInd);
-                Debug.Log("ending spawn rpc");
+                //Debug.Log("ending spawn rpc");
             }
             //j++;
         }
@@ -272,7 +272,7 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
 
     //timer ticker    
     private void _tick() {
-        Debug.Log("tick");
+        //Debug.Log("tick");
         timeRemaining--;
         int thisBuffer = buffer;
         if (thisBuffer == 0) { thisBuffer = 3; }
@@ -281,7 +281,7 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
                 int startCount = enemsInWaveSpawned;
                 for (int i = enemsInWaveSpawned; i < (startCount + spawnPerTick); i++) {
                     if (i < enemsInWave.Count) {
-                        Debug.Log("calling enem spawn for enem " + enemsInWave[i][1] + " of dc " + enemsInWave[i][0] + " to spawn on spawner " + enemsInWave[i][2]);
+                        //Debug.Log("calling enem spawn for enem " + enemsInWave[i][1] + " of dc " + enemsInWave[i][0] + " to spawn on spawner " + enemsInWave[i][2]);
                         LobbySceneManagement.singleton.getLocalPlayer().spawnEnemyServerRpc(enemsInWave[i][0], enemsInWave[i][1], enemsInWave[i][2], payoutModifier);
                         enemsInWaveSpawned++;
                     }
@@ -311,7 +311,7 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
         enemsInWave.Clear();
         isCountingDown = true;
         startedWaveStuff = true;
-                Debug.Log("starting to start wave " + waveCount);
+                //Debug.Log("starting to start wave " + waveCount);
 
         int[] thisWave = new int[8];
         for(int i = 0; i < 8; i++) {
@@ -325,9 +325,9 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
         if (thisWave[7] == 1) {
             isBreak = true;
         }
-        Debug.Log("starting to start wave " + waveCount);
+        //Debug.Log("starting to start wave " + waveCount);
         LobbySceneManagement.singleton.getLocalPlayer().setupWaveServerRpc(thisWave[0], waveCount, isBreak);
-        Debug.Log("starting wave index " + waveIndex + " timer for " + thisWave[0]);
+        //Debug.Log("starting wave index " + waveIndex + " timer for " + thisWave[0]);
         startTimer(thisWave[0], thisWave[1]);
             //Wave length in seconds, total enemies in wave, prop. of DC0 Enems, prop. of DC1 Enems, prop. of DC2 Enems, prop. of DC3 Enems, prop of DC4 Enems, isBreak(0 false, 1 true))
         //NetworkObject[]
@@ -376,7 +376,7 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
 
         result[1] = Random.Range(0, DCListHolder[result[0]].Count);
         result[2] = pickRandomSpawner();
-        Debug.Log("chose enemy " + result[1] + " of dc " + result[0] + " to spawn on spawner " + result[2]);
+        //Debug.Log("chose enemy " + result[1] + " of dc " + result[0] + " to spawn on spawner " + result[2]);
         return result;
     }
 
@@ -393,7 +393,7 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
         }
         //Debug.Log()
         spawnPerTick = ((int) (((1f - prop) * enemCount) / (secsIn - buffer)));
-        Debug.Log("will spawn " + spawnPerTick + "enems per seconds tick");
+        //Debug.Log("will spawn " + spawnPerTick + "enems per seconds tick");
         if (secsIn != 0) {
             Invoke( "_tick", 1f );
         }
@@ -402,9 +402,9 @@ public class EnemyWaveSpawnerTake2 : NetworkBehaviour
 
     private void spawnFirstPortion(float portion) {
         int numToSpawn = ((int) (portion * enemsInWave.Count));
-        Debug.Log("first portion: " + numToSpawn);
+        //Debug.Log("first portion: " + numToSpawn);
         for (int i = enemsInWaveSpawned; i < numToSpawn; i++) {
-            Debug.Log("calling enem spawn for enem " + enemsInWave[i][1] + " of dc " + enemsInWave[i][0] + " to spawn on spawner " + enemsInWave[i][2]);
+            //Debug.Log("calling enem spawn for enem " + enemsInWave[i][1] + " of dc " + enemsInWave[i][0] + " to spawn on spawner " + enemsInWave[i][2]);
             LobbySceneManagement.singleton.getLocalPlayer().spawnEnemyServerRpc(enemsInWave[i][0], enemsInWave[i][1], enemsInWave[i][2], payoutModifier);
             enemsInWaveSpawned++;
         }

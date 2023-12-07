@@ -40,7 +40,7 @@ public class FirstPersonMovement : NetworkBehaviour
 
     void FixedUpdate()
     {   
-        Debug.Log(isMovementEnabled);
+        //Debug.Log(isMovementEnabled);
         if(!LobbySceneManagement.singleton.getLocalPlayer().getIsLocalPlayer() || !isMovementEnabled) {
             //Debug.Log("isn't local player");
             return;
@@ -143,9 +143,9 @@ public class FirstPersonMovement : NetworkBehaviour
         
         // Get targetVelocity from input.
         Vector2 targetVelocity = new Vector2( Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
-        Debug.Log("Movement Data:");
-        Debug.Log(Input.GetAxis("Horizontal") + " " + Input.GetAxis("Vertical"));
-        Debug.Log(runSpeed + " " + speed);
+        //Debug.Log("Movement Data:");
+        //Debug.Log(Input.GetAxis("Horizontal") + " " + Input.GetAxis("Vertical"));
+        //Debug.Log(runSpeed + " " + speed);
         // Apply movement.
         Rigidbody rig = gameObject.GetComponent<Rigidbody>();
         /*

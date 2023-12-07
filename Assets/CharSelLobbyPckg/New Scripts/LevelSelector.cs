@@ -36,7 +36,7 @@ public class LevelSelector : MonoBehaviour
 
         if (!settled) {
             if (LobbySceneManagement.singleton != null) {
-                Debug.Log("settling");
+                //Debug.Log("settling");
                 if (LobbySceneManagement.singleton.getLocalPlayer().getIsHost()) {
                     titleText.enabled = false;
                 } else {
@@ -51,7 +51,7 @@ public class LevelSelector : MonoBehaviour
 
     public void changeLevel() {
         //Debug.Log("Changing text to: " + text);
-        Debug.Log("Dropdown val: " + dropdown.value);
+        //Debug.Log("Dropdown val: " + dropdown.value);
         switch (dropdown.value) {
             case 0:
                 //levelName = "Urban";
@@ -76,7 +76,7 @@ public class LevelSelector : MonoBehaviour
     }
 
     public void updateLevelStuff(string nameIn) {
-        Debug.Log("updating level to " + nameIn);
+        //Debug.Log("updating level to " + nameIn);
         levelName = nameIn;
         LobbySceneManagement.singleton.SceneToPlay = nameIn;
         LobbySceneManagement.singleton.LobbyHeader.SetText(nameIn);

@@ -56,7 +56,7 @@ public class WaveCounterHUD : MonoBehaviour
             timerOut += "0";
         }
         timerOut += secs;
-        Debug.Log(secsIn + " formatted as " + timerOut);
+        //Debug.Log(secsIn + " formatted as " + timerOut);
         return timerOut;
     }
 

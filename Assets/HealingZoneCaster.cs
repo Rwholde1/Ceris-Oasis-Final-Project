@@ -78,6 +78,9 @@ public class HealingZoneCaster : NetworkBehaviour
         Debug.Log("Zone pid is " + zone.GetComponent<HealingZone>().pID);
     }
 
+    //[ClientRpc]
+
+
     /*
     public void createPing() {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
