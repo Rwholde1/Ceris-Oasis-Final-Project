@@ -214,6 +214,7 @@ public class PlayerManager : NetworkBehaviour
 
     [ClientRpc] 
     public void takeDamageClientRpc(int damageIn, int playerID){
+        playerID++;
         if (LobbySceneManagement.singleton.getLocalPlayer().getIsClient()) {
             //Debug.Log("client rpc got hit " + EnemyWaveManager.singleton.spawnedEnemies[enemID] + " " + gameObject);
             
