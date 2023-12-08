@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FixedGunManager : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class FixedGunManager : MonoBehaviour
     [SerializeField] private GameObject gun2;
     public int gunactive = 1;
 
+    void Start() {
+        if (SceneManager.GetActiveScene().name == "Pherris Reactor") {
+            Debug.Log("isPherris");
+            Invoke("ResetGuns", 2f);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -140,5 +147,7 @@ public class FixedGunManager : MonoBehaviour
         gunID2 = 0;
         gunactive = 1;
     }
+
+    //fixPherris
 
 }

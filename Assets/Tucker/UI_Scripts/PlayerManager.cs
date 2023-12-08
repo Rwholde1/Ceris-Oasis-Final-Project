@@ -30,6 +30,10 @@ public class PlayerManager : NetworkBehaviour
     public bool canDamage = true;
     public float invincibleCooldown = 0.5f;
 
+    public float timeToRegen;
+    public float timeToRegenMax = 4.5f;
+    public bool isRegen = false;
+    public int healthToRegen = 10;
     //grenades
     //shielding?
 
@@ -41,11 +45,21 @@ public class PlayerManager : NetworkBehaviour
         healthBar.setMaxHealth(maxHealth);
         //abilities.setCooldown1(cooldown1);
         abilities.setCooldown2(cooldown2);
+        timeToRegen = timeToRegenMax;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (timeToRegen > 0) {
+            timeToRegen -= Time.deltaTime;
+            isRegen = false;
+        } else if (!isRegen) {
+            isRegen = true;
+            Invoke("regenHealth", 0.5f);
+        }
+
+
         Debug.Log("Alive " + alive);
         /*
         if (currentHealth <= 0 && alive && !LobbySceneManagement.singleton.dead && canDamage) {
@@ -243,6 +257,8 @@ public class PlayerManager : NetworkBehaviour
                 }
                 healthBar.setHealth(currentHealth);
                 StartCoroutine(InvincibleTime());
+                timeToRegen = timeToRegenMax;
+                isRegen = false;
                 //health -= damage;
                 //Debug.Log("Damage: " + LobbySceneManagement.singleton.statsArray[playerID, 3]);
                 //Credit player for damage
@@ -285,4 +301,11 @@ public class PlayerManager : NetworkBehaviour
         canDamage = true;
     }
 
+    public void regenHealth() {
+        if (isRegen) {
+            receiveHeals(healthToRegen);
+            Invoke("regenHealth", 0.5f);
+        }
+        
+    }
 }

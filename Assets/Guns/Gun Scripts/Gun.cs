@@ -7,6 +7,7 @@ using TMPro;
 using System;
 using System.Diagnostics.Contracts;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class Gun : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class Gun : MonoBehaviour
     public float adsSpeed = 5f;
     private bool isAiming = false;
     public Image crosshairImage;
-    public bool allowshooting = false;
+    public bool allowshooting = true;
     public TMP_Text ammocount;
     public int burstamount = 0;
     public float timebetweenbursts = 0;
@@ -73,14 +74,19 @@ public class Gun : MonoBehaviour
             anim.SetBool("IsReloading", false);
             isAiming = false;
         }
+
     }
     // Update is called once per frame
     void Update()
     {
 
         if (LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled == false) { allowshooting = false; }
+        Debug.Log(LobbySceneManagement.singleton.getLocalPlayer().GetComponent<FirstPersonMovement>().isMovementEnabled);
         if (LobbySceneManagement.singleton.dead) { allowshooting = false; }
+        Debug.Log(LobbySceneManagement.singleton.dead);
         if (!LobbySceneManagement.singleton.playerCamObject.transform.Find("Holder").gameObject.active) { allowshooting = false; }
+        Debug.Log(!LobbySceneManagement.singleton.playerCamObject.transform.Find("Holder").gameObject.active);
+        Debug.Log("Playercam" + LobbySceneManagement.singleton.playerCamObject.transform.Find("Holder").gameObject);
         
         //Async start astuff
         if (playerCamera == null) {
@@ -96,8 +102,9 @@ public class Gun : MonoBehaviour
 
 
 
-
+        Debug.Log("preshop" + allowshooting); 
          shop = GameObject.Find("Shop");
+         Debug.Log(shop);
         if (shop == null)
         {
             Invoke("allowShoot", 0.1f);
@@ -106,6 +113,8 @@ public class Gun : MonoBehaviour
         { 
             allowshooting = false; 
         }
+
+        Debug.Log("postshop " + allowshooting);
         if (allowshooting)
         {
             if (isreloading)
